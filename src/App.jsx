@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "./components/Navbar";
 import HeroBanner from "./components/HeroBanner";
+import BrandsCarousel from "./components/BrandsCarousel";
 import GarageSelector from "./components/GarageSelector";
 import CategoryNav from "./components/CategoryNav";
 import ProductCard from "./components/ProductCard";
@@ -228,11 +229,14 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
-        {/* Hero Section */}
+        {/* Hero Section with Real Photos */}
         <HeroBanner
           onSelectCategory={(catId) => setActiveCategory(catId)}
           onOpenGarage={() => setIsGarageOpen(true)}
         />
+
+        {/* Real Brand Showcase Carousel */}
+        <BrandsCarousel />
 
         {/* Selected Bike Notification Banner */}
         {selectedBike && (
