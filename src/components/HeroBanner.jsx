@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Truck, ShieldCheck, Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Truck, ShieldCheck, Clock, ArrowRight } from "lucide-react";
+import { ShimmerButton } from "./ui/ShimmerButton";
+import { BorderBeam } from "./ui/BorderBeam";
 
 const SLIDES = [
   {
@@ -9,7 +11,6 @@ const SLIDES = [
     cta: "Ver Cascos",
     category: "128",
     img: "https://motorock.cl/wp-content/uploads/2026/08/CASCO-ABATIBLE-GHB-166-ANDROID-GRIS-MATTE-1.png",
-    accent: "bg-orange-50 border-orange-200"
   },
   {
     tag: "TRANSMISI?N Y ARRASTRE",
@@ -18,7 +19,6 @@ const SLIDES = [
     cta: "Ver Transmisiones",
     category: "47",
     img: "https://motorock.cl/wp-content/uploads/2026/08/1-24-300x300.webp",
-    accent: "bg-blue-50 border-blue-200"
   },
   {
     tag: "LUBRICANTES Y MANTENCI?N",
@@ -27,7 +27,6 @@ const SLIDES = [
     cta: "Ver Lubricantes",
     category: "36",
     img: "https://motorock.cl/wp-content/uploads/2026/08/MOTUL-7100-10W-40.png",
-    accent: "bg-amber-50 border-amber-200"
   }
 ];
 
@@ -45,10 +44,12 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage }) {
 
   return (
     <div className="mb-8">
-      {/* Main Editorial Hero Card */}
+      {/* Main Editorial Hero Card with Magic UI ShimmerButton & BorderBeam */}
       <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm relative overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left Column: Clear Human Copy */}
+        <BorderBeam size={220} duration={10} colorFrom="#FF5500" colorTo="#F59E0B" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          {/* Left Column */}
           <div className="lg:col-span-7 space-y-4">
             <span className="inline-block bg-orange-100 text-[#FF5500] font-bold text-[11px] px-3 py-1 rounded uppercase tracking-wider">
               {slide.tag}
@@ -63,24 +64,24 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage }) {
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <button
+              <ShimmerButton
                 onClick={() => onSelectCategory(slide.category)}
-                className="bg-[#FF5500] hover:bg-[#e64d00] text-white px-6 py-3 rounded-lg font-bold text-xs sm:text-sm shadow-sm flex items-center gap-2 transition-all cursor-pointer"
+                className="flex items-center gap-2"
               >
                 <span>{slide.cta}</span>
                 <ArrowRight size={16} />
-              </button>
+              </ShimmerButton>
 
               <button
                 onClick={onOpenGarage}
-                className="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 px-5 py-3 rounded-lg font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
+                className="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 px-5 py-3 rounded-xl font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
               >
                 <span>Filtrar por Mi Moto</span>
               </button>
             </div>
 
             {/* Slide Indicators */}
-            <div className="flex items-center gap-2 pt-4">
+            <div className="flex items-center gap-2 pt-3">
               {SLIDES.map((_, idx) => (
                 <button
                   key={idx}

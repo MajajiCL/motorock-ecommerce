@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "./components/Navbar";
 import HeroBanner from "./components/HeroBanner";
 import BrandsCarousel from "./components/BrandsCarousel";
+import BentoCategories from "./components/BentoCategories";
 import GarageSelector from "./components/GarageSelector";
 import CategoryNav from "./components/CategoryNav";
 import ProductCard from "./components/ProductCard";
@@ -224,14 +225,19 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
-        {/* Hero Section */}
+        {/* Hero Section with Magic UI BorderBeam & ShimmerButton */}
         <HeroBanner
           onSelectCategory={(catId) => setActiveCategory(catId)}
           onOpenGarage={() => setIsGarageOpen(true)}
         />
 
-        {/* Brand Ribbon Strip */}
+        {/* Brand Showcase with Magic UI Marquee */}
         <BrandsCarousel />
+
+        {/* Aceternity UI Bento Grid Categories */}
+        <BentoCategories
+          onSelectCategory={(catId) => setActiveCategory(catId)}
+        />
 
         {/* Selected Bike Notification Banner */}
         {selectedBike && (
@@ -264,7 +270,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Category Navigation */}
+        {/* Category Navigation Pills */}
         <CategoryNav
           activeCategory={activeCategory}
           onSelectCategory={(catId) => setActiveCategory(catId)}
@@ -319,7 +325,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* Product Grid */}
+        {/* Product Grid with CardSpotlight */}
         {paginatedProducts.length === 0 ? (
           <div className="py-16 text-center space-y-2 bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
             <span className="text-3xl">??</span>

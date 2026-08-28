@@ -1,5 +1,6 @@
 import React from "react";
-import { ShoppingCart, Eye, Check, X, Star } from "lucide-react";
+import { ShoppingCart, Eye, Check, Star } from "lucide-react";
+import { CardSpotlight } from "./ui/CardSpotlight";
 
 export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
   const isOutOfStock = !product.inStock;
@@ -7,8 +8,8 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
   const installmentVal = Math.round(product.price / 6);
 
   return (
-    <div className="moto-card overflow-hidden flex flex-col justify-between group">
-      {/* Product Image Container */}
+    <CardSpotlight className="flex flex-col justify-between group">
+      {/* Image Container */}
       <div
         onClick={() => onOpenDetail(product)}
         className="relative aspect-square bg-white overflow-hidden cursor-pointer flex items-center justify-center p-5 border-b border-slate-100"
@@ -44,7 +45,7 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
               <Check size={10} /> En Stock
             </span>
           ) : (
-            <span className="bg-slate-100 border border-slate-200 text-slate-500 text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1">
+            <span className="bg-slate-100 border border-slate-200 text-slate-500 text-[10px] font-bold px-2 py-0.5 rounded">
               Agotado
             </span>
           )}
@@ -65,7 +66,7 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
             </div>
           </div>
 
-          {/* Product Name */}
+          {/* Title */}
           <h3
             onClick={() => onOpenDetail(product)}
             className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#FF5500] transition-colors line-clamp-2 cursor-pointer leading-snug"
@@ -96,7 +97,7 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => onOpenDetail(product)}
-              className="flex-1 py-2 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 font-semibold text-xs transition-colors flex items-center justify-center gap-1.5"
+              className="flex-1 py-2 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 font-semibold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <Eye size={13} />
               <span>Ver Detalle</span>
@@ -123,6 +124,6 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
           </div>
         </div>
       </div>
-    </div>
+    </CardSpotlight>
   );
 }

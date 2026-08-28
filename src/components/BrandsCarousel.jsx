@@ -1,4 +1,5 @@
 import React from "react";
+import { Marquee } from "./ui/Marquee";
 import motulImg from "../assets/brands/motul.png";
 import ls2Img from "../assets/brands/ls2.png";
 import alpinestarsImg from "../assets/brands/alpinestars.png";
@@ -45,30 +46,37 @@ const BRANDS = [
 
 export default function BrandsCarousel() {
   return (
-    <section className="my-8 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-      <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+    <section className="my-8 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
+      <div className="flex items-center justify-between px-2 mb-3 pb-2 border-b border-slate-100">
         <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
-          Marcas Oficiales & Distribuidor Autorizado
+          Distribuidor Oficial & Marcas Autorizadas
         </h3>
-        <span className="text-[11px] text-slate-400 font-medium">
-          Garant?a y respaldo oficial
+        <span className="text-[11px] text-slate-400 font-medium hidden sm:inline">
+          Respaldo y garant?a oficial
         </span>
       </div>
 
-      <div className="flex items-center gap-6 overflow-x-auto pb-1 scrollbar-none justify-start sm:justify-center">
-        {BRANDS.map((brand, idx) => (
-          <div
-            key={idx}
-            className="flex-shrink-0 flex items-center justify-center p-2 hover:bg-slate-50 rounded-lg transition-all h-12 w-24 cursor-pointer"
-            title={brand.name}
-          >
-            <img
-              src={brand.img}
-              alt={brand.name}
-              className="max-h-7 max-w-[85%] object-contain filter grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100"
-            />
-          </div>
-        ))}
+      {/* Magic UI Marquee with Edge Gradient Blur */}
+      <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
+        <Marquee pauseOnHover className="[--duration:30s]">
+          {BRANDS.map((brand, idx) => (
+            <div
+              key={idx}
+              className="flex items-center justify-center p-2.5 bg-slate-50 hover:bg-white rounded-xl border border-slate-100 hover:border-slate-300 shadow-sm transition-all h-12 w-28 cursor-pointer mx-2"
+              title={brand.name}
+            >
+              <img
+                src={brand.img}
+                alt={brand.name}
+                className="max-h-7 max-w-[85%] object-contain filter grayscale hover:grayscale-0 transition-all opacity-80 hover:opacity-100"
+              />
+            </div>
+          ))}
+        </Marquee>
+
+        {/* Left & Right Edge Gradient Fade */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white to-transparent" />
       </div>
     </section>
   );
