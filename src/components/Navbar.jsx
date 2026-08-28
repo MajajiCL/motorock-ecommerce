@@ -1,3 +1,4 @@
+import logoMotoRock from '../assets/logo-motorock-600.png';
 import React, { useState, useEffect, useRef } from "react";
 import { ShoppingCart, Search, Wrench, MapPin, Phone, ChevronDown, X, Shield, Sparkles, SlidersHorizontal, Flame } from "lucide-react";
 import { ALL_PRODUCTS } from "../data/catalogData";
@@ -78,7 +79,7 @@ export default function Navbar({
         {/* Brand Official Logo */}
         <a href="#" className="flex items-center gap-2 group flex-shrink-0">
           <img
-            src="./logo-motorock-600.png"
+            src={logoMotoRock}
             alt="MotoRock Chile"
             className="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
             onError={(e) => {

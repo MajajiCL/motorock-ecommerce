@@ -1,3 +1,4 @@
+import logoMotoRock from '../assets/logo-motorock-600.png';
 import React from "react";
 import { Shield, Truck, RefreshCw, MessageCircle, MapPin, Instagram, Facebook, Phone } from "lucide-react";
 
@@ -10,7 +11,7 @@ export default function Footer() {
           <div className="space-y-4">
             <a href="#" className="flex items-center gap-2">
               <img
-                src="./logo-motorock-600.png"
+                src={logoMotoRock}
                 alt="MotoRock Chile"
                 className="h-10 w-auto object-contain"
               />
