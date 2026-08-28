@@ -2,64 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Colors */
+  --color-indigo-ink: #151581;
+  --color-electric-violet: #5465ff;
+  --gradient-electric-violet: linear-gradient(270deg, rgba(102, 127, 255, 0.8) 19.614%, rgba(206, 162, 255, 0.8) 50.0389%, rgba(255, 133, 177, 0.8) 86.0908%);
+  --color-lavender-mist: #a1a1cd;
+  --color-lilac-accent: #9f73e6;
+  --color-petal-blush: #de62de;
+  --color-verified-green: #00bb76;
+  --color-alert-rose: #f25c75;
+  --color-info-blue: #20a2e3;
+  --color-porcelain: #f6f6fa;
+  --color-paper-white: #ffffff;
+  --color-bone: #f6f5f4;
+  --color-fog: #d6d6d6;
+  --color-pebble: #bfbfbd;
+  --color-graphite: #292824;
+  --color-ash: #949392;
+
+  /* Typography */
+  --font-inter: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Shadow */
+  --shadow-xl: rgba(36, 36, 41, 0.07) 0px 8px 34px 0px, rgba(37, 36, 41, 0.09) 0px 1px 2px 0px;
+}
+
 @layer base {
   body {
-    background-color: #f8fafc;
-    color: #0f172a;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--color-porcelain);
+    color: var(--color-indigo-ink);
+    font-family: var(--font-inter);
     -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.015em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-indigo-ink);
+    letter-spacing: -0.035em;
   }
 }
 
-/* Clean, crisp product & panel styling */
-.moto-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 1rem;
-  transition: all 0.25s ease-in-out;
-}
-.moto-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
-  transform: translateY(-2px);
+/* Specific Lovi Style Classes */
+.bg-porcelain { background-color: #f6f6fa; }
+.bg-paper-white { background-color: #ffffff; }
+.bg-bone { background-color: #f6f5f4; }
+.text-indigo-ink { color: #151581; }
+.text-lavender-mist { color: #a1a1cd; }
+.text-verified-green { color: #00bb76; }
+.text-graphite { color: #292824; }
+.text-ash { color: #949392; }
+.border-fog { border-color: #e5e5eb; }
+
+.shadow-lovi {
+  box-shadow: rgba(36, 36, 41, 0.07) 0px 8px 34px 0px, rgba(37, 36, 41, 0.09) 0px 1px 2px 0px;
 }
 
-.moto-btn-primary {
-  background-color: #FF5500;
-  color: #ffffff;
-  font-weight: 700;
-  border-radius: 0.75rem;
-  transition: all 0.2s ease-in-out;
-}
-.moto-btn-primary:hover {
-  background-color: #e64d00;
-  box-shadow: 0 4px 12px rgba(255, 85, 0, 0.25);
+.gradient-brand {
+  background: linear-gradient(270deg, rgba(102, 127, 255, 0.85) 19.6%, rgba(206, 162, 255, 0.85) 50%, rgba(255, 133, 177, 0.85) 86%);
 }
 
-.moto-btn-secondary {
-  background-color: #f1f5f9;
-  color: #334155;
-  font-weight: 600;
-  border-radius: 0.75rem;
-  transition: all 0.2s ease-in-out;
-}
-.moto-btn-secondary:hover {
-  background-color: #e2e8f0;
-  color: #0f172a;
+.gradient-brand-subtle {
+  background: linear-gradient(135deg, rgba(84, 101, 255, 0.08) 0%, rgba(159, 115, 230, 0.08) 50%, rgba(222, 98, 222, 0.08) 100%);
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f6f6fa;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d6d6d6;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #a1a1cd;
 }

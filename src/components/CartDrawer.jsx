@@ -30,84 +30,81 @@ export default function CartDrawer({
   const total = subtotal + shippingCost;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white border-l border-slate-200 w-full max-w-md h-full flex flex-col justify-between shadow-2xl animate-in slide-in-from-right duration-300">
-        {/* Header */}
-        <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+    <div className="fixed inset-0 z-50 flex justify-end bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-white border-l border-[#e5e5eb] w-full max-w-md h-full flex flex-col justify-between shadow-2xl animate-in slide-in-from-right duration-300">
+        <div className="p-5 border-b border-[#e5e5eb] flex items-center justify-between bg-[#f6f6fa]">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-orange-100 text-[#FF5500] flex items-center justify-center font-bold">
-              <ShoppingBag size={18} />
+            <div className="w-8 h-8 rounded-full bg-indigo-50 text-[#151581] flex items-center justify-center font-bold">
+              <ShoppingBag size={16} />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 text-sm">Carrito de Compras</h3>
-              <p className="text-xs text-slate-500">{items.length} productos agregados</p>
+              <h3 className="font-semibold text-[#151581] text-sm">Tu Carrito de Repuestos</h3>
+              <p className="text-xs text-[#a1a1cd]">{items.length} productos agregados</p>
             </div>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-900 p-1.5 rounded-lg hover:bg-slate-200">
+          <button onClick={onClose} className="text-slate-400 hover:text-[#151581] p-1.5 rounded-full hover:bg-slate-200 cursor-pointer">
             <X size={18} />
           </button>
         </div>
 
-        {/* Free Shipping Progress */}
-        <div className="bg-orange-50 p-3.5 border-b border-orange-100">
-          <div className="flex items-center justify-between text-xs font-bold text-slate-800 mb-1">
-            <span className="flex items-center gap-1.5 text-[#FF5500]">
-              <Truck size={14} />
+        <div className="bg-indigo-50/70 p-4 border-b border-indigo-100">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#151581] mb-1.5">
+            <span className="flex items-center gap-1.5">
+              <Truck size={14} className="text-[#00bb76]" />
               {remainingForFreeShipping > 0
                 ? `Agrega $${remainingForFreeShipping.toLocaleString("es-CL")} m?s para Env?o Gratis`
-                : "?Tienes Env?o Gratis a todo Chile!"}
+                : "?Tienes Despacho Express Gratis a todo Chile!"}
             </span>
-            <span className="text-[10px] text-slate-500">{progressToFreeShipping}%</span>
+            <span className="text-[10px] text-[#a1a1cd]">{progressToFreeShipping}%</span>
           </div>
-          <div className="w-full h-1.5 bg-orange-200 rounded-full overflow-hidden">
+          <div className="w-full h-1.5 bg-indigo-100 rounded-full overflow-hidden">
             <div
-              className="h-full bg-[#FF5500] transition-all duration-300 rounded-full"
+              className="h-full bg-[#00bb76] transition-all duration-300 rounded-full"
               style={{ width: `${progressToFreeShipping}%` }}
             />
           </div>
         </div>
 
-        {/* Items List */}
         <div className="p-4 overflow-y-auto flex-1 divide-y divide-slate-100">
           {items.length === 0 ? (
             <div className="py-16 text-center space-y-2">
-              <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto text-xl">
+              <div className="w-12 h-12 rounded-full bg-[#f6f6fa] text-slate-400 flex items-center justify-center mx-auto text-xl">
                 ??
               </div>
-              <h4 className="text-sm font-bold text-slate-900">Tu carrito est? vac?o</h4>
-              <p className="text-xs text-slate-500">Agrega productos para continuar con tu compra.</p>
+              <h4 className="text-sm font-semibold text-[#151581]">Tu carrito est? vac?o</h4>
+              <p className="text-xs text-[#a1a1cd]">Agrega repuestos para continuar con tu pedido.</p>
             </div>
           ) : (
             items.map((it) => (
-              <div key={`${it.product.id}-${it.variation?.id}`} className="py-3 flex gap-3 items-center">
+              <div key={`${it.product.id}-${it.variation?.id}`} className="py-3.5 flex gap-3 items-center">
                 <img
                   src={it.product.primaryImage}
                   alt={it.product.name}
-                  className="w-14 h-14 object-contain rounded-lg bg-slate-50 border border-slate-200 p-1 flex-shrink-0"
+                  className="w-14 h-14 object-contain rounded-2xl bg-[#f6f6fa] border border-[#e5e5eb] p-1.5 flex-shrink-0"
                 />
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-xs font-bold text-slate-900 truncate">{it.product.name}</h4>
+                  <h4 className="text-xs font-semibold text-[#151581] truncate">{it.product.name}</h4>
                   {it.variation && (
-                    <p className="text-[10px] text-slate-500">
+                    <p className="text-[10px] text-[#a1a1cd]">
                       Talla: {it.variation.attributes?.map((a) => a.value).join(" ")}
                     </p>
                   )}
-                  <span className="text-xs font-bold text-[#FF5500] block mt-0.5">
+                  <span className="text-xs font-bold text-[#151581] block mt-0.5">
                     ${(it.product.price * it.quantity).toLocaleString("es-CL")} CLP
                   </span>
 
                   <div className="flex items-center gap-2 mt-1.5">
-                    <div className="flex items-center bg-slate-100 rounded border border-slate-200 px-1 py-0.5">
+                    <div className="flex items-center bg-[#f6f6fa] rounded-full border border-[#e5e5eb] px-1.5 py-0.5">
                       <button
                         onClick={() => onUpdateQuantity(it.product.id, it.variation?.id, it.quantity - 1)}
-                        className="text-xs px-1.5 text-slate-600 hover:text-slate-900 font-bold"
+                        className="text-xs px-1 text-[#151581] hover:text-black font-bold"
                       >
                         -
                       </button>
-                      <span className="text-xs font-bold px-1 text-slate-900">{it.quantity}</span>
+                      <span className="text-xs font-bold px-1.5 text-[#151581]">{it.quantity}</span>
                       <button
                         onClick={() => onUpdateQuantity(it.product.id, it.variation?.id, it.quantity + 1)}
-                        className="text-xs px-1.5 text-slate-600 hover:text-slate-900 font-bold"
+                        className="text-xs px-1 text-[#151581] hover:text-black font-bold"
                       >
                         +
                       </button>
@@ -127,30 +124,28 @@ export default function CartDrawer({
           )}
         </div>
 
-        {/* Footer */}
         {items.length > 0 && (
-          <div className="p-4 border-t border-slate-200 bg-slate-50 space-y-3">
-            {/* Pickup toggle */}
-            <div className="p-2.5 bg-white border border-slate-200 rounded-lg space-y-2 text-xs">
+          <div className="p-5 border-t border-[#e5e5eb] bg-[#f6f6fa] space-y-3">
+            <div className="p-3 bg-white border border-[#e5e5eb] rounded-2xl space-y-2 text-xs">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={pickupInStore}
                   onChange={(e) => onTogglePickup(e.target.checked)}
-                  className="rounded text-[#FF5500] focus:ring-[#FF5500]"
+                  className="rounded text-[#151581] focus:ring-[#151581]"
                 />
-                <span className="font-semibold text-slate-800 flex items-center gap-1">
-                  <MapPin size={13} className="text-[#FF5500]" /> Retirar gratis en local de Talca (Av. 2 Sur 771-777)
+                <span className="font-semibold text-[#151581] flex items-center gap-1">
+                  <MapPin size={13} className="text-[#00bb76]" /> Retirar gratis en local de Talca (2 horas)
                 </span>
               </label>
 
               {!pickupInStore && (
-                <div className="flex items-center justify-between pt-1.5 border-t border-slate-100">
-                  <span className="text-slate-500">Regi?n de env?o:</span>
+                <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+                  <span className="text-[#a1a1cd]">Regi?n de despacho:</span>
                   <select
                     value={selectedRegion}
                     onChange={(e) => onChangeRegion(e.target.value)}
-                    className="bg-slate-50 border border-slate-300 text-slate-900 text-xs rounded px-2 py-1 focus:outline-none focus:border-[#FF5500]"
+                    className="bg-[#f6f6fa] border border-[#e5e5eb] text-[#151581] text-xs rounded-full px-3 py-1 focus:outline-none focus:border-[#151581]"
                   >
                     <option value="maule">Maule ($3.990)</option>
                     <option value="metropolitana">Metropolitana ($4.990)</option>
@@ -162,27 +157,26 @@ export default function CartDrawer({
               )}
             </div>
 
-            {/* Totals */}
             <div className="space-y-1 text-xs text-slate-600">
               <div className="flex justify-between">
                 <span>Subtotal:</span>
-                <span className="font-bold text-slate-900">${subtotal.toLocaleString("es-CL")} CLP</span>
+                <span className="font-bold text-[#151581]">${subtotal.toLocaleString("es-CL")} CLP</span>
               </div>
               <div className="flex justify-between">
                 <span>Despacho:</span>
-                <span className="font-bold text-slate-900">
+                <span className="font-bold text-[#151581]">
                   {shippingCost === 0 ? "GRATIS" : `$${shippingCost.toLocaleString("es-CL")} CLP`}
                 </span>
               </div>
-              <div className="flex justify-between text-sm font-black text-slate-900 pt-1.5 border-t border-slate-200">
+              <div className="flex justify-between text-base font-bold text-[#151581] pt-2 border-t border-[#e5e5eb]">
                 <span>Total:</span>
-                <span className="text-[#FF5500]">${total.toLocaleString("es-CL")} CLP</span>
+                <span>${total.toLocaleString("es-CL")} CLP</span>
               </div>
             </div>
 
             <button
               onClick={onProceedToCheckout}
-              className="w-full bg-[#FF5500] hover:bg-[#e64d00] text-white py-3 rounded-lg font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
+              className="w-full bg-[#151581] hover:bg-[#0e0e5a] text-white py-3 rounded-full font-semibold text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
             >
               <span>Continuar al Pago</span>
               <ArrowRight size={15} />

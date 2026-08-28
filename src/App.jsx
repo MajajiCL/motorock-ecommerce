@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "./components/Navbar";
 import HeroBanner from "./components/HeroBanner";
 import BrandsCarousel from "./components/BrandsCarousel";
+import AppFeatureSection from "./components/AppFeatureSection";
 import BentoCategories from "./components/BentoCategories";
 import GarageSelector from "./components/GarageSelector";
 import CategoryNav from "./components/CategoryNav";
@@ -9,10 +10,12 @@ import ProductCard from "./components/ProductCard";
 import ProductModal from "./components/ProductModal";
 import CartDrawer from "./components/CartDrawer";
 import CheckoutModal from "./components/CheckoutModal";
+import VerifiedReviews from "./components/VerifiedReviews";
 import StoreLocation from "./components/StoreLocation";
 import Footer from "./components/Footer";
-import { Filter, ArrowUpDown, Check, ChevronLeft, ChevronRight } from "lucide-react";
-import { ALL_PRODUCTS, ALL_CATEGORIES, ALL_BIKES } from "./data/catalogData";
+import AppDownloadModal from "./components/AppDownloadModal";
+import { Filter, ArrowUpDown, Check, ChevronLeft, ChevronRight, Smartphone } from "lucide-react";
+import { ALL_PRODUCTS } from "./data/catalogData";
 
 export default function App() {
   // Filters State
@@ -29,6 +32,7 @@ export default function App() {
   const [isGarageOpen, setIsGarageOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isAppModalOpen, setIsAppModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Cart State (Persisted in localStorage)
@@ -202,11 +206,11 @@ export default function App() {
   const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f6f6fa] text-[#151581] flex flex-col justify-between">
       {/* Toast Notification */}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-3 rounded-lg shadow-xl font-bold text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200">
-          <Check size={16} className="text-[#FF5500]" />
+        <div className="fixed bottom-6 right-6 z-50 bg-[#151581] text-white px-5 py-3 rounded-full shadow-lovi font-semibold text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200">
+          <Check size={15} className="text-[#00bb76]" />
           <span>{toast}</span>
         </div>
       )}
@@ -221,34 +225,42 @@ export default function App() {
         searchQuery={searchQuery}
         onSearchChange={(q) => setSearchQuery(q)}
         onSelectProduct={(p) => setSelectedProduct(p)}
+        onOpenAppModal={() => setIsAppModalOpen(true)}
       />
 
       {/* Main Content Area */}
       <main className="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
-        {/* Hero Section with Magic UI BorderBeam & ShimmerButton */}
+        {/* 1. Hero Section (Lovi Style with Smartphone Mockup) */}
         <HeroBanner
           onSelectCategory={(catId) => setActiveCategory(catId)}
           onOpenGarage={() => setIsGarageOpen(true)}
+          onOpenAppModal={() => setIsAppModalOpen(true)}
         />
 
-        {/* Brand Showcase with Magic UI Marquee */}
+        {/* 2. Official Brand Marquee */}
         <BrandsCarousel />
 
-        {/* Aceternity UI Bento Grid Categories */}
+        {/* 3. App Features & Delivery Speed 3-Pillar Section */}
+        <AppFeatureSection
+          onOpenAppModal={() => setIsAppModalOpen(true)}
+          onSelectCategory={(catId) => setActiveCategory(catId)}
+        />
+
+        {/* 4. Bento Categories Showcase */}
         <BentoCategories
           onSelectCategory={(catId) => setActiveCategory(catId)}
         />
 
         {/* Selected Bike Notification Banner */}
         {selectedBike && (
-          <div className="mb-6 p-4 bg-orange-50 border border-orange-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="mb-6 p-5 bg-indigo-50/70 border border-indigo-200 rounded-[24px] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
             <div className="flex items-center gap-3">
               <span className="text-2xl">???</span>
               <div>
-                <h4 className="text-xs font-bold text-slate-900">
-                  Repuestos compatibles para: <span className="text-[#FF5500]">{selectedBike.brand} {selectedBike.model}</span>
+                <h4 className="text-xs font-bold text-[#151581]">
+                  Filtrando repuestos compatibles para: <span className="text-[#5465ff]">{selectedBike.brand} {selectedBike.model}</span>
                 </h4>
-                <p className="text-[11px] text-slate-500 mt-0.5">
+                <p className="text-[11px] text-[#a1a1cd] mt-0.5">
                   Paso de Cadena: {selectedBike.chainPitch} ? Aceite recomendado: {selectedBike.oilSpec}
                 </p>
               </div>
@@ -256,13 +268,13 @@ export default function App() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsGarageOpen(true)}
-                className="px-3 py-1.5 bg-white hover:bg-slate-100 text-xs font-semibold rounded border border-slate-200 text-slate-800"
+                className="px-4 py-1.5 bg-white hover:bg-slate-100 text-xs font-semibold rounded-full border border-[#e5e5eb] text-[#151581]"
               >
                 Cambiar Moto
               </button>
               <button
                 onClick={() => setSelectedBike(null)}
-                className="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-semibold rounded border border-red-200"
+                className="px-4 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-semibold rounded-full border border-red-100"
               >
                 Quitar Filtro
               </button>
@@ -277,20 +289,20 @@ export default function App() {
         />
 
         {/* Filters & Sorting Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-4 bg-white border border-[#e5e5eb] rounded-[24px] shadow-sm">
           <div className="flex items-center gap-2 text-xs">
-            <span className="font-bold text-slate-900 flex items-center gap-1.5">
-              <Filter size={14} className="text-[#FF5500]" />
-              Cat?logo ({totalItemsCount} productos)
+            <span className="font-bold text-[#151581] flex items-center gap-1.5">
+              <Filter size={14} className="text-[#5465ff]" />
+              Cat?logo ({totalItemsCount} repuestos)
             </span>
 
             {/* In stock toggle */}
             <button
               onClick={() => setInStockOnly(!inStockOnly)}
-              className={`px-3 py-1 rounded-md text-[11px] font-bold border transition-colors cursor-pointer ${
+              className={`px-3.5 py-1 rounded-full text-[11px] font-semibold border transition-colors cursor-pointer ${
                 inStockOnly
-                  ? "bg-emerald-50 border-emerald-300 text-emerald-800"
-                  : "bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900"
+                  ? "bg-emerald-50 border-emerald-200 text-[#00bb76]"
+                  : "bg-[#f6f6fa] border-[#e5e5eb] text-[#292824] hover:text-[#151581]"
               }`}
             >
               ? En Stock
@@ -299,23 +311,23 @@ export default function App() {
             {/* On sale toggle */}
             <button
               onClick={() => setOnSaleOnly(!onSaleOnly)}
-              className={`px-3 py-1 rounded-md text-[11px] font-bold border transition-colors cursor-pointer ${
+              className={`px-3.5 py-1 rounded-full text-[11px] font-semibold border transition-colors cursor-pointer ${
                 onSaleOnly
-                  ? "bg-orange-50 border-orange-300 text-[#FF5500]"
-                  : "bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900"
+                  ? "bg-indigo-50 border-indigo-200 text-[#151581]"
+                  : "bg-[#f6f6fa] border-[#e5e5eb] text-[#292824] hover:text-[#151581]"
               }`}
             >
-              ?? En Oferta
+              ?? Ofertas
             </button>
           </div>
 
           {/* Sort Selector */}
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-slate-500 flex items-center gap-1"><ArrowUpDown size={12} /> Ordenar:</span>
+            <span className="text-[#a1a1cd] flex items-center gap-1"><ArrowUpDown size={12} /> Ordenar:</span>
             <select
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value)}
-              className="bg-slate-50 text-slate-800 border border-slate-300 rounded px-2.5 py-1 text-xs font-medium focus:outline-none focus:border-[#FF5500]"
+              className="bg-[#f6f6fa] text-[#151581] border border-[#e5e5eb] rounded-full px-3 py-1 text-xs font-semibold focus:outline-none focus:border-[#151581]"
             >
               <option value="popular">Destacados</option>
               <option value="price_asc">Menor Precio</option>
@@ -325,12 +337,12 @@ export default function App() {
           </div>
         </div>
 
-        {/* Product Grid with CardSpotlight */}
+        {/* Product Grid */}
         {paginatedProducts.length === 0 ? (
-          <div className="py-16 text-center space-y-2 bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+          <div className="py-16 text-center space-y-2 bg-white border border-[#e5e5eb] rounded-[32px] p-8 shadow-sm">
             <span className="text-3xl">??</span>
-            <h3 className="text-sm font-bold text-slate-900">No encontramos productos con esos filtros</h3>
-            <p className="text-xs text-slate-500">Prueba con otros t?rminos de b?squeda o restablece los filtros.</p>
+            <h3 className="text-sm font-bold text-[#151581]">No encontramos repuestos con esos filtros</h3>
+            <p className="text-xs text-[#a1a1cd]">Prueba con otros t?rminos de b?squeda o restablece los filtros.</p>
             <button
               onClick={() => {
                 setActiveCategory("all");
@@ -339,7 +351,7 @@ export default function App() {
                 setInStockOnly(false);
                 setOnSaleOnly(false);
               }}
-              className="mt-2 bg-[#FF5500] hover:bg-[#e64d00] text-white px-4 py-2 rounded-lg text-xs font-bold"
+              className="mt-2 bg-[#151581] hover:bg-[#0e0e5a] text-white px-5 py-2 rounded-full text-xs font-bold"
             >
               Restablecer Filtros
             </button>
@@ -363,30 +375,38 @@ export default function App() {
             <button
               onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className="flex items-center gap-1 px-4 py-2 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700 disabled:opacity-40 hover:bg-slate-50 shadow-sm"
+              className="flex items-center gap-1 px-4 py-2 rounded-full bg-white border border-[#e5e5eb] text-xs font-semibold text-[#151581] disabled:opacity-40 hover:bg-[#f6f6fa] shadow-sm cursor-pointer"
             >
-              <ChevronLeft size={15} /> Anterior
+              <ChevronLeft size={14} /> Anterior
             </button>
 
-            <span className="text-xs font-medium text-slate-500 px-2">
-              P?gina <strong className="text-slate-900">{currentPage}</strong> de <strong className="text-slate-900">{totalPages}</strong>
+            <span className="text-xs font-medium text-[#a1a1cd] px-3">
+              P?gina <strong className="text-[#151581]">{currentPage}</strong> de <strong className="text-[#151581]">{totalPages}</strong>
             </span>
 
             <button
               onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-1 px-4 py-2 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700 disabled:opacity-40 hover:bg-slate-50 shadow-sm"
+              className="flex items-center gap-1 px-4 py-2 rounded-full bg-white border border-[#e5e5eb] text-xs font-semibold text-[#151581] disabled:opacity-40 hover:bg-[#f6f6fa] shadow-sm cursor-pointer"
             >
-              Siguiente <ChevronRight size={15} />
+              Siguiente <ChevronRight size={14} />
             </button>
           </div>
         )}
 
-        {/* Physical Store Section */}
+        {/* 5. Verified Reviews Section */}
+        <VerifiedReviews />
+
+        {/* 6. Physical Showroom & Workshop Section in Talca */}
         <StoreLocation />
       </main>
 
-      {/* Modals */}
+      {/* Modals & Drawers */}
+      <AppDownloadModal
+        isOpen={isAppModalOpen}
+        onClose={() => setIsAppModalOpen(false)}
+      />
+
       <GarageSelector
         isOpen={isGarageOpen}
         onClose={() => setIsGarageOpen(false)}
@@ -403,6 +423,10 @@ export default function App() {
         onClose={() => setSelectedProduct(null)}
         onAddToCart={handleAddToCart}
         onBuyNow={handleBuyNow}
+        onOpenAppModal={() => {
+          setSelectedProduct(null);
+          setIsAppModalOpen(true);
+        }}
       />
 
       <CartDrawer
@@ -440,7 +464,7 @@ export default function App() {
       />
 
       {/* Footer */}
-      <Footer />
+      <Footer onOpenAppModal={() => setIsAppModalOpen(true)} />
     </div>
   );
 }
