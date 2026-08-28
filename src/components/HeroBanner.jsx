@@ -1,10 +1,11 @@
 import React from "react";
-import { Truck, ShieldCheck, Clock, ArrowRight, Smartphone, Sparkles, Mic, CheckCircle2, Shield, Cog } from "lucide-react";
+import { Truck, ShieldCheck, Clock, ArrowRight, Smartphone, Sparkles, Shield, CheckCircle2 } from "lucide-react";
+import IPhoneMockup from "./IPhoneMockup";
 
 export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppModal }) {
   return (
     <div className="pt-8 pb-16 flex flex-col items-center text-center">
-      {/* 1. Award Pill Badge */}
+      {/* 1. Trust Pill Badge */}
       <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full border border-[#e5e5eb] shadow-sm mb-6 animate-in fade-in duration-300">
         <Sparkles size={13} className="text-[#5465ff]" />
         <span className="text-xs font-normal text-[#151581]">
@@ -12,7 +13,7 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
         </span>
       </div>
 
-      {/* 2. Display Headline in ES Rebond Grotesque Style (Indigo Ink, Weight 400, Negative Tracking) */}
+      {/* 2. Display Headline in ES Rebond Grotesque Style */}
       <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-normal text-[#151581] leading-[0.93] tracking-[-0.045em] max-w-3xl mx-auto">
         Todo para tu moto en tu bolsillo.
         <br />
@@ -57,17 +58,20 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
         </button>
       </div>
 
-      {/* 5. Hero Centerpiece: iPhone 16 Pro Mockup (320px width, 40px radius, signature dual shadow) + Real Floating Product Badges */}
-      <div className="mt-14 w-full max-w-4xl relative flex items-center justify-center">
-        {/* Left Floating Card: Real Casco HJC Dakar (Paper White, 24px radius, dual shadow) */}
+      {/* 5. Centerpiece: Real iPhone 16 Pro Mockup with Non-Clipped Side Floating Badges */}
+      <div className="mt-14 w-full max-w-5xl relative flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 px-4">
+        {/* Left Floating Card: Real Casco HJC Dakar */}
         <div
           onClick={() => onSelectCategory("128")}
-          className="hidden lg:flex absolute left-4 top-12 z-20 bg-white p-4 rounded-[24px] shadow-lovi border border-[#e5e5eb] items-center gap-3 cursor-pointer hover:scale-105 transition-transform duration-200 max-w-[240px] text-left"
+          className="w-full sm:w-auto lg:max-w-[230px] bg-white p-4 rounded-[24px] shadow-lovi border border-[#e5e5eb] flex items-center gap-3.5 cursor-pointer hover:scale-105 transition-all duration-200 text-left order-2 lg:order-1"
         >
           <img
             src="https://motorock.cl/wp-content/uploads/2026/08/028f734bfb6a4b59a4a803ad9cc54fa8_800.jpg"
             alt="Casco HJC Dakar"
-            className="w-14 h-14 object-contain rounded-xl bg-[#f6f6fa] p-1 flex-shrink-0"
+            className="w-14 h-14 object-contain rounded-2xl bg-[#f6f6fa] p-1.5 flex-shrink-0"
+            onError={(e) => {
+              e.target.src = "https://placehold.co/100x100/ffffff/333?text=HJC";
+            }}
           />
           <div className="min-w-0">
             <span className="text-[9px] font-bold text-[#00bb76] uppercase tracking-wider flex items-center gap-1">
@@ -78,104 +82,33 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
           </div>
         </div>
 
+        {/* Center: Hyper-realistic iPhone 16 Pro Mockup */}
+        <div className="order-1 lg:order-2 flex-shrink-0">
+          <IPhoneMockup
+            onSelectCategory={onSelectCategory}
+            onOpenGarage={onOpenGarage}
+          />
+        </div>
+
         {/* Right Floating Card: Real Aceite Motul 7100 Sintético Ester */}
         <div
           onClick={() => onSelectCategory("36")}
-          className="hidden lg:flex absolute right-4 bottom-12 z-20 bg-white p-4 rounded-[24px] shadow-lovi border border-[#e5e5eb] items-center gap-3 cursor-pointer hover:scale-105 transition-transform duration-200 max-w-[240px] text-left"
+          className="w-full sm:w-auto lg:max-w-[230px] bg-white p-4 rounded-[24px] shadow-lovi border border-[#e5e5eb] flex items-center gap-3.5 cursor-pointer hover:scale-105 transition-all duration-200 text-left order-3"
         >
           <img
-            src="https://motorock.cl/wp-content/uploads/2026/08/MOTUL-7100-10W-40.png"
+            src="https://motorock.cl/wp-content/uploads/2026/06/MOTUL-7100-10W-40.png"
             alt="Motul 7100"
-            className="w-14 h-14 object-contain rounded-xl bg-[#f6f6fa] p-1 flex-shrink-0"
+            className="w-14 h-14 object-contain rounded-2xl bg-[#f6f6fa] p-1.5 flex-shrink-0"
+            onError={(e) => {
+              e.target.src = "https://placehold.co/100x100/ffffff/333?text=Motul";
+            }}
           />
           <div className="min-w-0">
-            <span className="text-[9px] font-bold text-[#00bb76] uppercase tracking-wider">
+            <span className="text-[9px] font-bold text-[#00bb76] uppercase tracking-wider block">
               100% Sintético Ester
             </span>
             <h5 className="text-xs font-bold text-[#151581] truncate">Motul 7100 10W-40</h5>
             <span className="text-xs font-bold text-[#151581] block">$16.900 CLP</span>
-          </div>
-        </div>
-
-        {/* Center iPhone Mockup */}
-        <div className="w-full max-w-[340px] relative">
-          <div className="bg-white rounded-[44px] p-4 shadow-lovi border border-[#e5e5eb] relative overflow-hidden">
-            {/* Dynamic Island */}
-            <div className="w-24 h-4 bg-slate-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-              <div className="w-2.5 h-2.5 rounded-full bg-slate-300 mr-2" />
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
-            </div>
-
-            {/* Mockup Screen */}
-            <div className="bg-[#f6f6fa] rounded-[32px] p-4 space-y-3 text-left border border-slate-100">
-              <div className="flex items-center justify-between text-[11px] font-semibold text-[#151581] pb-1 border-b border-[#e5e5eb]">
-                <span className="flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-[#00bb76] animate-pulse" />
-                  MotoRock Express
-                </span>
-                <span className="text-[#a1a1cd]">Talca, Chile</span>
-              </div>
-
-              {/* Widget Live Delivery Tracking */}
-              <div className="bg-white p-3 rounded-2xl shadow-sm border border-[#e5e5eb] space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-[#00bb76] uppercase tracking-wider flex items-center gap-1">
-                    <Truck size={12} /> Despacho en Ruta
-                  </span>
-                  <span className="text-[10px] font-mono text-[#a1a1cd]">STK-882194</span>
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-[#151581]">Starken Express • En Camino</h4>
-                  <p className="text-[10px] text-[#a1a1cd]">Entrega estimada: Hoy antes de las 18:00 hrs</p>
-                </div>
-                <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                  <div className="w-3/4 h-full bg-[#00bb76] rounded-full" />
-                </div>
-              </div>
-
-              {/* Widget Active Garage Bike */}
-              <div className="bg-white p-3 rounded-2xl shadow-sm border border-[#e5e5eb] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-xl bg-indigo-50 text-[#151581] flex items-center justify-center text-sm font-bold">
-                    🏍️
-                  </div>
-                  <div>
-                    <h5 className="text-[11px] font-bold text-[#151581]">Yamaha MT-03 2024</h5>
-                    <p className="text-[9px] text-[#00bb76] font-semibold">100% Repuestos Compatibles</p>
-                  </div>
-                </div>
-                <span className="text-[10px] text-[#151581] font-bold">Activo</span>
-              </div>
-
-              {/* Featured Real Item */}
-              <div className="bg-white p-3 rounded-2xl shadow-sm border border-[#e5e5eb] flex items-center gap-2.5">
-                <img
-                  src="https://motorock.cl/wp-content/uploads/2026/08/028f734bfb6a4b59a4a803ad9cc54fa8_800.jpg"
-                  alt="Casco HJC Dakar"
-                  className="w-10 h-10 object-contain rounded-lg"
-                />
-                <div className="flex-1 min-w-0">
-                  <h6 className="text-[10px] font-bold text-[#151581] truncate">Casco HJC RPH 60 Dakar</h6>
-                  <span className="text-[10px] font-bold text-[#151581]">$599.900 CLP</span>
-                </div>
-                <button
-                  onClick={() => onSelectCategory("128")}
-                  className="px-2.5 py-1 bg-[#151581] text-white rounded-full text-[9px] font-bold cursor-pointer"
-                >
-                  Ver
-                </button>
-              </div>
-
-              {/* Signature Liquid Gradient AI Assistant Input Bar */}
-              <div className="gradient-brand p-2.5 rounded-full flex items-center justify-between text-white shadow-sm cursor-pointer">
-                <span className="text-[10px] font-medium text-white/95 truncate pl-2">
-                  Pregunta al mecánico MotoRock...
-                </span>
-                <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                  <Mic size={11} className="text-white" />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

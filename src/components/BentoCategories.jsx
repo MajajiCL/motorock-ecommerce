@@ -119,7 +119,7 @@ export default function BentoCategories({ onSelectCategory }) {
           </div>
 
           <img
-            src="https://motorock.cl/wp-content/uploads/2026/08/MOTUL-7100-10W-40.png"
+            src="https://motorock.cl/wp-content/uploads/2026/06/MOTUL-7100-10W-40.png"
             alt="Aceites Motul"
             className="absolute -right-4 -bottom-4 w-32 h-32 object-contain opacity-90 group-hover:scale-110 transition-transform duration-300 pointer-events-none"
           />
