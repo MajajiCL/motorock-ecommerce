@@ -1,67 +1,78 @@
 import React from "react";
-import { ShoppingCart, Eye, Sparkles, Check, X } from "lucide-react";
+import { ShoppingCart, Eye, Sparkles, Check, X, Star, MessageCircle } from "lucide-react";
 
 export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
   const isOutOfStock = !product.inStock;
   const hasOptions = product.hasVariations;
 
+  const installmentVal = Math.round(product.price / 6);
+  const waPhone = "56956105413";
+  const waText = encodeURIComponent(`Hola MotoRock, me interesa el producto: ${product.name} ($${product.priceFormatted})`);
+  const waLink = `https://wa.me/${waPhone}?text=${waText}`;
+
   return (
-    <div className="group bg-[#131620] border border-[#222839] hover:border-[#FF5500]/50 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-[#FF5500]/10 flex flex-col justify-between">
+    <div className="group relative glass-panel rounded-3xl overflow-hidden border border-white/5 hover:border-[#FF5500]/40 transition-all duration-500 hover:shadow-2xl hover:shadow-[#FF5500]/15 flex flex-col justify-between">
       {/* Product Image Container */}
       <div
         onClick={() => onOpenDetail(product)}
-        className="relative aspect-square bg-gradient-to-b from-[#181c28] to-[#0f121a] overflow-hidden cursor-pointer flex items-center justify-center p-4"
+        className="relative aspect-square bg-gradient-to-b from-[#141824] via-[#0f131c] to-[#0a0d14] overflow-hidden cursor-pointer flex items-center justify-center p-5 group-hover:bg-[#161c28] transition-colors"
       >
         <img
-          src={product.primaryImage || "https://placehold.co/400x400/181c28/fff?text=MotoRock"}
+          src={product.primaryImage}
           alt={product.name}
           loading="lazy"
-          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
           onError={(e) => {
-            if (product.images?.[0]?.originalUrl && e.target.src !== product.images[0].originalUrl) {
-              e.target.src = product.images[0].originalUrl;
-            }
+            e.target.src = "https://placehold.co/400x400/141824/fff?text=MotoRock";
           }}
         />
 
-        {/* Badges */}
-        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5">
+        {/* Top Badges */}
+        <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
           {product.onSale && (
-            <span className="bg-[#FF5500] text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-md uppercase tracking-wider">
-              Oferta
+            <span className="bg-[#FF5500] text-black font-black text-[9px] px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-md">
+              OFERTA
             </span>
           )}
           {hasOptions && (
-            <span className="bg-[#1f2638] text-gray-300 border border-[#313c56] text-[10px] font-semibold px-2 py-0.5 rounded-full">
-              Tallas / Opciones
+            <span className="bg-[#181f2f]/90 backdrop-blur-md text-gray-200 border border-white/10 text-[9px] font-bold px-2 py-0.5 rounded-full">
+              Tallas S - XXL
             </span>
           )}
         </div>
 
-        {/* Stock Badge */}
-        <div className="absolute top-2.5 right-2.5">
+        {/* Stock Status Badge */}
+        <div className="absolute top-3 right-3 z-10">
           {product.inStock ? (
-            <span className="bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
-              <Check size={10} /> Stock
+            <span className="bg-emerald-500/15 backdrop-blur-md border border-emerald-500/30 text-emerald-400 text-[9px] font-black px-2.5 py-0.5 rounded-full flex items-center gap-1">
+              <Check size={10} /> EN STOCK
             </span>
           ) : (
-            <span className="bg-red-500/20 border border-red-500/40 text-red-400 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
-              <X size={10} /> Agotado
+            <span className="bg-red-500/15 backdrop-blur-md border border-red-500/30 text-red-400 text-[9px] font-black px-2.5 py-0.5 rounded-full flex items-center gap-1">
+              <X size={10} /> AGOTADO
             </span>
           )}
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-4 flex-1 flex flex-col justify-between">
+      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-[#0b0e15]/90">
         <div>
-          <span className="text-[11px] text-gray-400 uppercase tracking-wide font-medium block mb-1">
-            {product.categories?.[0]?.name || "Repuestos"}
-          </span>
+          {/* Category and Rating */}
+          <div className="flex items-center justify-between gap-2 mb-1.5">
+            <span className="text-[10px] text-[#FF5500] font-black uppercase tracking-wider truncate">
+              {product.categories?.[0]?.name || "Repuestos"}
+            </span>
+            <div className="flex items-center gap-1 text-amber-400 text-[10px] font-bold">
+              <Star size={11} fill="currentColor" />
+              <span>4.9</span>
+            </div>
+          </div>
 
+          {/* Title */}
           <h3
             onClick={() => onOpenDetail(product)}
-            className="text-sm font-bold text-white group-hover:text-[#FF5500] transition-colors line-clamp-2 cursor-pointer leading-snug"
+            className="text-xs sm:text-sm font-bold text-white group-hover:text-[#FF5500] transition-colors line-clamp-2 cursor-pointer leading-snug"
             title={product.name}
           >
             {product.name}
@@ -69,25 +80,30 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
         </div>
 
         {/* Pricing & Actions */}
-        <div className="mt-4 pt-3 border-t border-[#1f2536] flex items-center justify-between gap-2">
+        <div className="mt-4 pt-3.5 border-t border-white/5 space-y-3">
           <div>
-            <span className="text-base font-black text-white block">
-              {product.priceFormatted}
-            </span>
-            {product.onSale && (
-              <span className="text-[11px] text-gray-500 line-through block">
-                {product.regularPriceFormatted}
+            <div className="flex items-baseline gap-2">
+              <span className="text-base sm:text-lg font-black text-white">
+                {product.priceFormatted}
               </span>
-            )}
+              {product.onSale && (
+                <span className="text-[11px] text-gray-500 line-through">
+                  {product.regularPriceFormatted}
+                </span>
+              )}
+            </div>
+            <span className="text-[10px] text-gray-400 block mt-0.5 font-medium">
+              o 6 cuotas de <strong className="text-gray-200">${installmentVal.toLocaleString("es-CL")}</strong> sin inter?s
+            </span>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => onOpenDetail(product)}
-              className="p-2 rounded-xl bg-[#1e2434] hover:bg-[#283045] text-gray-300 hover:text-white transition-colors"
-              title="Ver detalle"
+              className="flex-1 py-2.5 px-3 rounded-xl bg-[#141a27] hover:bg-[#1f283a] text-gray-200 hover:text-white border border-white/5 font-bold text-xs transition-all flex items-center justify-center gap-1.5"
             >
-              <Eye size={16} />
+              <Eye size={14} />
+              <span>Ver Detalle</span>
             </button>
 
             <button
@@ -101,8 +117,8 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
               disabled={isOutOfStock}
               className={`p-2.5 rounded-xl font-bold transition-all ${
                 isOutOfStock
-                  ? "bg-gray-800 text-gray-500 cursor-not-allowed"
-                  : "bg-[#FF5500] hover:bg-[#E04800] text-white shadow-md shadow-[#FF5500]/25 transform active:scale-95"
+                  ? "bg-gray-800 text-gray-600 cursor-not-allowed"
+                  : "bg-[#FF5500] hover:bg-[#E04800] text-white shadow-lg shadow-[#FF5500]/25 transform active:scale-95"
               }`}
               title={hasOptions ? "Seleccionar talla" : "Agregar al carrito"}
             >
