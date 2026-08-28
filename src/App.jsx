@@ -187,16 +187,16 @@ export default function App() {
   const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] text-[#121214] flex flex-col justify-between">
-      {/* Notificación Toast */}
+    <div className="min-h-screen bg-[#f6f6fa] text-[#151581] flex flex-col justify-between">
+      {/* Toast Notification */}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#121214] text-white px-5 py-3 rounded-full shadow-motorock font-bold text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200 border border-zinc-700">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#151581] text-white px-5 py-3 rounded-full shadow-lovi font-semibold text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200">
           <Check size={15} className="text-[#00bb76]" />
           <span>{toast}</span>
         </div>
       )}
 
-      {/* Cabecera */}
+      {/* Header */}
       <Navbar
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
@@ -209,39 +209,39 @@ export default function App() {
         onOpenAppModal={() => setIsAppModalOpen(true)}
       />
 
-      {/* Contenido Principal */}
+      {/* Main Content Area */}
       <main className="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
-        {/* 1. Hero con Showcase Interactivo de Fotos Reales */}
+        {/* 1. Hero Showcase with iPhone Mockup and Floating Real Cutouts */}
         <HeroBanner
           onSelectCategory={(catId) => setActiveCategory(catId)}
           onOpenGarage={() => setIsGarageOpen(true)}
           onOpenAppModal={() => setIsAppModalOpen(true)}
         />
 
-        {/* 2. Marquee de Marcas Oficiales */}
+        {/* 2. Official Brand Marquee */}
         <BrandsCarousel />
 
-        {/* 3. Sección de 3 Pilares: App, Delivery Express y Taller */}
+        {/* 3. App Features & Delivery Speed 3-Pillar Section */}
         <AppFeatureSection
           onOpenAppModal={() => setIsAppModalOpen(true)}
           onSelectCategory={(catId) => setActiveCategory(catId)}
         />
 
-        {/* 4. Bento Grid de Categorías Principales */}
+        {/* 4. Bento Categories Showcase */}
         <BentoCategories
           onSelectCategory={(catId) => setActiveCategory(catId)}
         />
 
-        {/* Notificación de Moto Seleccionada */}
+        {/* Selected Bike Notification Banner */}
         {selectedBike && (
-          <div className="mb-6 p-5 bg-red-50 border border-red-200 rounded-[24px] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
+          <div className="mb-6 p-5 bg-indigo-50/70 border border-indigo-200 rounded-[24px] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
             <div className="flex items-center gap-3">
               <span className="text-2xl">🏍️</span>
               <div>
-                <h4 className="text-xs font-bold text-[#e60000]">
-                  Filtrando repuestos compatibles para: <span className="text-[#121214]">{selectedBike.brand} {selectedBike.model}</span>
+                <h4 className="text-xs font-bold text-[#151581]">
+                  Filtrando repuestos compatibles para: <span className="text-[#5465ff]">{selectedBike.brand} {selectedBike.model}</span>
                 </h4>
-                <p className="text-[11px] text-zinc-500 mt-0.5">
+                <p className="text-[11px] text-[#a1a1cd] mt-0.5">
                   Paso de Cadena: {selectedBike.chainPitch} • Aceite recomendado: {selectedBike.oilSpec}
                 </p>
               </div>
@@ -249,13 +249,13 @@ export default function App() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsGarageOpen(true)}
-                className="px-4 py-1.5 bg-white hover:bg-zinc-100 text-xs font-bold rounded-full border border-[#e4e4e7] text-[#121214]"
+                className="px-4 py-1.5 bg-white hover:bg-slate-100 text-xs font-semibold rounded-full border border-[#e5e5eb] text-[#151581]"
               >
                 Cambiar Moto
               </button>
               <button
                 onClick={() => setSelectedBike(null)}
-                className="px-4 py-1.5 bg-red-100 hover:bg-red-200 text-[#e60000] text-xs font-bold rounded-full"
+                className="px-4 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-semibold rounded-full border border-red-100"
               >
                 Quitar Filtro
               </button>
@@ -263,26 +263,26 @@ export default function App() {
           </div>
         )}
 
-        {/* Píldoras de Categorías */}
+        {/* Category Navigation Pills */}
         <CategoryNav
           activeCategory={activeCategory}
           onSelectCategory={(catId) => setActiveCategory(catId)}
         />
 
-        {/* Barra de Filtros y Ordenamiento */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-4 bg-white border border-[#e4e4e7] rounded-[24px] shadow-sm">
+        {/* Filters & Sorting Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-4 bg-white border border-[#e5e5eb] rounded-[24px] shadow-sm">
           <div className="flex items-center gap-2 text-xs">
-            <span className="font-bold text-[#121214] flex items-center gap-1.5">
-              <Filter size={14} className="text-[#e60000]" />
+            <span className="font-bold text-[#151581] flex items-center gap-1.5">
+              <Filter size={14} className="text-[#5465ff]" />
               Catálogo ({totalItemsCount} repuestos)
             </span>
 
             <button
               onClick={() => setInStockOnly(!inStockOnly)}
-              className={`px-3.5 py-1 rounded-full text-[11px] font-bold border transition-colors cursor-pointer ${
+              className={`px-3.5 py-1 rounded-full text-[11px] font-semibold border transition-colors cursor-pointer ${
                 inStockOnly
                   ? "bg-emerald-50 border-emerald-200 text-[#00bb76]"
-                  : "bg-[#f8f9fa] border-[#e4e4e7] text-zinc-700 hover:text-[#e60000]"
+                  : "bg-[#f6f6fa] border-[#e5e5eb] text-[#292824] hover:text-[#151581]"
               }`}
             >
               ✓ En Stock
@@ -290,10 +290,10 @@ export default function App() {
 
             <button
               onClick={() => setOnSaleOnly(!onSaleOnly)}
-              className={`px-3.5 py-1 rounded-full text-[11px] font-bold border transition-colors cursor-pointer ${
+              className={`px-3.5 py-1 rounded-full text-[11px] font-semibold border transition-colors cursor-pointer ${
                 onSaleOnly
-                  ? "bg-red-50 border-red-200 text-[#e60000]"
-                  : "bg-[#f8f9fa] border-[#e4e4e7] text-zinc-700 hover:text-[#e60000]"
+                  ? "bg-indigo-50 border-indigo-200 text-[#151581]"
+                  : "bg-[#f6f6fa] border-[#e5e5eb] text-[#292824] hover:text-[#151581]"
               }`}
             >
               🔥 Ofertas
@@ -301,11 +301,11 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-zinc-400 flex items-center gap-1"><ArrowUpDown size={12} /> Ordenar:</span>
+            <span className="text-[#a1a1cd] flex items-center gap-1"><ArrowUpDown size={12} /> Ordenar:</span>
             <select
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value)}
-              className="bg-[#f8f9fa] text-[#121214] border border-[#e4e4e7] rounded-full px-3 py-1 text-xs font-semibold focus:outline-none focus:border-[#e60000]"
+              className="bg-[#f6f6fa] text-[#151581] border border-[#e5e5eb] rounded-full px-3 py-1 text-xs font-semibold focus:outline-none focus:border-[#151581]"
             >
               <option value="popular">Destacados</option>
               <option value="price_asc">Menor Precio</option>
@@ -315,12 +315,12 @@ export default function App() {
           </div>
         </div>
 
-        {/* Grilla de Productos */}
+        {/* Product Grid */}
         {paginatedProducts.length === 0 ? (
-          <div className="py-16 text-center space-y-2 bg-white border border-[#e4e4e7] rounded-[32px] p-8 shadow-sm">
+          <div className="py-16 text-center space-y-2 bg-white border border-[#e5e5eb] rounded-[32px] p-8 shadow-sm">
             <span className="text-3xl">🔍</span>
-            <h3 className="text-sm font-bold text-[#121214]">No encontramos repuestos con esos filtros</h3>
-            <p className="text-xs text-zinc-400">Prueba con otros términos de búsqueda o restablece los filtros.</p>
+            <h3 className="text-sm font-bold text-[#151581]">No encontramos repuestos con esos filtros</h3>
+            <p className="text-xs text-[#a1a1cd]">Prueba con otros términos de búsqueda o restablece los filtros.</p>
             <button
               onClick={() => {
                 setActiveCategory("all");
@@ -329,7 +329,7 @@ export default function App() {
                 setInStockOnly(false);
                 setOnSaleOnly(false);
               }}
-              className="mt-2 bg-[#e60000] hover:bg-[#cc0000] text-white px-5 py-2 rounded-full text-xs font-bold shadow-motorock-red"
+              className="mt-2 bg-[#151581] hover:bg-[#0e0e5a] text-white px-5 py-2 rounded-full text-xs font-bold"
             >
               Restablecer Filtros
             </button>
@@ -347,39 +347,39 @@ export default function App() {
           </div>
         )}
 
-        {/* Paginación */}
+        {/* Pagination Controls */}
         {totalPages > 1 && (
           <div className="mt-10 flex items-center justify-center gap-2">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className="flex items-center gap-1 px-4 py-2 rounded-full bg-white border border-[#e4e4e7] text-xs font-bold text-[#121214] disabled:opacity-40 hover:bg-[#f8f9fa] shadow-sm cursor-pointer"
+              className="flex items-center gap-1 px-4 py-2 rounded-full bg-white border border-[#e5e5eb] text-xs font-semibold text-[#151581] disabled:opacity-40 hover:bg-[#f6f6fa] shadow-sm cursor-pointer"
             >
               <ChevronLeft size={14} /> Anterior
             </button>
 
-            <span className="text-xs font-medium text-zinc-400 px-3">
-              Página <strong className="text-[#121214]">{currentPage}</strong> de <strong className="text-[#121214]">{totalPages}</strong>
+            <span className="text-xs font-medium text-[#a1a1cd] px-3">
+              Página <strong className="text-[#151581]">{currentPage}</strong> de <strong className="text-[#151581]">{totalPages}</strong>
             </span>
 
             <button
               onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-1 px-4 py-2 rounded-full bg-white border border-[#e4e4e7] text-xs font-bold text-[#121214] disabled:opacity-40 hover:bg-[#f8f9fa] shadow-sm cursor-pointer"
+              className="flex items-center gap-1 px-4 py-2 rounded-full bg-white border border-[#e5e5eb] text-xs font-semibold text-[#151581] disabled:opacity-40 hover:bg-[#f6f6fa] shadow-sm cursor-pointer"
             >
               Siguiente <ChevronRight size={14} />
             </button>
           </div>
         )}
 
-        {/* 5. Reseñas Verificadas de Motociclistas */}
+        {/* 5. Verified Reviews Section */}
         <VerifiedReviews />
 
-        {/* 6. Showroom Físico y Taller en Talca */}
+        {/* 6. Physical Showroom & Workshop Section in Talca */}
         <StoreLocation />
       </main>
 
-      {/* Modales */}
+      {/* Modals & Drawers */}
       <AppDownloadModal
         isOpen={isAppModalOpen}
         onClose={() => setIsAppModalOpen(false)}
@@ -441,7 +441,7 @@ export default function App() {
         }}
       />
 
-      {/* Pie de Página */}
+      {/* Footer */}
       <Footer onOpenAppModal={() => setIsAppModalOpen(true)} />
     </div>
   );

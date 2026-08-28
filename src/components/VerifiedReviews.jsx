@@ -35,13 +35,13 @@ export default function VerifiedReviews() {
   return (
     <section className="my-16">
       <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-        <span className="text-[11px] font-bold text-[#e60000] uppercase tracking-wider bg-red-50 px-3 py-1 rounded-full border border-red-100">
+        <span className="text-[11px] font-bold text-[#151581] uppercase tracking-wider bg-[#f6f6fa] px-3 py-1 rounded-full border border-[#e5e5eb]">
           Opiniones Verificadas
         </span>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#121214] tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-normal text-[#151581] tracking-tight">
           La confianza de miles de motociclistas en Chile
         </h2>
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-[#a1a1cd]">
           Calificación promedio de 4.9/5 basada en compras con entrega confirmada.
         </p>
       </div>
@@ -50,33 +50,33 @@ export default function VerifiedReviews() {
         {REVIEWS.map((rev, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-[24px] p-6 shadow-motorock border border-[#e4e4e7] flex flex-col justify-between space-y-4"
+            className="bg-white rounded-[24px] p-6 shadow-lovi border border-[#e5e5eb] flex flex-col justify-between space-y-4"
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex text-[#00bb76] text-sm tracking-tight">
                   {"★".repeat(rev.rating)}
                 </div>
-                <span className="text-xs font-bold text-[#00bb76] flex items-center gap-1">
+                <span className="text-xs font-semibold text-[#00bb76] flex items-center gap-1">
                   <CheckCircle2 size={12} /> Verificado
                 </span>
               </div>
 
-              <h4 className="text-sm font-bold text-[#121214] leading-snug">
+              <h4 className="text-sm font-semibold text-[#151581] leading-snug">
                 {rev.title}
               </h4>
 
-              <p className="text-xs text-zinc-600 leading-relaxed font-normal">
+              <p className="text-xs text-[#292824]/80 leading-relaxed font-normal">
                 "{rev.body}"
               </p>
             </div>
 
-            <div className="pt-3 border-t border-zinc-100 flex items-center justify-between text-[11px]">
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px]">
               <div>
-                <strong className="text-[#121214] block">{rev.name}</strong>
-                <span className="text-zinc-400">{rev.bike} • {rev.location}</span>
+                <strong className="text-[#151581] block">{rev.name}</strong>
+                <span className="text-[#a1a1cd]">{rev.bike} • {rev.location}</span>
               </div>
-              <span className="text-zinc-400">{rev.date}</span>
+              <span className="text-[#a1a1cd]">{rev.date}</span>
             </div>
           </div>
         ))}
