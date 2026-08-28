@@ -22,17 +22,17 @@ export default function CategoryNav({ activeCategory, onSelectCategory }) {
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.id)}
-              className={`flex items-center gap-2.5 px-4 py-3 rounded-2xl text-xs font-black tracking-wide whitespace-nowrap transition-all duration-300 border ${
+              className={`flex items-center gap-2.5 px-5 py-3 rounded-full text-xs font-black tracking-wide whitespace-nowrap transition-all duration-300 border cursor-pointer ${
                 isActive
-                  ? "bg-gradient-to-r from-[#FF5500] to-[#E04800] border-[#FF5500] text-white shadow-xl shadow-[#FF5500]/25 transform scale-102"
-                  : "glass-panel text-gray-300 hover:text-white hover:border-gray-500 hover:bg-[#141a27]"
+                  ? "liquid-btn text-white shadow-lg shadow-[#FF5500]/30 border-transparent transform scale-102"
+                  : "bg-white/80 hover:bg-white text-slate-700 hover:text-slate-950 border-slate-200/80 shadow-sm hover:shadow"
               }`}
             >
               <Icon size={16} className={isActive ? "text-white" : "text-[#FF5500]"} />
               <span>{cat.name}</span>
               <span
                 className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                  isActive ? "bg-black/30 text-white" : "bg-[#1e2738] text-gray-400"
+                  isActive ? "bg-black/20 text-white" : "bg-slate-100 text-slate-500"
                 }`}
               >
                 {cat.count}

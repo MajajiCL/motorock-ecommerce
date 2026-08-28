@@ -200,10 +200,15 @@ export default function App() {
   const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#0b0d13] text-gray-100 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col justify-between relative overflow-x-hidden">
+      {/* Background Liquid Ambient Gradients */}
+      <div className="fixed top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-orange-200/40 to-amber-100/30 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="fixed top-1/3 right-10 w-[500px] h-[500px] bg-gradient-to-tr from-sky-200/30 to-blue-100/20 rounded-full blur-[120px] pointer-events-none -z-10" />
+      <div className="fixed bottom-10 left-10 w-[700px] h-[700px] bg-gradient-to-tr from-orange-100/30 via-pink-100/20 to-transparent rounded-full blur-[160px] pointer-events-none -z-10" />
+
       {/* Toast Notification */}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#FF5500] text-white px-4 py-3 rounded-2xl shadow-2xl font-bold text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200">
+        <div className="fixed bottom-6 right-6 z-50 bg-[#FF5500] text-white px-5 py-3 rounded-full shadow-2xl font-black text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200">
           <Check size={16} />
           <span>{toast}</span>
         </div>
@@ -231,28 +236,30 @@ export default function App() {
 
         {/* Selected Bike Notification Banner */}
         {selectedBike && (
-          <div className="mb-6 p-4 bg-gradient-to-r from-[#FF5500]/20 via-[#181d2c] to-[#12151f] border border-[#FF5500]/40 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
-            <div className="flex items-center gap-3">
-              <span className="text-2xl">???</span>
+          <div className="mb-6 p-5 glass-aero border-orange-300/60 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-md">
+            <div className="flex items-center gap-3.5">
+              <div className="w-12 h-12 rounded-2xl bg-orange-100 text-2xl flex items-center justify-center shadow-sm">
+                ???
+              </div>
               <div>
-                <h4 className="text-sm font-bold text-white">
+                <h4 className="text-sm font-black text-slate-900">
                   Mostrando repuestos y accesorios para: <span className="text-[#FF5500]">{selectedBike.brand} {selectedBike.model}</span>
                 </h4>
-                <p className="text-xs text-gray-400">
-                  Paso de Cadena: {selectedBike.chainPitch} | Aceite recomendado: {selectedBike.oilSpec}
+                <p className="text-xs text-slate-500 mt-0.5 font-medium">
+                  Paso de Cadena: <strong>{selectedBike.chainPitch}</strong> | Aceite recomendado: <strong>{selectedBike.oilSpec}</strong>
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsGarageOpen(true)}
-                className="px-3 py-1.5 bg-[#202738] hover:bg-[#2b354c] text-xs font-semibold rounded-lg text-white"
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-xs font-bold rounded-full text-slate-800 shadow-sm"
               >
                 Cambiar Moto
               </button>
               <button
                 onClick={() => setSelectedBike(null)}
-                className="px-3 py-1.5 bg-red-500/20 hover:bg-red-500/30 text-red-400 text-xs font-semibold rounded-lg"
+                className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold rounded-full border border-red-200 shadow-sm"
               >
                 Quitar Filtro
               </button>
@@ -267,20 +274,20 @@ export default function App() {
         />
 
         {/* Filters and Sorting Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-3.5 bg-[#131620] border border-[#202636] rounded-2xl">
-          <div className="flex items-center gap-2 text-xs">
-            <span className="font-bold text-white flex items-center gap-1.5">
-              <Filter size={14} className="text-[#FF5500]" />
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-4 glass-aero rounded-3xl shadow-sm">
+          <div className="flex items-center gap-2.5 text-xs">
+            <span className="font-black text-slate-900 flex items-center gap-1.5">
+              <Filter size={15} className="text-[#FF5500]" />
               Cat?logo ({totalItemsCount} productos)
             </span>
 
             {/* In stock toggle */}
             <button
               onClick={() => setInStockOnly(!inStockOnly)}
-              className={`px-3 py-1 rounded-lg text-[11px] font-bold border transition-all ${
+              className={`px-3.5 py-1.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer ${
                 inStockOnly
-                  ? "bg-emerald-500/20 border-emerald-500 text-emerald-300"
-                  : "bg-[#1a1f2c] border-[#293246] text-gray-400 hover:text-white"
+                  ? "bg-emerald-100 border-emerald-300 text-emerald-800 shadow-sm"
+                  : "bg-white/80 border-slate-200 text-slate-600 hover:text-slate-950"
               }`}
             >
               ? En Stock
@@ -289,10 +296,10 @@ export default function App() {
             {/* On sale toggle */}
             <button
               onClick={() => setOnSaleOnly(!onSaleOnly)}
-              className={`px-3 py-1 rounded-lg text-[11px] font-bold border transition-all ${
+              className={`px-3.5 py-1.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer ${
                 onSaleOnly
-                  ? "bg-[#FF5500]/20 border-[#FF5500] text-[#FF5500]"
-                  : "bg-[#1a1f2c] border-[#293246] text-gray-400 hover:text-white"
+                  ? "bg-orange-100 border-orange-300 text-[#FF5500] shadow-sm"
+                  : "bg-white/80 border-slate-200 text-slate-600 hover:text-slate-950"
               }`}
             >
               ?? Ofertas
@@ -301,11 +308,11 @@ export default function App() {
 
           {/* Sort Selector */}
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-gray-400 flex items-center gap-1"><ArrowUpDown size={12} /> Ordenar:</span>
+            <span className="text-slate-500 font-semibold flex items-center gap-1"><ArrowUpDown size={13} /> Ordenar:</span>
             <select
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value)}
-              className="bg-[#1a1f2c] text-white border border-[#293246] rounded-lg px-2.5 py-1 text-xs focus:outline-none focus:border-[#FF5500]"
+              className="bg-white text-slate-800 border border-slate-200 rounded-full px-3 py-1.5 text-xs font-semibold focus:outline-none focus:border-[#FF5500] shadow-sm cursor-pointer"
             >
               <option value="popular">M?s Populares & Destacados</option>
               <option value="price_asc">Menor Precio</option>
@@ -317,10 +324,10 @@ export default function App() {
 
         {/* Product Grid */}
         {paginatedProducts.length === 0 ? (
-          <div className="py-20 text-center space-y-3 bg-[#131620] border border-[#222839] rounded-3xl p-8">
+          <div className="py-20 text-center space-y-3 glass-aero rounded-3xl p-8 shadow-sm">
             <span className="text-4xl">??</span>
-            <h3 className="text-base font-bold text-white">No encontramos productos con esos filtros</h3>
-            <p className="text-xs text-gray-400">Intenta buscar con otros t?rminos o cambia la categor?a seleccionada.</p>
+            <h3 className="text-base font-bold text-slate-900">No encontramos productos con esos filtros</h3>
+            <p className="text-xs text-slate-500">Intenta buscar con otros t?rminos o cambia la categor?a seleccionada.</p>
             <button
               onClick={() => {
                 setActiveCategory("all");
@@ -329,7 +336,7 @@ export default function App() {
                 setInStockOnly(false);
                 setOnSaleOnly(false);
               }}
-              className="mt-2 px-4 py-2 bg-[#FF5500] text-white rounded-xl text-xs font-bold"
+              className="mt-2 liquid-btn text-white px-5 py-2.5 rounded-full text-xs font-bold shadow-md cursor-pointer"
             >
               Restablecer Filtros
             </button>
@@ -349,23 +356,23 @@ export default function App() {
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div className="mt-10 flex items-center justify-center gap-3">
+          <div className="mt-12 flex items-center justify-center gap-3">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#141722] border border-[#22283a] text-xs font-semibold text-gray-300 disabled:opacity-40 hover:bg-[#1f2536] transition-colors"
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-700 disabled:opacity-40 hover:bg-slate-50 shadow-sm transition-colors cursor-pointer"
             >
               <ChevronLeft size={16} /> Anterior
             </button>
 
-            <span className="text-xs font-bold text-gray-400">
-              P?gina <strong className="text-white">{currentPage}</strong> de <strong className="text-white">{totalPages}</strong>
+            <span className="text-xs font-bold text-slate-500">
+              P?gina <strong className="text-slate-900">{currentPage}</strong> de <strong className="text-slate-900">{totalPages}</strong>
             </span>
 
             <button
               onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#141722] border border-[#22283a] text-xs font-semibold text-gray-300 disabled:opacity-40 hover:bg-[#1f2536] transition-colors"
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-700 disabled:opacity-40 hover:bg-slate-50 shadow-sm transition-colors cursor-pointer"
             >
               Siguiente <ChevronRight size={16} />
             </button>

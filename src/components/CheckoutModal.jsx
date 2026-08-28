@@ -18,7 +18,6 @@ export default function CheckoutModal({
   const [timeLeft, setTimeLeft] = useState(600);
   const [confirmedOrder, setConfirmedOrder] = useState(null);
 
-  // Form states
   const [customer, setCustomer] = useState({
     name: "",
     rut: "",
@@ -31,47 +30,13 @@ export default function CheckoutModal({
 
   const [paymentMethod, setPaymentMethod] = useState("webpay_plus");
 
-  // 1. Initial reservation on checkout open
   useEffect(() => {
     if (isOpen && items.length > 0 && step === 1) {
-      setLoading(true);
-      setError(null);
-
-      const reservationPayload = {
-        items: items.map((it) => ({
-          productId: it.product.id,
-          variationId: it.variation?.id || null,
-          quantity: it.quantity,
-          name: it.product.name
-        }))
-      };
-
-      fetch("/api/checkout/reserve", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(reservationPayload)
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success) {
-            setReservationToken(data.reservationToken);
-          } else {
-            // Local fallback token for GitHub Pages
-            setReservationToken("resv_" + Math.random().toString(36).substring(2, 15));
-          }
-          setTimeLeft(600);
-          setLoading(false);
-        })
-        .catch(() => {
-          // Local fallback token for GitHub Pages
-          setReservationToken("resv_" + Math.random().toString(36).substring(2, 15));
-          setTimeLeft(600);
-          setLoading(false);
-        });
+      setReservationToken("resv_" + Math.random().toString(36).substring(2, 15));
+      setTimeLeft(600);
     }
   }, [isOpen, items]);
 
-  // Reservation countdown timer
   useEffect(() => {
     if (!isOpen || step === 3) return;
     const timer = setInterval(() => {
@@ -92,8 +57,7 @@ export default function CheckoutModal({
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
 
-  // Process order confirmation
-  const handleConfirmPayment = async () => {
+  const handleConfirmPayment = () => {
     if (!customer.name || !customer.email || !customer.phone) {
       setError("Por favor completa los datos obligatorios.");
       return;
@@ -102,59 +66,13 @@ export default function CheckoutModal({
     setLoading(true);
     setError(null);
 
-    const payload = {
-      reservationToken,
-      customer,
-      items: items.map((it) => ({
-        id: it.product.id,
-        name: it.product.name,
-        price: it.product.price || 0,
-        quantity: it.quantity,
-        variation: it.variation?.attributes || null
-      })),
-      shipping: shippingQuote,
-      paymentMethod,
-      total: totalCLP
-    };
-
-    try {
-      const res = await fetch("/api/checkout/confirm", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-
-      if (data.success) {
-        setConfirmedOrder(data.data);
-        setStep(3);
-        if (onOrderCompleted) onOrderCompleted();
-      } else {
-        // Fallback for GitHub Pages
-        const localOrder = {
-          orderId: "MR-" + Math.floor(100000 + Math.random() * 900000),
-          createdAt: new Date().toISOString(),
-          status: paymentMethod === "transferencia" ? "PENDING_PAYMENT" : "PAID",
-          customer,
-          items: payload.items,
-          shipping: shippingQuote,
-          paymentMethod,
-          total: totalCLP,
-          totalFormatted: `$${totalCLP.toLocaleString("es-CL")} CLP`,
-          trackingNumber: "STK-" + Math.floor(10000000 + Math.random() * 90000000)
-        };
-        setConfirmedOrder(localOrder);
-        setStep(3);
-        if (onOrderCompleted) onOrderCompleted();
-      }
-    } catch {
-      // Fallback for GitHub Pages
+    setTimeout(() => {
       const localOrder = {
         orderId: "MR-" + Math.floor(100000 + Math.random() * 900000),
         createdAt: new Date().toISOString(),
         status: paymentMethod === "transferencia" ? "PENDING_PAYMENT" : "PAID",
         customer,
-        items: payload.items,
+        items,
         shipping: shippingQuote,
         paymentMethod,
         total: totalCLP,
@@ -163,28 +81,27 @@ export default function CheckoutModal({
       };
       setConfirmedOrder(localOrder);
       setStep(3);
-      if (onOrderCompleted) onOrderCompleted();
-    } finally {
       setLoading(false);
-    }
+      if (onOrderCompleted) onOrderCompleted();
+    }, 1200);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in">
-      <div className="bg-[#12151f] border border-[#272e42] rounded-3xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/60 backdrop-blur-xl animate-in fade-in">
+      <div className="bg-white/95 backdrop-blur-2xl border border-white/90 rounded-3xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="p-5 border-b border-[#222738] flex items-center justify-between bg-[#151926]">
+        <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#FF5500] text-white flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-2xl bg-[#FF5500] text-white flex items-center justify-center font-bold shadow-md shadow-[#FF5500]/30">
               ??
             </div>
             <div>
-              <h3 className="font-bold text-white text-base">Checkout Seguro MotoRock Chile</h3>
-              <p className="text-xs text-gray-400">Webpay Plus ? Mercado Pago ? Despacho Nacional</p>
+              <h3 className="font-bold text-slate-900 text-base">Checkout Seguro MotoRock Chile</h3>
+              <p className="text-xs text-slate-500">Webpay Plus ? Mercado Pago ? Despacho Nacional</p>
             </div>
           </div>
           {step !== 3 && (
-            <button onClick={onClose} className="text-gray-400 hover:text-white p-1 rounded-lg hover:bg-white/5">
+            <button onClick={onClose} className="text-slate-400 hover:text-slate-900 p-1.5 rounded-full hover:bg-slate-200">
               <X size={20} />
             </button>
           )}
@@ -192,12 +109,12 @@ export default function CheckoutModal({
 
         {/* Stock Lock Timer Bar */}
         {step !== 3 && (
-          <div className="bg-[#191e2b] px-4 py-2 border-b border-[#242b3d] flex items-center justify-between text-xs">
-            <span className="text-gray-300 flex items-center gap-1.5 font-medium">
+          <div className="bg-orange-50/60 px-4 py-2 border-b border-orange-100 flex items-center justify-between text-xs">
+            <span className="text-slate-700 flex items-center gap-1.5 font-medium">
               <Clock size={14} className="text-[#FF5500]" />
               Stock reservado en memoria para ti:
             </span>
-            <span className="font-mono font-bold text-amber-400 bg-black/40 px-2 py-0.5 rounded border border-amber-500/30">
+            <span className="font-mono font-bold text-[#FF5500] bg-white px-2.5 py-0.5 rounded-full border border-orange-200 shadow-sm">
               {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
             </span>
           </div>
@@ -206,93 +123,93 @@ export default function CheckoutModal({
         {/* Modal Body */}
         <div className="p-6 overflow-y-auto flex-1 space-y-6">
           {error && (
-            <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-xs text-red-300 flex items-center gap-2">
-              <AlertTriangle size={16} className="text-red-400 flex-shrink-0" />
+            <div className="p-4 bg-red-50 border border-red-200 rounded-2xl text-xs text-red-700 flex items-center gap-2 shadow-sm">
+              <AlertTriangle size={16} className="text-red-500 flex-shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
-          {/* STEP 1: Customer & Delivery Info */}
+          {/* STEP 1: Customer Info */}
           {step === 1 && (
             <div className="space-y-4">
-              <h4 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                <span>1. Datos del Comprador & Despacho</span>
+              <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                1. Datos del Comprador & Despacho
               </h4>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <div>
-                  <label className="block text-gray-300 font-semibold mb-1">Nombre Completo *</label>
+                  <label className="block text-slate-700 font-bold mb-1">Nombre Completo *</label>
                   <input
                     type="text"
                     required
                     placeholder="Ej: Claudio Andr?s"
                     value={customer.name}
                     onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
-                    className="w-full bg-[#171b26] border border-[#272e42] rounded-xl p-2.5 text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#FF5500] shadow-inner"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 font-semibold mb-1">RUT Chileno</label>
+                  <label className="block text-slate-700 font-bold mb-1">RUT Chileno</label>
                   <input
                     type="text"
                     placeholder="Ej: 18.456.789-K"
                     value={customer.rut}
                     onChange={(e) => setCustomer({ ...customer, rut: e.target.value })}
-                    className="w-full bg-[#171b26] border border-[#272e42] rounded-xl p-2.5 text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#FF5500] shadow-inner"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 font-semibold mb-1">Correo Electr?nico *</label>
+                  <label className="block text-slate-700 font-bold mb-1">Correo Electr?nico *</label>
                   <input
                     type="email"
                     required
                     placeholder="tucorreo@ejemplo.cl"
                     value={customer.email}
                     onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
-                    className="w-full bg-[#171b26] border border-[#272e42] rounded-xl p-2.5 text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#FF5500] shadow-inner"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-gray-300 font-semibold mb-1">Tel?fono / WhatsApp *</label>
+                  <label className="block text-slate-700 font-bold mb-1">Tel?fono / WhatsApp *</label>
                   <input
                     type="tel"
                     required
                     placeholder="+56 9 1234 5678"
                     value={customer.phone}
                     onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
-                    className="w-full bg-[#171b26] border border-[#272e42] rounded-xl p-2.5 text-white focus:outline-none focus:border-[#FF5500]"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#FF5500] shadow-inner"
                   />
                 </div>
 
                 {!pickupInStore ? (
                   <>
                     <div className="sm:col-span-2">
-                      <label className="block text-gray-300 font-semibold mb-1">Direcci?n de Entrega *</label>
+                      <label className="block text-slate-700 font-bold mb-1">Direcci?n de Entrega *</label>
                       <input
                         type="text"
                         placeholder="Calle, N?mero, Depto / Villa"
                         value={customer.address}
                         onChange={(e) => setCustomer({ ...customer, address: e.target.value })}
-                        className="w-full bg-[#171b26] border border-[#272e42] rounded-xl p-2.5 text-white focus:outline-none focus:border-[#FF5500]"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#FF5500] shadow-inner"
                       />
                     </div>
                     <div>
-                      <label className="block text-gray-300 font-semibold mb-1">Comuna / Ciudad</label>
+                      <label className="block text-slate-700 font-bold mb-1">Comuna / Ciudad</label>
                       <input
                         type="text"
                         placeholder="Ej: Talca, Santiago, Concepci?n..."
                         value={customer.commune}
                         onChange={(e) => setCustomer({ ...customer, commune: e.target.value })}
-                        className="w-full bg-[#171b26] border border-[#272e42] rounded-xl p-2.5 text-white focus:outline-none focus:border-[#FF5500]"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-900 focus:outline-none focus:border-[#FF5500] shadow-inner"
                       />
                     </div>
                   </>
                 ) : (
-                  <div className="sm:col-span-2 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-xs text-emerald-300 flex items-center gap-2">
-                    <MapPin size={16} className="text-emerald-400 flex-shrink-0" />
+                  <div className="sm:col-span-2 p-3 bg-emerald-50 border border-emerald-200 rounded-2xl text-xs text-emerald-800 flex items-center gap-2 shadow-sm">
+                    <MapPin size={16} className="text-emerald-600 flex-shrink-0" />
                     <span>Retiro en Tienda MotoRock: Av. 2 Sur Locales 771 y 777, Talca. Listo en 2 horas h?biles.</span>
                   </div>
                 )}
@@ -300,98 +217,94 @@ export default function CheckoutModal({
             </div>
           )}
 
-          {/* STEP 2: Payment Gateway Selection */}
+          {/* STEP 2: Payment Gateways */}
           {step === 2 && (
             <div className="space-y-4">
-              <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+              <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                 2. Selecciona M?todo de Pago
               </h4>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {/* Webpay Plus */}
                 <div
                   onClick={() => setPaymentMethod("webpay_plus")}
                   className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-start gap-3 ${
                     paymentMethod === "webpay_plus"
-                      ? "bg-[#FF5500]/10 border-[#FF5500] shadow-md shadow-[#FF5500]/20"
-                      : "bg-[#171b26] border-[#272e42] hover:border-gray-500"
+                      ? "bg-orange-50 border-[#FF5500] shadow-md shadow-[#FF5500]/20"
+                      : "bg-white border-slate-200 hover:border-slate-400 shadow-sm"
                   }`}
                 >
-                  <div className="w-8 h-8 rounded-lg bg-red-600/20 text-red-400 flex items-center justify-center font-black text-xs">
+                  <div className="w-8 h-8 rounded-xl bg-red-100 text-red-600 flex items-center justify-center font-black text-xs">
                     TBK
                   </div>
                   <div>
-                    <h5 className="text-xs font-bold text-white">Transbank Webpay Plus</h5>
-                    <p className="text-[11px] text-gray-400">Tarjetas de D?bito (Redcompra), Cr?dito y Prepago.</p>
+                    <h5 className="text-xs font-bold text-slate-900">Transbank Webpay Plus</h5>
+                    <p className="text-[11px] text-slate-500">Tarjetas de D?bito (Redcompra), Cr?dito y Prepago.</p>
                   </div>
                 </div>
 
-                {/* Mercado Pago */}
                 <div
                   onClick={() => setPaymentMethod("mercadopago")}
                   className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-start gap-3 ${
                     paymentMethod === "mercadopago"
-                      ? "bg-[#FF5500]/10 border-[#FF5500] shadow-md shadow-[#FF5500]/20"
-                      : "bg-[#171b26] border-[#272e42] hover:border-gray-500"
+                      ? "bg-orange-50 border-[#FF5500] shadow-md shadow-[#FF5500]/20"
+                      : "bg-white border-slate-200 hover:border-slate-400 shadow-sm"
                   }`}
                 >
-                  <div className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-black text-xs">
+                  <div className="w-8 h-8 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-black text-xs">
                     MP
                   </div>
                   <div>
-                    <h5 className="text-xs font-bold text-white">Mercado Pago Chile</h5>
-                    <p className="text-[11px] text-gray-400">Hasta 6 cuotas sin inter?s y saldo en cuenta.</p>
+                    <h5 className="text-xs font-bold text-slate-900">Mercado Pago Chile</h5>
+                    <p className="text-[11px] text-slate-500">Hasta 6 cuotas sin inter?s y saldo en cuenta.</p>
                   </div>
                 </div>
 
-                {/* Flow.cl */}
                 <div
                   onClick={() => setPaymentMethod("flow")}
                   className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-start gap-3 ${
                     paymentMethod === "flow"
-                      ? "bg-[#FF5500]/10 border-[#FF5500] shadow-md shadow-[#FF5500]/20"
-                      : "bg-[#171b26] border-[#272e42] hover:border-gray-500"
+                      ? "bg-orange-50 border-[#FF5500] shadow-md shadow-[#FF5500]/20"
+                      : "bg-white border-slate-200 hover:border-slate-400 shadow-sm"
                   }`}
                 >
-                  <div className="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-black text-xs">
+                  <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-black text-xs">
                     FL
                   </div>
                   <div>
-                    <h5 className="text-xs font-bold text-white">Flow.cl Pagos</h5>
-                    <p className="text-[11px] text-gray-400">Mach, Servipag, Khipu y Webpay.</p>
+                    <h5 className="text-xs font-bold text-slate-900">Flow.cl Pagos</h5>
+                    <p className="text-[11px] text-slate-500">Mach, Servipag, Khipu y Webpay.</p>
                   </div>
                 </div>
 
-                {/* Transferencia Bancaria */}
                 <div
                   onClick={() => setPaymentMethod("transferencia")}
                   className={`p-4 rounded-2xl border cursor-pointer transition-all flex items-start gap-3 ${
                     paymentMethod === "transferencia"
-                      ? "bg-[#FF5500]/10 border-[#FF5500] shadow-md shadow-[#FF5500]/20"
-                      : "bg-[#171b26] border-[#272e42] hover:border-gray-500"
+                      ? "bg-orange-50 border-[#FF5500] shadow-md shadow-[#FF5500]/20"
+                      : "bg-white border-slate-200 hover:border-slate-400 shadow-sm"
                   }`}
                 >
-                  <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xs">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-black text-xs">
                     ??
                   </div>
                   <div>
-                    <h5 className="text-xs font-bold text-white">Transferencia Bancaria</h5>
-                    <p className="text-[11px] text-gray-400">Banco Santander / Estado con comprobante.</p>
+                    <h5 className="text-xs font-bold text-slate-900">Transferencia Bancaria</h5>
+                    <p className="text-[11px] text-slate-500">Banco Santander / Estado con comprobante.</p>
                   </div>
                 </div>
               </div>
 
-              {/* Order Summary Recap */}
-              <div className="p-4 bg-[#141824] rounded-2xl border border-[#23293c] space-y-2 text-xs">
-                <div className="flex justify-between text-gray-400">
+              {/* Order Recap */}
+              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs shadow-inner">
+                <div className="flex justify-between text-slate-600">
                   <span>Productos ({items.length})</span>
                   <span>${subtotalCLP.toLocaleString("es-CL")} CLP</span>
                 </div>
-                <div className="flex justify-between text-gray-400">
+                <div className="flex justify-between text-slate-600">
                   <span>Despacho ({pickupInStore ? "Retiro Talca" : "Starken/Chilexpress"})</span>
                   <span>{pickupInStore ? "GRATIS" : `$${(totalCLP - subtotalCLP).toLocaleString("es-CL")} CLP`}</span>
                 </div>
-                <div className="pt-2 border-t border-[#23293c] flex justify-between font-black text-sm text-white">
+                <div className="pt-2 border-t border-slate-200 flex justify-between font-black text-sm text-slate-900">
                   <span>Total Final</span>
                   <span className="text-base text-[#FF5500]">${totalCLP.toLocaleString("es-CL")} CLP</span>
                 </div>
@@ -399,56 +312,55 @@ export default function CheckoutModal({
             </div>
           )}
 
-          {/* STEP 3: Order Completed & Digital Voucher */}
+          {/* STEP 3: Order Completed Voucher */}
           {step === 3 && confirmedOrder && (
             <div className="py-6 text-center space-y-4">
-              <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center mx-auto text-3xl">
+              <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 border border-emerald-200 flex items-center justify-center mx-auto text-3xl shadow-sm">
                 <CheckCircle2 size={36} />
               </div>
 
               <div>
-                <h3 className="text-xl font-display font-black text-white">?Compra Realizada con ?xito!</h3>
-                <p className="text-xs text-gray-400 mt-1">Hemos registrado tu pedido en MotoRock Chile</p>
+                <h3 className="text-xl font-display font-black text-slate-900">?Compra Realizada con ?xito!</h3>
+                <p className="text-xs text-slate-500 mt-1">Hemos registrado tu pedido en MotoRock Chile</p>
               </div>
 
-              {/* Digital Voucher Card */}
-              <div className="bg-[#151926] border border-[#283146] rounded-2xl p-5 text-left text-xs space-y-3">
-                <div className="flex justify-between pb-3 border-b border-[#232a3d]">
-                  <span className="text-gray-400">N?mero de Orden:</span>
+              <div className="bg-slate-50 border border-slate-200 rounded-3xl p-5 text-left text-xs space-y-3 shadow-inner">
+                <div className="flex justify-between pb-3 border-b border-slate-200">
+                  <span className="text-slate-500">N?mero de Orden:</span>
                   <span className="font-mono font-black text-[#FF5500] text-sm">{confirmedOrder.orderId}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Cliente:</span>
-                  <span className="font-bold text-white">{confirmedOrder.customer.name}</span>
+                  <span className="text-slate-500">Cliente:</span>
+                  <span className="font-bold text-slate-900">{confirmedOrder.customer.name}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Email:</span>
-                  <span className="text-gray-300">{confirmedOrder.customer.email}</span>
+                  <span className="text-slate-500">Email:</span>
+                  <span className="text-slate-700">{confirmedOrder.customer.email}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">M?todo de Pago:</span>
-                  <span className="font-bold text-white uppercase">{confirmedOrder.paymentMethod}</span>
+                  <span className="text-slate-500">M?todo de Pago:</span>
+                  <span className="font-bold text-slate-900 uppercase">{confirmedOrder.paymentMethod}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">C?digo de Seguimiento:</span>
-                  <span className="font-mono font-bold text-emerald-400">{confirmedOrder.trackingNumber}</span>
+                  <span className="text-slate-500">C?digo de Seguimiento:</span>
+                  <span className="font-mono font-bold text-emerald-700">{confirmedOrder.trackingNumber}</span>
                 </div>
-                <div className="flex justify-between pt-2 border-t border-[#232a3d] text-sm font-black">
-                  <span className="text-white">Monto Pagado:</span>
-                  <span className="text-white">{confirmedOrder.totalFormatted}</span>
+                <div className="flex justify-between pt-2 border-t border-slate-200 text-sm font-black">
+                  <span className="text-slate-900">Monto Pagado:</span>
+                  <span className="text-[#FF5500]">{confirmedOrder.totalFormatted}</span>
                 </div>
               </div>
 
               <div className="flex gap-3 justify-center pt-2">
                 <button
                   onClick={() => window.print()}
-                  className="flex items-center gap-2 px-4 py-2 bg-[#202738] hover:bg-[#2c354d] text-gray-200 rounded-xl text-xs font-semibold"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-full text-xs font-bold shadow-sm"
                 >
                   <Printer size={14} /> Imprimir Comprobante
                 </button>
                 <button
                   onClick={onClose}
-                  className="px-6 py-2 bg-[#FF5500] hover:bg-[#E04800] text-white rounded-xl text-xs font-bold shadow-md shadow-[#FF5500]/25"
+                  className="liquid-btn text-white px-6 py-2.5 rounded-full text-xs font-black shadow-md shadow-[#FF5500]/30 cursor-pointer"
                 >
                   Volver a la Tienda
                 </button>
@@ -457,19 +369,19 @@ export default function CheckoutModal({
           )}
         </div>
 
-        {/* Modal Footer Controls */}
+        {/* Footer */}
         {step !== 3 && (
-          <div className="p-5 bg-[#141724] border-t border-[#222738] flex items-center justify-between">
+          <div className="p-5 bg-slate-50/90 border-t border-slate-100 flex items-center justify-between">
             {step === 2 ? (
               <button
                 onClick={() => setStep(1)}
-                className="px-4 py-2.5 bg-[#202638] text-gray-300 hover:text-white rounded-xl text-xs font-semibold"
+                className="px-4 py-2.5 bg-slate-200 text-slate-800 hover:bg-slate-300 rounded-full text-xs font-bold"
               >
                 Volver a Datos
               </button>
             ) : (
-              <div className="flex items-center gap-2 text-xs text-gray-400">
-                <ShieldCheck size={16} className="text-emerald-400" />
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <ShieldCheck size={16} className="text-emerald-600" />
                 <span>Transacci?n Encriptada 256-bit</span>
               </div>
             )}
@@ -478,13 +390,13 @@ export default function CheckoutModal({
               <button
                 onClick={() => {
                   if (!customer.name || !customer.email || !customer.phone) {
-                    setError("Por favor completa los datos obligatorios (Nombre, Email y Tel?fono).");
+                    setError("Por favor completa los datos obligatorios.");
                     return;
                   }
                   setError(null);
                   setStep(2);
                 }}
-                className="flex items-center gap-2 bg-[#FF5500] hover:bg-[#E04800] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md shadow-[#FF5500]/30"
+                className="liquid-btn text-white px-6 py-3 rounded-full font-black text-xs shadow-md shadow-[#FF5500]/30 flex items-center gap-2 cursor-pointer"
               >
                 <span>Continuar al Pago</span>
                 <ArrowRight size={16} />
@@ -493,9 +405,9 @@ export default function CheckoutModal({
               <button
                 onClick={handleConfirmPayment}
                 disabled={loading || timeLeft === 0}
-                className="flex items-center gap-2 bg-[#FF5500] hover:bg-[#E04800] disabled:bg-gray-700 text-white px-6 py-3 rounded-xl font-black text-xs shadow-lg shadow-[#FF5500]/30 transition-all"
+                className="liquid-btn text-white px-7 py-3 rounded-full font-black text-xs shadow-lg shadow-[#FF5500]/30 flex items-center gap-2 cursor-pointer"
               >
-                <span>{loading ? "Procesando Transacci?n..." : `Pagar $${totalCLP.toLocaleString("es-CL")} CLP`}</span>
+                <span>{loading ? "Procesando..." : `Pagar $${totalCLP.toLocaleString("es-CL")} CLP`}</span>
                 <ArrowRight size={16} />
               </button>
             )}
