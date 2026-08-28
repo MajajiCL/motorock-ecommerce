@@ -4,7 +4,7 @@ import logoMotoRock from "../assets/logo-motorock-600.png";
 
 export default function Footer({ onOpenAppModal }) {
   return (
-    <footer className="mt-20 border-t border-[#e5e5eb] bg-white">
+    <footer className="mt-20 border-t border-[#e4e4e7] bg-white">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Col 1 */}
@@ -14,15 +14,15 @@ export default function Footer({ onOpenAppModal }) {
               alt="MotoRock Chile"
               className="h-10 w-auto object-contain"
             />
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Venta de motos, repuestos, cascos e indumentaria en Chile. Servicio técnico, despacho express y retiro en Talca.
+            <p className="text-xs text-zinc-600 leading-relaxed">
+              Venta de motos, repuestos, cascos e indumentaria en Chile. Servicio técnico especializado, despacho express y retiro en Talca.
             </p>
             <div className="flex items-center gap-2 pt-1">
               <a
                 href="https://instagram.com/motorocktalca"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-[#f6f6fa] text-[#151581] hover:bg-[#151581] hover:text-white flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-[#f8f9fa] text-[#121214] hover:bg-[#e60000] hover:text-white flex items-center justify-center transition-colors"
                 title="Instagram"
               >
                 <Instagram size={14} />
@@ -31,7 +31,7 @@ export default function Footer({ onOpenAppModal }) {
                 href="https://facebook.com/MotoRockChile"
                 target="_blank"
                 rel="noreferrer"
-                className="w-8 h-8 rounded-full bg-[#f6f6fa] text-[#151581] hover:bg-[#151581] hover:text-white flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-full bg-[#f8f9fa] text-[#121214] hover:bg-[#e60000] hover:text-white flex items-center justify-center transition-colors"
                 title="Facebook"
               >
                 <Facebook size={14} />
@@ -41,41 +41,41 @@ export default function Footer({ onOpenAppModal }) {
 
           {/* Col 2 */}
           <div className="space-y-2.5">
-            <h4 className="text-xs font-semibold text-[#151581] uppercase tracking-wider">Categorías</h4>
-            <ul className="space-y-1.5 text-xs text-slate-600">
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Cascos Homologados ECE 22.06</a></li>
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Cadenas y Transmisiones D.I.D</a></li>
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Aceites y Lubricantes Motul</a></li>
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Chaquetas y Guantes</a></li>
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Bolsos Impermeables Rhinowalk</a></li>
+            <h4 className="text-xs font-bold text-[#121214] uppercase tracking-wider">Categorías</h4>
+            <ul className="space-y-1.5 text-xs text-zinc-600">
+              <li><a href="#" className="hover:text-[#e60000] transition-colors">Cascos Homologados ECE 22.06</a></li>
+              <li><a href="#" className="hover:text-[#e60000] transition-colors">Cadenas y Transmisiones D.I.D</a></li>
+              <li><a href="#" className="hover:text-[#e60000] transition-colors">Aceites y Lubricantes Motul</a></li>
+              <li><a href="#" className="hover:text-[#e60000] transition-colors">Chaquetas y Guantes LS2</a></li>
+              <li><a href="#" className="hover:text-[#e60000] transition-colors">Bolsos Impermeables Rhinowalk</a></li>
             </ul>
           </div>
 
           {/* Col 3 */}
           <div className="space-y-2.5">
-            <h4 className="text-xs font-semibold text-[#151581] uppercase tracking-wider">Ecosistema Móvil</h4>
-            <ul className="space-y-2 text-xs text-slate-600">
+            <h4 className="text-xs font-bold text-[#121214] uppercase tracking-wider">Ecosistema Móvil</h4>
+            <ul className="space-y-2 text-xs text-zinc-600">
               <li>
                 <button
                   onClick={onOpenAppModal}
-                  className="flex items-center gap-1.5 text-[#151581] font-semibold hover:text-[#5465ff] cursor-pointer"
+                  className="flex items-center gap-1.5 text-[#e60000] font-bold hover:underline cursor-pointer"
                 >
-                  <Smartphone size={13} className="text-[#00bb76]" />
+                  <Smartphone size={13} />
                   <span>Descargar App MotoRock iOS & Android</span>
                 </button>
               </li>
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Rastreo GPS de Envíos Starken</a></li>
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Garantía Legal y Devoluciones</a></li>
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Términos del Servicio</a></li>
+              <li><a href="#" className="hover:text-[#e60000] transition-colors">Rastreo GPS de Envíos Starken</a></li>
+              <li><a href="#" className="hover:text-[#e60000] transition-colors">Garantía Legal y Devoluciones</a></li>
+              <li><a href="#" className="hover:text-[#e60000] transition-colors">Términos del Servicio</a></li>
             </ul>
           </div>
 
           {/* Col 4 */}
           <div className="space-y-2.5">
-            <h4 className="text-xs font-semibold text-[#151581] uppercase tracking-wider">Locales y Contacto</h4>
-            <div className="space-y-1.5 text-xs text-slate-600">
+            <h4 className="text-xs font-bold text-[#121214] uppercase tracking-wider">Locales y Contacto</h4>
+            <div className="space-y-1.5 text-xs text-zinc-600">
               <p className="flex items-start gap-1.5">
-                <MapPin size={13} className="text-[#00bb76] flex-shrink-0 mt-0.5" />
+                <MapPin size={13} className="text-[#e60000] flex-shrink-0 mt-0.5" />
                 <span>Av. 2 Sur 771 y 777, Talca, Maule</span>
               </p>
               <p className="flex items-center gap-1.5">
@@ -87,16 +87,16 @@ export default function Footer({ onOpenAppModal }) {
                 <span>+56 9 7696 7438 (Taller Mecánico)</span>
               </p>
               <p className="flex items-center gap-1.5">
-                <Mail size={13} className="text-slate-400 flex-shrink-0" />
+                <Mail size={13} className="text-zinc-400 flex-shrink-0" />
                 <span>contacto@motorock.cl</span>
               </p>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-[#e5e5eb] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#a1a1cd]">
+        <div className="mt-10 pt-6 border-t border-[#e4e4e7] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400">
           <p>© 2026 MotoRock Chile. Todos los derechos reservados.</p>
-          <div className="flex items-center gap-3 font-medium text-slate-500">
+          <div className="flex items-center gap-3 font-semibold text-zinc-500">
             <span>Webpay Plus</span>
             <span>•</span>
             <span>Mercado Pago</span>
