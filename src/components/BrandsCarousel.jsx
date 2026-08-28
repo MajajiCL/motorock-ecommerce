@@ -46,13 +46,13 @@ const BRANDS = [
 
 export default function BrandsCarousel() {
   return (
-    <section className="my-8 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative overflow-hidden">
-      <div className="flex items-center justify-between px-2 mb-3 pb-2 border-b border-slate-100">
-        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
+    <section className="my-8 bg-white border border-[#e5e5eb] rounded-[24px] p-5 shadow-sm relative overflow-hidden">
+      <div className="flex items-center justify-between px-2 mb-3 pb-2 border-b border-[#e5e5eb]">
+        <h3 className="text-xs font-bold uppercase tracking-wider text-[#151581]">
           Distribuidor Oficial & Marcas Autorizadas
         </h3>
-        <span className="text-[11px] text-slate-400 font-medium hidden sm:inline">
-          Respaldo y garant?a oficial
+        <span className="text-[11px] text-[#a1a1cd] font-medium hidden sm:inline">
+          Respaldo y garantía oficial
         </span>
       </div>
 
@@ -62,7 +62,7 @@ export default function BrandsCarousel() {
           {BRANDS.map((brand, idx) => (
             <div
               key={idx}
-              className="flex items-center justify-center p-2.5 bg-slate-50 hover:bg-white rounded-xl border border-slate-100 hover:border-slate-300 shadow-sm transition-all h-12 w-28 cursor-pointer mx-2"
+              className="flex items-center justify-center p-2.5 bg-[#f6f6fa] hover:bg-white rounded-2xl border border-[#e5e5eb] hover:border-slate-300 shadow-sm transition-all h-12 w-28 cursor-pointer mx-2"
               title={brand.name}
             >
               <img

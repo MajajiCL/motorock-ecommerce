@@ -8,7 +8,7 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
 
   return (
     <div className="bg-white rounded-[24px] border border-[#e5e5eb] overflow-hidden flex flex-col justify-between hover:shadow-lovi transition-all duration-200 group">
-      {/* Product Image Container */}
+      {/* Contenedor Imagen */}
       <div
         onClick={() => onOpenDetail(product)}
         className="relative aspect-square bg-[#f6f6fa]/60 overflow-hidden cursor-pointer flex items-center justify-center p-6 border-b border-[#e5e5eb]"
@@ -37,11 +37,11 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
           )}
         </div>
 
-        {/* Stock Status */}
+        {/* Estado Stock */}
         <div className="absolute top-3 right-3 z-10">
           {product.inStock ? (
             <span className="bg-white border border-emerald-100 text-[#00bb76] text-[10px] font-semibold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-              ? En Stock
+              ✓ En Stock
             </span>
           ) : (
             <span className="bg-slate-100 border border-slate-200 text-slate-400 text-[10px] font-medium px-2 py-0.5 rounded-full">
@@ -51,21 +51,21 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
         </div>
       </div>
 
-      {/* Content */}
+      {/* Contenido */}
       <div className="p-5 flex-1 flex flex-col justify-between bg-white">
         <div>
-          {/* Category */}
+          {/* Categoría */}
           <div className="flex items-center justify-between gap-2 mb-1.5">
             <span className="text-[10px] text-[#a1a1cd] font-semibold uppercase tracking-wider truncate">
               {product.categories?.[0]?.name || "Repuestos"}
             </span>
             <div className="flex items-center gap-0.5 text-[#00bb76] text-[10px] font-bold">
-              <span>?</span>
+              <span>★</span>
               <span>4.9</span>
             </div>
           </div>
 
-          {/* Title */}
+          {/* Nombre */}
           <h3
             onClick={() => onOpenDetail(product)}
             className="text-xs sm:text-sm font-semibold text-[#151581] group-hover:text-[#5465ff] transition-colors line-clamp-2 cursor-pointer leading-snug"
@@ -75,7 +75,7 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
           </h3>
         </div>
 
-        {/* Pricing & CTA */}
+        {/* Precios & Acciones */}
         <div className="mt-4 pt-3 border-t border-slate-100 space-y-3">
           <div>
             <div className="flex items-baseline gap-2">
@@ -89,7 +89,7 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
               )}
             </div>
             <span className="text-[10px] text-[#a1a1cd] block font-normal">
-              6 cuotas de <strong>${installmentVal.toLocaleString("es-CL")}</strong> sin inter?s
+              6 cuotas de <strong>${installmentVal.toLocaleString("es-CL")}</strong> sin interés
             </span>
           </div>
 
@@ -116,7 +116,7 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
                   ? "bg-slate-100 text-slate-400 cursor-not-allowed"
                   : "bg-[#151581] hover:bg-[#0e0e5a] text-white shadow-sm cursor-pointer"
               }`}
-              title={hasOptions ? "Seleccionar talla" : "A?adir al carrito"}
+              title={hasOptions ? "Seleccionar talla" : "Añadir al carrito"}
             >
               <ShoppingCart size={14} />
             </button>

@@ -15,7 +15,7 @@ export default function Footer({ onOpenAppModal }) {
               className="h-10 w-auto object-contain"
             />
             <p className="text-xs text-slate-600 leading-relaxed">
-              Venta de motos, repuestos, cascos e indumentaria en Chile. Servicio t?cnico, despacho express y retiro en Talca.
+              Venta de motos, repuestos, cascos e indumentaria en Chile. Servicio técnico, despacho express y retiro en Talca.
             </p>
             <div className="flex items-center gap-2 pt-1">
               <a
@@ -41,7 +41,7 @@ export default function Footer({ onOpenAppModal }) {
 
           {/* Col 2 */}
           <div className="space-y-2.5">
-            <h4 className="text-xs font-semibold text-[#151581] uppercase tracking-wider">Categor?as</h4>
+            <h4 className="text-xs font-semibold text-[#151581] uppercase tracking-wider">Categorías</h4>
             <ul className="space-y-1.5 text-xs text-slate-600">
               <li><a href="#" className="hover:text-[#5465ff] transition-colors">Cascos Homologados ECE 22.06</a></li>
               <li><a href="#" className="hover:text-[#5465ff] transition-colors">Cadenas y Transmisiones D.I.D</a></li>
@@ -53,7 +53,7 @@ export default function Footer({ onOpenAppModal }) {
 
           {/* Col 3 */}
           <div className="space-y-2.5">
-            <h4 className="text-xs font-semibold text-[#151581] uppercase tracking-wider">Ecosistema M?vil</h4>
+            <h4 className="text-xs font-semibold text-[#151581] uppercase tracking-wider">Ecosistema Móvil</h4>
             <ul className="space-y-2 text-xs text-slate-600">
               <li>
                 <button
@@ -64,9 +64,9 @@ export default function Footer({ onOpenAppModal }) {
                   <span>Descargar App MotoRock iOS & Android</span>
                 </button>
               </li>
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Rastreo GPS de Env?os Starken</a></li>
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Garant?a Legal y Devoluciones</a></li>
-              <li><a href="#" className="hover:text-[#5465ff] transition-colors">T?rminos del Servicio</a></li>
+              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Rastreo GPS de Envíos Starken</a></li>
+              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Garantía Legal y Devoluciones</a></li>
+              <li><a href="#" className="hover:text-[#5465ff] transition-colors">Términos del Servicio</a></li>
             </ul>
           </div>
 
@@ -84,7 +84,7 @@ export default function Footer({ onOpenAppModal }) {
               </p>
               <p className="flex items-center gap-1.5">
                 <Phone size={13} className="text-[#00bb76] flex-shrink-0" />
-                <span>+56 9 7696 7438 (Taller Mec?nico)</span>
+                <span>+56 9 7696 7438 (Taller Mecánico)</span>
               </p>
               <p className="flex items-center gap-1.5">
                 <Mail size={13} className="text-slate-400 flex-shrink-0" />
@@ -95,14 +95,14 @@ export default function Footer({ onOpenAppModal }) {
         </div>
 
         <div className="mt-10 pt-6 border-t border-[#e5e5eb] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#a1a1cd]">
-          <p>? 2026 MotoRock Chile. Todos los derechos reservados.</p>
+          <p>© 2026 MotoRock Chile. Todos los derechos reservados.</p>
           <div className="flex items-center gap-3 font-medium text-slate-500">
             <span>Webpay Plus</span>
-            <span>?</span>
+            <span>•</span>
             <span>Mercado Pago</span>
-            <span>?</span>
+            <span>•</span>
             <span>Starken Express</span>
-            <span>?</span>
+            <span>•</span>
             <span>Chilexpress</span>
           </div>
         </div>

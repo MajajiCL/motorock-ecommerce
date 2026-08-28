@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ShoppingCart, Search, MapPin, Smartphone, X, Check, ArrowRight } from "lucide-react";
+import { ShoppingCart, Search, MapPin, Smartphone, X } from "lucide-react";
 import { ALL_PRODUCTS } from "../data/catalogData";
 import logoMotoRock from "../assets/logo-motorock-600.png";
 
@@ -47,7 +47,7 @@ export default function Navbar({
 
   return (
     <header className="sticky top-0 z-40 bg-[#f6f6fa]/95 backdrop-blur-md border-b border-[#e5e5eb]">
-      {/* Top Notice Pill Bar */}
+      {/* Barra de Notificación Superior */}
       <div className="bg-[#151581] text-white text-[11px] py-1.5 px-4 font-normal">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           <div className="flex items-center gap-2">
@@ -55,7 +55,7 @@ export default function Navbar({
               APP 2026
             </span>
             <span className="text-slate-200">
-              Despacho Express Starken & Chilexpress ? <strong>Retiro en 2 horas en Talca</strong>
+              Despacho Express Starken y Chilexpress • <strong>Retiro en 2 horas en Talca</strong>
             </span>
           </div>
 
@@ -63,20 +63,20 @@ export default function Navbar({
             <span className="flex items-center gap-1">
               <MapPin size={11} className="text-[#00bb76]" /> Av. 2 Sur 771 y 777, Talca
             </span>
-            <span className="hidden sm:inline text-indigo-400">?</span>
+            <span className="hidden sm:inline text-indigo-400">•</span>
             <button
               onClick={onOpenAppModal}
               className="text-[#00bb76] hover:underline font-medium cursor-pointer"
             >
-              Descargar App M?vil
+              Descargar App Móvil
             </button>
           </div>
         </div>
       </div>
 
-      {/* Main Header Bar */}
+      {/* Cabecera Principal */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-        {/* Brand Logo */}
+        {/* Logo Oficial */}
         <a href="#" className="flex items-center gap-2 flex-shrink-0">
           <img
             src={logoMotoRock}
@@ -85,7 +85,7 @@ export default function Navbar({
           />
         </a>
 
-        {/* Search Bar */}
+        {/* Barra de Búsqueda */}
         <div className="flex-1 max-w-lg relative hidden md:block" ref={searchRef}>
           <div className="relative">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#a1a1cd]" size={15} />
@@ -117,11 +117,11 @@ export default function Navbar({
             )}
           </div>
 
-          {/* Autocomplete Dropdown */}
+          {/* Menú Autocompletar */}
           {showSearch && suggestions.length > 0 && (
             <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-[#e5e5eb] rounded-2xl shadow-lovi overflow-hidden z-50 divide-y divide-slate-100">
               <div className="p-3 text-[10px] font-bold text-[#a1a1cd] uppercase tracking-wider bg-[#f6f6fa] flex items-center justify-between">
-                <span>Resultados de b?squeda</span>
+                <span>Resultados de búsqueda</span>
                 <span className="text-[#151581]">{suggestions.length} encontrados</span>
               </div>
               {suggestions.map((item) => (
@@ -145,7 +145,7 @@ export default function Navbar({
                   <div className="text-right">
                     <span className="text-xs font-bold text-[#151581] block">{item.priceFormatted}</span>
                     {item.inStock ? (
-                      <span className="text-[9px] font-medium text-[#00bb76]">? En Stock</span>
+                      <span className="text-[9px] font-medium text-[#00bb76]">✓ En Stock</span>
                     ) : (
                       <span className="text-[9px] font-medium text-slate-400">Agotado</span>
                     )}
@@ -156,9 +156,9 @@ export default function Navbar({
           )}
         </div>
 
-        {/* Right Actions */}
+        {/* Acciones */}
         <div className="flex items-center gap-2.5">
-          {/* App Store Download Button Pill */}
+          {/* Botón Descarga App */}
           <button
             onClick={onOpenAppModal}
             className="hidden sm:flex items-center gap-2 bg-[#151581] hover:bg-[#0e0e5a] text-white px-4 py-2 rounded-full font-medium text-xs shadow-sm transition-all cursor-pointer"
@@ -167,7 +167,7 @@ export default function Navbar({
             <span>Descargar App</span>
           </button>
 
-          {/* Virtual Garage Vehicle Selector */}
+          {/* Selector Mi Moto */}
           <button
             onClick={onOpenGarage}
             className={`flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-medium border transition-all cursor-pointer ${
@@ -176,7 +176,7 @@ export default function Navbar({
                 : "bg-white border-[#e5e5eb] text-[#292824] hover:bg-slate-50"
             }`}
           >
-            <span className="text-sm">???</span>
+            <span className="text-sm">🏍️</span>
             <div className="text-left hidden lg:block">
               <span className="block text-[9px] text-[#a1a1cd] uppercase leading-none">Mi Moto</span>
               <span className="block font-semibold text-xs truncate max-w-[110px] text-[#151581] mt-0.5">
@@ -197,7 +197,7 @@ export default function Navbar({
             )}
           </button>
 
-          {/* Cart Button */}
+          {/* Carrito */}
           <button
             onClick={onOpenCart}
             className="flex items-center gap-2 bg-white border border-[#e5e5eb] hover:border-[#151581] text-[#151581] px-3.5 py-2 rounded-full font-semibold text-xs shadow-sm transition-all cursor-pointer"
@@ -213,7 +213,7 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Mobile Search Bar */}
+      {/* Buscador Móvil */}
       <div className="p-3 pt-0 md:hidden">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#a1a1cd]" size={14} />

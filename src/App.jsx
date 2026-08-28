@@ -14,11 +14,11 @@ import VerifiedReviews from "./components/VerifiedReviews";
 import StoreLocation from "./components/StoreLocation";
 import Footer from "./components/Footer";
 import AppDownloadModal from "./components/AppDownloadModal";
-import { Filter, ArrowUpDown, Check, ChevronLeft, ChevronRight, Smartphone } from "lucide-react";
+import { Filter, ArrowUpDown, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { ALL_PRODUCTS } from "./data/catalogData";
 
 export default function App() {
-  // Filters State
+  // Estados de Filtros
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBike, setSelectedBike] = useState(null);
@@ -28,14 +28,14 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 24;
 
-  // Modals & Drawers State
+  // Estados de Modales
   const [isGarageOpen, setIsGarageOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isAppModalOpen, setIsAppModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Cart State (Persisted in localStorage)
+  // Carrito persistido
   const [cart, setCart] = useState(() => {
     try {
       const saved = localStorage.getItem("motorock_cart");
@@ -45,13 +45,12 @@ export default function App() {
     }
   });
 
-  // Shipping & Region
+  // Despacho y Región
   const [selectedRegion, setSelectedRegion] = useState("maule");
   const [pickupInStore, setPickupInStore] = useState(false);
 
-  // Toast Notification
+  // Toast
   const [toast, setToast] = useState(null);
-
   const showToast = (message) => {
     setToast(message);
     setTimeout(() => setToast(null), 3000);
@@ -65,23 +64,21 @@ export default function App() {
     }
   }, [cart]);
 
-  // Reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [activeCategory, searchQuery, selectedBike, sortOption, inStockOnly, onSaleOnly]);
 
-  // High-Performance Client-Side Filtering
+  // Filtrado de alto rendimiento
   const filteredProducts = useMemo(() => {
     let result = [...ALL_PRODUCTS];
 
-    // 1. Garage Filter
     if (selectedBike) {
       const keywords = selectedBike.keywords || [];
       const chain = selectedBike.chainPitch;
       result = result.filter((p) => {
         const text = (p.name + " " + p.shortDescription + " " + p.description).toLowerCase();
         if (keywords.some((k) => text.includes(k))) return true;
-        if (text.includes("cadena") || text.includes("transmision") || text.includes("catalina") || text.includes("pi??n")) {
+        if (text.includes("cadena") || text.includes("transmision") || text.includes("catalina") || text.includes("piñón")) {
           if (text.includes(chain)) return true;
         }
         if (text.includes("aceite") || text.includes("lubricante") || text.includes("motul")) {
@@ -92,7 +89,6 @@ export default function App() {
       });
     }
 
-    // 2. Search Query
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
       result = result.filter((p) => {
@@ -104,7 +100,6 @@ export default function App() {
       });
     }
 
-    // 3. Category Filter
     if (activeCategory !== "all") {
       result = result.filter((p) => {
         return (p.categories || []).some(
@@ -113,17 +108,14 @@ export default function App() {
       });
     }
 
-    // 4. In Stock Filter
     if (inStockOnly) {
       result = result.filter((p) => p.inStock);
     }
 
-    // 5. On Sale Filter
     if (onSaleOnly) {
       result = result.filter((p) => p.onSale);
     }
 
-    // 6. Sorting
     if (sortOption === "price_asc") {
       result.sort((a, b) => a.price - b.price);
     } else if (sortOption === "price_desc") {
@@ -137,13 +129,11 @@ export default function App() {
     return result;
   }, [activeCategory, searchQuery, selectedBike, sortOption, inStockOnly, onSaleOnly]);
 
-  // Pagination Calculation
   const totalItemsCount = filteredProducts.length;
   const totalPages = Math.ceil(totalItemsCount / ITEMS_PER_PAGE) || 1;
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedProducts = filteredProducts.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
-  // Cart Actions
   const handleAddToCart = (product, quantity = 1, variation = null) => {
     setCart((prev) => {
       const existingIndex = prev.findIndex(
@@ -159,7 +149,7 @@ export default function App() {
       }
     });
 
-    showToast(`"${product.name.slice(0, 24)}..." agregado al carrito`);
+    showToast(`"${product.name.slice(0, 24)}..." añadido al carrito`);
   };
 
   const handleUpdateQuantity = (productId, variationId, newQuantity) => {
@@ -190,10 +180,7 @@ export default function App() {
     setIsCheckoutOpen(true);
   };
 
-  // Pricing & Shipping
-  const subtotalCLP = cart.reduce((acc, item) => {
-    return acc + (item.product.price || 0) * item.quantity;
-  }, 0);
+  const subtotalCLP = cart.reduce((acc, item) => acc + (item.product.price || 0) * item.quantity, 0);
 
   let shippingCost = 4990;
   if (pickupInStore || subtotalCLP >= 50000) {
@@ -207,7 +194,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f6f6fa] text-[#151581] flex flex-col justify-between">
-      {/* Toast Notification */}
+      {/* Notificación Toast */}
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 bg-[#151581] text-white px-5 py-3 rounded-full shadow-lovi font-semibold text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200">
           <Check size={15} className="text-[#00bb76]" />
@@ -215,7 +202,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Navigation Header */}
+      {/* Cabecera */}
       <Navbar
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
@@ -228,40 +215,40 @@ export default function App() {
         onOpenAppModal={() => setIsAppModalOpen(true)}
       />
 
-      {/* Main Content Area */}
+      {/* Contenido Principal */}
       <main className="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
-        {/* 1. Hero Section (Lovi Style with Smartphone Mockup) */}
+        {/* 1. Hero con Mockup de Smartphone y CTA de App */}
         <HeroBanner
           onSelectCategory={(catId) => setActiveCategory(catId)}
           onOpenGarage={() => setIsGarageOpen(true)}
           onOpenAppModal={() => setIsAppModalOpen(true)}
         />
 
-        {/* 2. Official Brand Marquee */}
+        {/* 2. Marquee de Marcas Oficiales */}
         <BrandsCarousel />
 
-        {/* 3. App Features & Delivery Speed 3-Pillar Section */}
+        {/* 3. Sección de 3 Pilares: App, Delivery Express y Taller */}
         <AppFeatureSection
           onOpenAppModal={() => setIsAppModalOpen(true)}
           onSelectCategory={(catId) => setActiveCategory(catId)}
         />
 
-        {/* 4. Bento Categories Showcase */}
+        {/* 4. Bento Grid de Categorías Principales */}
         <BentoCategories
           onSelectCategory={(catId) => setActiveCategory(catId)}
         />
 
-        {/* Selected Bike Notification Banner */}
+        {/* Notificación de Moto Seleccionada */}
         {selectedBike && (
           <div className="mb-6 p-5 bg-indigo-50/70 border border-indigo-200 rounded-[24px] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
             <div className="flex items-center gap-3">
-              <span className="text-2xl">???</span>
+              <span className="text-2xl">🏍️</span>
               <div>
                 <h4 className="text-xs font-bold text-[#151581]">
                   Filtrando repuestos compatibles para: <span className="text-[#5465ff]">{selectedBike.brand} {selectedBike.model}</span>
                 </h4>
                 <p className="text-[11px] text-[#a1a1cd] mt-0.5">
-                  Paso de Cadena: {selectedBike.chainPitch} ? Aceite recomendado: {selectedBike.oilSpec}
+                  Paso de Cadena: {selectedBike.chainPitch} • Aceite recomendado: {selectedBike.oilSpec}
                 </p>
               </div>
             </div>
@@ -282,21 +269,20 @@ export default function App() {
           </div>
         )}
 
-        {/* Category Navigation Pills */}
+        {/* Píldoras de Categorías */}
         <CategoryNav
           activeCategory={activeCategory}
           onSelectCategory={(catId) => setActiveCategory(catId)}
         />
 
-        {/* Filters & Sorting Bar */}
+        {/* Barra de Filtros y Ordenamiento */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-4 bg-white border border-[#e5e5eb] rounded-[24px] shadow-sm">
           <div className="flex items-center gap-2 text-xs">
             <span className="font-bold text-[#151581] flex items-center gap-1.5">
               <Filter size={14} className="text-[#5465ff]" />
-              Cat?logo ({totalItemsCount} repuestos)
+              Catálogo ({totalItemsCount} repuestos)
             </span>
 
-            {/* In stock toggle */}
             <button
               onClick={() => setInStockOnly(!inStockOnly)}
               className={`px-3.5 py-1 rounded-full text-[11px] font-semibold border transition-colors cursor-pointer ${
@@ -305,10 +291,9 @@ export default function App() {
                   : "bg-[#f6f6fa] border-[#e5e5eb] text-[#292824] hover:text-[#151581]"
               }`}
             >
-              ? En Stock
+              ✓ En Stock
             </button>
 
-            {/* On sale toggle */}
             <button
               onClick={() => setOnSaleOnly(!onSaleOnly)}
               className={`px-3.5 py-1 rounded-full text-[11px] font-semibold border transition-colors cursor-pointer ${
@@ -317,11 +302,10 @@ export default function App() {
                   : "bg-[#f6f6fa] border-[#e5e5eb] text-[#292824] hover:text-[#151581]"
               }`}
             >
-              ?? Ofertas
+              🔥 Ofertas
             </button>
           </div>
 
-          {/* Sort Selector */}
           <div className="flex items-center gap-2 text-xs">
             <span className="text-[#a1a1cd] flex items-center gap-1"><ArrowUpDown size={12} /> Ordenar:</span>
             <select
@@ -337,12 +321,12 @@ export default function App() {
           </div>
         </div>
 
-        {/* Product Grid */}
+        {/* Grilla de Productos */}
         {paginatedProducts.length === 0 ? (
           <div className="py-16 text-center space-y-2 bg-white border border-[#e5e5eb] rounded-[32px] p-8 shadow-sm">
-            <span className="text-3xl">??</span>
+            <span className="text-3xl">🔍</span>
             <h3 className="text-sm font-bold text-[#151581]">No encontramos repuestos con esos filtros</h3>
-            <p className="text-xs text-[#a1a1cd]">Prueba con otros t?rminos de b?squeda o restablece los filtros.</p>
+            <p className="text-xs text-[#a1a1cd]">Prueba con otros términos de búsqueda o restablece los filtros.</p>
             <button
               onClick={() => {
                 setActiveCategory("all");
@@ -369,7 +353,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Pagination Controls */}
+        {/* Paginación */}
         {totalPages > 1 && (
           <div className="mt-10 flex items-center justify-center gap-2">
             <button
@@ -381,7 +365,7 @@ export default function App() {
             </button>
 
             <span className="text-xs font-medium text-[#a1a1cd] px-3">
-              P?gina <strong className="text-[#151581]">{currentPage}</strong> de <strong className="text-[#151581]">{totalPages}</strong>
+              Página <strong className="text-[#151581]">{currentPage}</strong> de <strong className="text-[#151581]">{totalPages}</strong>
             </span>
 
             <button
@@ -394,14 +378,14 @@ export default function App() {
           </div>
         )}
 
-        {/* 5. Verified Reviews Section */}
+        {/* 5. Reseñas Verificadas de Motociclistas */}
         <VerifiedReviews />
 
-        {/* 6. Physical Showroom & Workshop Section in Talca */}
+        {/* 6. Showroom Físico y Taller en Talca */}
         <StoreLocation />
       </main>
 
-      {/* Modals & Drawers */}
+      {/* Modales */}
       <AppDownloadModal
         isOpen={isAppModalOpen}
         onClose={() => setIsAppModalOpen(false)}
@@ -459,11 +443,11 @@ export default function App() {
         pickupInStore={pickupInStore}
         onOrderCompleted={() => {
           setCart([]);
-          showToast("?Pedido completado con ?xito!");
+          showToast("¡Pedido completado con éxito!");
         }}
       />
 
-      {/* Footer */}
+      {/* Pie de Página */}
       <Footer onOpenAppModal={() => setIsAppModalOpen(true)} />
     </div>
   );

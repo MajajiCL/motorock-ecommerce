@@ -52,8 +52,8 @@ export default function CartDrawer({
             <span className="flex items-center gap-1.5">
               <Truck size={14} className="text-[#00bb76]" />
               {remainingForFreeShipping > 0
-                ? `Agrega $${remainingForFreeShipping.toLocaleString("es-CL")} m?s para Env?o Gratis`
-                : "?Tienes Despacho Express Gratis a todo Chile!"}
+                ? `Agrega $${remainingForFreeShipping.toLocaleString("es-CL")} más para Envío Gratis`
+                : "¡Tienes Despacho Express Gratis a todo Chile!"}
             </span>
             <span className="text-[10px] text-[#a1a1cd]">{progressToFreeShipping}%</span>
           </div>
@@ -69,9 +69,9 @@ export default function CartDrawer({
           {items.length === 0 ? (
             <div className="py-16 text-center space-y-2">
               <div className="w-12 h-12 rounded-full bg-[#f6f6fa] text-slate-400 flex items-center justify-center mx-auto text-xl">
-                ??
+                🛒
               </div>
-              <h4 className="text-sm font-semibold text-[#151581]">Tu carrito est? vac?o</h4>
+              <h4 className="text-sm font-semibold text-[#151581]">Tu carrito está vacío</h4>
               <p className="text-xs text-[#a1a1cd]">Agrega repuestos para continuar con tu pedido.</p>
             </div>
           ) : (
@@ -141,7 +141,7 @@ export default function CartDrawer({
 
               {!pickupInStore && (
                 <div className="flex items-center justify-between pt-2 border-t border-slate-100">
-                  <span className="text-[#a1a1cd]">Regi?n de despacho:</span>
+                  <span className="text-[#a1a1cd]">Región de despacho:</span>
                   <select
                     value={selectedRegion}
                     onChange={(e) => onChangeRegion(e.target.value)}
@@ -149,8 +149,8 @@ export default function CartDrawer({
                   >
                     <option value="maule">Maule ($3.990)</option>
                     <option value="metropolitana">Metropolitana ($4.990)</option>
-                    <option value="valparaiso">Valpara?so ($4.990)</option>
-                    <option value="biobio">Biob?o ($4.990)</option>
+                    <option value="valparaiso">Valparaíso ($4.990)</option>
+                    <option value="biobio">Biobío ($4.990)</option>
                     <option value="otra">Otras Regiones ($5.990)</option>
                   </select>
                 </div>

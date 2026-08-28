@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { X, ShoppingCart, Check, ShieldCheck, Truck, MessageCircle, Star, ArrowRight, CreditCard } from "lucide-react";
+import { X, ShoppingCart, Check, ShieldCheck, Truck, MessageCircle, ArrowRight, CreditCard } from "lucide-react";
 
 export default function ProductModal({ product, isOpen, onClose, onAddToCart, onBuyNow, onOpenAppModal }) {
   const [selectedImg, setSelectedImg] = useState(0);
@@ -26,16 +26,23 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
 
   const waPhone = "56956105413";
   const waText = encodeURIComponent(
-    `Hola MotoRock, tengo una consulta sobre el producto:\n\n*${product.name}*\nPrecio: ${product.priceFormatted}\n${
-      selectedVariation ? `Talla/Opci?n: ${selectedVariation.attributes?.map((a) => a.value).join(", ")}\n` : ""
-    }URL: ${product.permalink}\n\n?Tienen disponibilidad para retiro en Talca o despacho express?`
+    `Hola MotoRock, tengo una consulta sobre el producto:
+
+*${product.name}*
+Precio: ${product.priceFormatted}
+${
+      selectedVariation ? `Talla/Opción: ${selectedVariation.attributes?.map((a) => a.value).join(", ")}
+` : ""
+    }URL: ${product.permalink}
+
+¿Tienen disponibilidad para retiro en Talca o despacho express?`
   );
   const waLink = `https://wa.me/${waPhone}?text=${waText}`;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="bg-white rounded-[32px] w-full max-w-4xl shadow-lovi border border-[#e5e5eb] overflow-hidden flex flex-col max-h-[92vh] relative">
-        {/* Close Button */}
+        {/* Botón Cerrar */}
         <button
           onClick={onClose}
           className="absolute top-5 right-5 z-20 text-slate-400 hover:text-[#151581] bg-[#f6f6fa] hover:bg-slate-200 p-2 rounded-full transition-colors cursor-pointer"
@@ -45,7 +52,7 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
 
         <div className="overflow-y-auto flex-1 p-6 md:p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Gallery */}
+            {/* Galería */}
             <div className="space-y-3">
               <div className="aspect-square bg-[#f6f6fa]/70 rounded-[24px] border border-[#e5e5eb] p-6 flex items-center justify-center relative overflow-hidden">
                 <img
@@ -63,7 +70,7 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
                 )}
               </div>
 
-              {/* Thumbnails */}
+              {/* Miniaturas */}
               {images.length > 1 && (
                 <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
                   {images.map((img, idx) => (
@@ -81,7 +88,7 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
               )}
             </div>
 
-            {/* Info Column */}
+            {/* Columna Info */}
             <div className="flex flex-col justify-between space-y-5">
               <div>
                 <div className="flex items-center gap-2 text-xs mb-1.5">
@@ -97,12 +104,12 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
 
                 <div className="flex items-center gap-2 mt-2 text-xs">
                   <div className="flex text-[#00bb76]">
-                    {"?".repeat(5)}
+                    {"★★★★★"}
                   </div>
-                  <span className="text-slate-500 font-medium">Producto oficial con garant?a MotoRock</span>
+                  <span className="text-slate-500 font-medium">Producto oficial con garantía MotoRock</span>
                 </div>
 
-                {/* Price */}
+                {/* Precio */}
                 <div className="mt-4 p-4 rounded-[20px] bg-[#f6f6fa] border border-[#e5e5eb] space-y-1">
                   <div className="flex items-baseline gap-3">
                     <span className="text-2xl font-bold text-[#151581]">
@@ -116,11 +123,11 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
                   </div>
                   <div className="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
                     <CreditCard size={14} className="text-[#00bb76]" />
-                    <span>Hasta <strong>6 cuotas de ${installmentVal.toLocaleString("es-CL")}</strong> sin inter?s</span>
+                    <span>Hasta <strong>6 cuotas de ${installmentVal.toLocaleString("es-CL")}</strong> sin interés</span>
                   </div>
                 </div>
 
-                {/* Stock Status */}
+                {/* Estado Stock */}
                 <div className="mt-3">
                   {product.inStock ? (
                     <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#00bb76] bg-emerald-50 border border-emerald-100 px-3.5 py-1 rounded-full">
@@ -133,7 +140,7 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
                   )}
                 </div>
 
-                {/* Variations */}
+                {/* Variaciones */}
                 {product.variations && product.variations.length > 0 && (
                   <div className="mt-4 p-3.5 bg-[#f6f6fa] border border-[#e5e5eb] rounded-2xl">
                     <label className="block text-xs font-bold text-[#151581] uppercase tracking-wider mb-2">
@@ -141,7 +148,7 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
                     </label>
                     <div className="flex flex-wrap gap-2">
                       {product.variations.map((v) => {
-                        const attrText = v.attributes?.map((a) => a.value || a.name).join(" - ") || `Opci?n #${v.id}`;
+                        const attrText = v.attributes?.map((a) => a.value || a.name).join(" - ") || `Opción #${v.id}`;
                         const isSelected = selectedVariation?.id === v.id;
                         return (
                           <button
@@ -161,7 +168,7 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
                   </div>
                 )}
 
-                {/* Quantity */}
+                {/* Cantidad */}
                 <div className="mt-4 flex items-center gap-3">
                   <span className="text-xs font-semibold text-slate-600 uppercase">Cantidad:</span>
                   <div className="flex items-center bg-[#f6f6fa] border border-[#e5e5eb] rounded-full p-0.5">
@@ -182,7 +189,7 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
                 </div>
               </div>
 
-              {/* Actions */}
+              {/* Acciones */}
               <div className="space-y-2.5 pt-3 border-t border-slate-100">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <button
@@ -194,7 +201,7 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
                     className="flex items-center justify-center gap-2 bg-[#f6f6fa] hover:bg-slate-200 text-[#151581] border border-[#e5e5eb] py-3 px-4 rounded-full font-semibold text-xs transition-colors cursor-pointer"
                   >
                     <ShoppingCart size={15} />
-                    <span>A?adir al Carrito</span>
+                    <span>Añadir al Carrito</span>
                   </button>
 
                   <button
@@ -223,7 +230,7 @@ export default function ProductModal({ product, isOpen, onClose, onAddToCart, on
             </div>
           </div>
 
-          {/* Description */}
+          {/* Descripción */}
           {product.description && (
             <div className="mt-6 pt-6 border-t border-slate-100">
               <h3 className="text-xs font-bold text-[#151581] uppercase tracking-wider mb-2">

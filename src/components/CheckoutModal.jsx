@@ -99,8 +99,8 @@ export default function CheckoutModal({
       <div className="bg-white rounded-[32px] w-full max-w-2xl shadow-lovi border border-[#e5e5eb] overflow-hidden flex flex-col max-h-[90vh]">
         <div className="p-5 border-b border-[#e5e5eb] flex items-center justify-between bg-[#f6f6fa]">
           <div>
-            <h3 className="font-semibold text-[#151581] text-sm">Pago Seguro ? MotoRock Chile</h3>
-            <p className="text-xs text-[#a1a1cd]">Webpay Plus ? Mercado Pago ? Starken Express</p>
+            <h3 className="font-semibold text-[#151581] text-sm">Pago Seguro • MotoRock Chile</h3>
+            <p className="text-xs text-[#a1a1cd]">Webpay Plus • Mercado Pago • Starken Express</p>
           </div>
           {step !== 3 && (
             <button onClick={onClose} className="text-slate-400 hover:text-[#151581] p-1.5 rounded-full hover:bg-slate-200 cursor-pointer">
@@ -141,7 +141,7 @@ export default function CheckoutModal({
                   <input
                     type="text"
                     required
-                    placeholder="Ej: Claudio Andr?s"
+                    placeholder="Ej: Claudio Andrés"
                     value={customer.name}
                     onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
                     className="w-full bg-[#f6f6fa] border border-[#e5e5eb] rounded-full px-3.5 py-2 text-[#151581] focus:outline-none focus:border-[#151581]"
@@ -160,7 +160,7 @@ export default function CheckoutModal({
                 </div>
 
                 <div>
-                  <label className="block text-[#151581] font-semibold mb-1">Correo Electr?nico *</label>
+                  <label className="block text-[#151581] font-semibold mb-1">Correo Electrónico *</label>
                   <input
                     type="email"
                     required
@@ -172,7 +172,7 @@ export default function CheckoutModal({
                 </div>
 
                 <div>
-                  <label className="block text-[#151581] font-semibold mb-1">Tel?fono / WhatsApp *</label>
+                  <label className="block text-[#151581] font-semibold mb-1">Teléfono / WhatsApp *</label>
                   <input
                     type="tel"
                     required
@@ -186,10 +186,10 @@ export default function CheckoutModal({
                 {!pickupInStore ? (
                   <>
                     <div className="sm:col-span-2">
-                      <label className="block text-[#151581] font-semibold mb-1">Direcci?n de Entrega *</label>
+                      <label className="block text-[#151581] font-semibold mb-1">Dirección de Entrega *</label>
                       <input
                         type="text"
-                        placeholder="Calle, N?mero, Depto / Villa"
+                        placeholder="Calle, Número, Depto / Villa"
                         value={customer.address}
                         onChange={(e) => setCustomer({ ...customer, address: e.target.value })}
                         className="w-full bg-[#f6f6fa] border border-[#e5e5eb] rounded-full px-3.5 py-2 text-[#151581] focus:outline-none focus:border-[#151581]"
@@ -199,7 +199,7 @@ export default function CheckoutModal({
                       <label className="block text-[#151581] font-semibold mb-1">Comuna / Ciudad</label>
                       <input
                         type="text"
-                        placeholder="Ej: Talca, Santiago, Concepci?n..."
+                        placeholder="Ej: Talca, Santiago, Concepción..."
                         value={customer.commune}
                         onChange={(e) => setCustomer({ ...customer, commune: e.target.value })}
                         className="w-full bg-[#f6f6fa] border border-[#e5e5eb] rounded-full px-3.5 py-2 text-[#151581] focus:outline-none focus:border-[#151581]"
@@ -208,7 +208,7 @@ export default function CheckoutModal({
                   </>
                 ) : (
                   <div className="sm:col-span-2 p-3.5 bg-emerald-50 border border-emerald-100 rounded-2xl text-xs text-[#00bb76] font-semibold">
-                    ? Retiro en Tienda Talca: Av. 2 Sur Locales 771 y 777. Listo en 2 horas h?biles.
+                    ✓ Retiro en Tienda Talca: Av. 2 Sur Locales 771 y 777. Listo en 2 horas hábiles.
                   </div>
                 )}
               </div>
@@ -235,7 +235,7 @@ export default function CheckoutModal({
                   </div>
                   <div>
                     <h5 className="text-xs font-bold text-[#151581]">Webpay Plus (Redcompra)</h5>
-                    <p className="text-[11px] text-[#a1a1cd]">Tarjetas de D?bito, Cr?dito y Prepago.</p>
+                    <p className="text-[11px] text-[#a1a1cd]">Tarjetas de Débito, Crédito y Prepago.</p>
                   </div>
                 </div>
 
@@ -252,7 +252,7 @@ export default function CheckoutModal({
                   </div>
                   <div>
                     <h5 className="text-xs font-bold text-[#151581]">Mercado Pago Chile</h5>
-                    <p className="text-[11px] text-[#a1a1cd]">Hasta 6 cuotas sin inter?s y saldo en cuenta.</p>
+                    <p className="text-[11px] text-[#a1a1cd]">Hasta 6 cuotas sin interés y saldo en cuenta.</p>
                   </div>
                 </div>
 
@@ -265,11 +265,11 @@ export default function CheckoutModal({
                   }`}
                 >
                   <div className="w-8 h-8 rounded-xl bg-emerald-50 text-[#00bb76] flex items-center justify-center font-bold text-xs">
-                    ??
+                    🏦
                   </div>
                   <div>
                     <h5 className="text-xs font-bold text-[#151581]">Transferencia Bancaria Directa</h5>
-                    <p className="text-[11px] text-[#a1a1cd]">Datos para transferencia electr?nica inmediata.</p>
+                    <p className="text-[11px] text-[#a1a1cd]">Datos para transferencia electrónica inmediata.</p>
                   </div>
                 </div>
               </div>
@@ -298,13 +298,13 @@ export default function CheckoutModal({
               </div>
 
               <div>
-                <h3 className="text-xl font-normal text-[#151581]">?Pedido Confirmado con ?xito!</h3>
+                <h3 className="text-xl font-normal text-[#151581]">¡Pedido Confirmado con Éxito!</h3>
                 <p className="text-xs text-[#a1a1cd] mt-0.5">Hemos registrado tu orden en MotoRock Chile</p>
               </div>
 
               <div className="bg-[#f6f6fa] border border-[#e5e5eb] rounded-[24px] p-5 text-left text-xs space-y-2.5">
                 <div className="flex justify-between pb-2 border-b border-[#e5e5eb]">
-                  <span className="text-[#a1a1cd]">N?mero de Orden:</span>
+                  <span className="text-[#a1a1cd]">Número de Orden:</span>
                   <span className="font-mono font-bold text-[#151581]">{confirmedOrder.orderId}</span>
                 </div>
                 <div className="flex justify-between">
@@ -316,7 +316,7 @@ export default function CheckoutModal({
                   <span className="text-slate-700">{confirmedOrder.customer.email}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-[#a1a1cd]">C?digo de Despacho Starken:</span>
+                  <span className="text-[#a1a1cd]">Código de Despacho Starken:</span>
                   <span className="font-mono font-bold text-[#00bb76]">{confirmedOrder.trackingNumber}</span>
                 </div>
                 <div className="flex justify-between pt-2 border-t border-[#e5e5eb] text-sm font-bold">
@@ -355,7 +355,7 @@ export default function CheckoutModal({
             ) : (
               <div className="flex items-center gap-1.5 text-xs text-[#a1a1cd]">
                 <ShieldCheck size={14} className="text-[#00bb76]" />
-                <span>Transacci?n Segura 256-bit</span>
+                <span>Transacción Segura 256-bit</span>
               </div>
             )}
 

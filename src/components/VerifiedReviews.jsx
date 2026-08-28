@@ -4,29 +4,29 @@ import { CheckCircle2 } from "lucide-react";
 const REVIEWS = [
   {
     name: "Claudio V.",
-    location: "Talca, Regi?n del Maule",
+    location: "Talca, Región del Maule",
     bike: "Yamaha MT-03",
     rating: 5,
     title: "Retiro en tienda en 2 horas impecable",
-    body: "Compr? el kit de transmisi?n D.I.D desde la app y en menos de 2 horas ya estaba listo para retirar en el local de 2 Sur. Excelente atenci?n de los mec?nicos.",
-    date: "Hace 2 d?as"
+    body: "Compré el kit de transmisión D.I.D desde la app y en menos de 2 horas ya estaba listo para retirar en el local de 2 Sur. Excelente atención de los mecánicos.",
+    date: "Hace 2 días"
   },
   {
-    name: "Mat?as P.",
+    name: "Matías P.",
     location: "Santiago, RM",
     bike: "Honda CB 190R",
     rating: 5,
-    title: "Despacho Starken rapid?simo a Santiago",
-    body: "Ped? casco HJC y aceite Motul 7100 el martes y me lleg? el mi?rcoles a primera hora con el seguimiento en la app. Calce perfecto y todo original con boleta.",
-    date: "Hace 4 d?as"
+    title: "Despacho Starken rapidísimo a Santiago",
+    body: "Pedí casco HJC y aceite Motul 7100 el martes y me llegó el miércoles a primera hora con el seguimiento en la app. Calce perfecto y todo original con boleta.",
+    date: "Hace 4 días"
   },
   {
     name: "Gonzalo R.",
-    location: "Concepci?n, Biob?o",
+    location: "Concepción, Biobío",
     bike: "Kawasaki Ninja 400",
     rating: 5,
-    title: "El filtro por moto me evit? comprar la cadena incorrecta",
-    body: "Puse mi modelo en el Garage y me mostr? exactamente el paso 520 con los eslabones correctos. La mejor tienda de motos de Chile sin duda.",
+    title: "El filtro por moto me evitó comprar la cadena incorrecta",
+    body: "Puse mi modelo en el Garage y me mostró exactamente el paso 520 con los eslabones correctos. La mejor tienda de motos de Chile sin duda.",
     date: "Hace 1 semana"
   }
 ];
@@ -42,7 +42,7 @@ export default function VerifiedReviews() {
           La confianza de miles de motociclistas en Chile
         </h2>
         <p className="text-xs text-[#a1a1cd]">
-          Calificaci?n promedio de 4.9/5 basada en compras con entrega confirmada.
+          Calificación promedio de 4.9/5 basada en compras con entrega confirmada.
         </p>
       </div>
 
@@ -53,10 +53,9 @@ export default function VerifiedReviews() {
             className="bg-white rounded-[24px] p-6 shadow-sm border border-[#e5e5eb] flex flex-col justify-between space-y-4"
           >
             <div className="space-y-3">
-              {/* Top Row: 5 Green Stars & Verified Tag */}
               <div className="flex items-center justify-between">
                 <div className="flex text-[#00bb76] text-sm tracking-tight">
-                  {"?".repeat(rev.rating)}
+                  {"★".repeat(rev.rating)}
                 </div>
                 <span className="text-xs font-semibold text-[#00bb76] flex items-center gap-1">
                   <CheckCircle2 size={12} /> Verificado
@@ -75,7 +74,7 @@ export default function VerifiedReviews() {
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px]">
               <div>
                 <strong className="text-[#151581] block">{rev.name}</strong>
-                <span className="text-[#a1a1cd]">{rev.bike} ? {rev.location}</span>
+                <span className="text-[#a1a1cd]">{rev.bike} • {rev.location}</span>
               </div>
               <span className="text-[#a1a1cd]">{rev.date}</span>
             </div>

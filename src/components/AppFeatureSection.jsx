@@ -1,5 +1,5 @@
 import React from "react";
-import { Truck, ShieldCheck, Wrench, Smartphone, ArrowRight, CheckCircle2, Clock, MapPin } from "lucide-react";
+import { Truck, ShieldCheck, Wrench, Smartphone, ArrowRight, CheckCircle2, Clock } from "lucide-react";
 
 export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) {
   return (
@@ -9,26 +9,25 @@ export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) 
           Ecosistema MotoRock App
         </span>
         <h2 className="text-2xl sm:text-4xl font-normal text-[#151581] tracking-tight leading-tight">
-          La m?xima efectividad de servicio para ti y tu motocicleta
+          La máxima efectividad de servicio para ti y tu motocicleta
         </h2>
         <p className="text-sm sm:text-base text-[#a1a1cd] max-w-xl mx-auto">
-          Dise?ado para eliminar dudas de compatibilidad, acelerar los tiempos de despacho y darte control total desde tu tel?fono.
+          Diseñado para eliminar dudas de compatibilidad, acelerar los tiempos de despacho y darte control total desde tu teléfono.
         </p>
       </div>
 
-      {/* 3 Large Pillar Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Card 1: Garage Inteligente */}
+        {/* Pilar 1 */}
         <div className="bg-[#f6f6fa] rounded-[28px] p-7 flex flex-col justify-between border border-[#e5e5eb] hover:bg-white hover:shadow-sm transition-all group">
           <div className="space-y-4">
             <div className="w-12 h-12 rounded-2xl bg-white text-[#151581] flex items-center justify-center text-xl shadow-sm border border-[#e5e5eb]">
-              ???
+              🏍️
             </div>
             <h3 className="text-lg font-semibold text-[#151581] group-hover:text-[#5465ff] transition-colors">
               Garage de Compatibilidad Exacta
             </h3>
             <p className="text-xs text-[#292824]/80 leading-relaxed">
-              Ingresa la marca y cilindrada de tu moto. La app filtra autom?ticamente el paso de cadena correcto (428/520), buj?as, pastillas y viscosidad recomendada.
+              Ingresa la marca y cilindrada de tu moto. La app filtra automáticamente el paso de cadena correcto (428/520), bujías, pastillas y viscosidad recomendada.
             </p>
           </div>
 
@@ -42,7 +41,7 @@ export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) 
           </div>
         </div>
 
-        {/* Card 2: Delivery Express */}
+        {/* Pilar 2 */}
         <div className="bg-[#f6f6fa] rounded-[28px] p-7 flex flex-col justify-between border border-[#e5e5eb] hover:bg-white hover:shadow-sm transition-all group">
           <div className="space-y-4">
             <div className="w-12 h-12 rounded-2xl bg-white text-[#00bb76] flex items-center justify-center text-xl shadow-sm border border-[#e5e5eb]">
@@ -52,7 +51,7 @@ export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) 
               Despacho Express & Tracking GPS
             </h3>
             <p className="text-xs text-[#292824]/80 leading-relaxed">
-              Env?os diarios por Starken y Chilexpress a todo Chile. Monitorea el estado de tu encomienda en tiempo real con notificaciones push directo a tu m?vil.
+              Envíos diarios por Starken y Chilexpress a todo Chile. Monitorea el estado de tu encomienda en tiempo real con notificaciones push directo a tu móvil.
             </p>
           </div>
 
@@ -66,7 +65,7 @@ export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) 
           </div>
         </div>
 
-        {/* Card 3: Taller y Retiro en Talca */}
+        {/* Pilar 3 */}
         <div className="bg-[#f6f6fa] rounded-[28px] p-7 flex flex-col justify-between border border-[#e5e5eb] hover:bg-white hover:shadow-sm transition-all group">
           <div className="space-y-4">
             <div className="w-12 h-12 rounded-2xl bg-white text-[#5465ff] flex items-center justify-center text-xl shadow-sm border border-[#e5e5eb]">
@@ -76,7 +75,7 @@ export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) 
               Retiro en 2h & Taller en Talca
             </h3>
             <p className="text-xs text-[#292824]/80 leading-relaxed">
-              Compra en la app y retira listo en nuestro local de Av. 2 Sur 771-777. Agenda mantenci?n o instalaci?n de repuestos con mec?nicos especializados.
+              Compra en la app y retira listo en nuestro local de Av. 2 Sur 771-777. Agenda mantención o instalación de repuestos con mecánicos especializados.
             </p>
           </div>
 
@@ -91,14 +90,14 @@ export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) 
         </div>
       </div>
 
-      {/* Interactive App Download Banner inside the Section */}
+      {/* Banner Descarga */}
       <div className="mt-12 p-8 bg-[#151581] text-white rounded-[32px] flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
         <div className="space-y-2 text-center lg:text-left">
           <span className="bg-[#00bb76] text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
             Disponible para iOS y Android
           </span>
           <h3 className="text-xl sm:text-2xl font-normal tracking-tight">
-            Descarga la App MotoRock y obt?n despacho prioritario
+            Descarga la App MotoRock y obtén despacho prioritario
           </h3>
           <p className="text-xs text-slate-300 max-w-lg">
             Guarda tu moto en el garage virtual, recibe cupones de descuento exclusivos y gestiona tus pedidos desde un solo lugar.
