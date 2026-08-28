@@ -10,7 +10,7 @@ import CartDrawer from "./components/CartDrawer";
 import CheckoutModal from "./components/CheckoutModal";
 import StoreLocation from "./components/StoreLocation";
 import Footer from "./components/Footer";
-import { Filter, ArrowUpDown, Check, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
+import { Filter, ArrowUpDown, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { ALL_PRODUCTS, ALL_CATEGORIES, ALL_BIKES } from "./data/catalogData";
 
 export default function App() {
@@ -154,7 +154,7 @@ export default function App() {
       }
     });
 
-    showToast(`?"${product.name.slice(0, 25)}..." agregado!`);
+    showToast(`"${product.name.slice(0, 24)}..." agregado al carrito`);
   };
 
   const handleUpdateQuantity = (productId, variationId, newQuantity) => {
@@ -201,16 +201,11 @@ export default function App() {
   const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex flex-col justify-between relative overflow-x-hidden">
-      {/* Background Liquid Ambient Gradients */}
-      <div className="fixed top-0 left-1/4 w-[600px] h-[600px] bg-gradient-to-br from-orange-200/40 to-amber-100/30 rounded-full blur-[140px] pointer-events-none -z-10" />
-      <div className="fixed top-1/3 right-10 w-[500px] h-[500px] bg-gradient-to-tr from-sky-200/30 to-blue-100/20 rounded-full blur-[120px] pointer-events-none -z-10" />
-      <div className="fixed bottom-10 left-10 w-[700px] h-[700px] bg-gradient-to-tr from-orange-100/30 via-pink-100/20 to-transparent rounded-full blur-[160px] pointer-events-none -z-10" />
-
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col justify-between">
       {/* Toast Notification */}
       {toast && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#FF5500] text-white px-5 py-3 rounded-full shadow-2xl font-black text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200">
-          <Check size={16} />
+        <div className="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-3 rounded-lg shadow-xl font-bold text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200">
+          <Check size={16} className="text-[#FF5500]" />
           <span>{toast}</span>
         </div>
       )}
@@ -229,41 +224,39 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
-        {/* Hero Section with Real Photos */}
+        {/* Hero Section */}
         <HeroBanner
           onSelectCategory={(catId) => setActiveCategory(catId)}
           onOpenGarage={() => setIsGarageOpen(true)}
         />
 
-        {/* Real Brand Showcase Carousel */}
+        {/* Brand Ribbon Strip */}
         <BrandsCarousel />
 
         {/* Selected Bike Notification Banner */}
         {selectedBike && (
-          <div className="mb-6 p-5 glass-aero border-orange-300/60 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-md">
-            <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-2xl bg-orange-100 text-2xl flex items-center justify-center shadow-sm">
-                ???
-              </div>
+          <div className="mb-6 p-4 bg-orange-50 border border-orange-200 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">???</span>
               <div>
-                <h4 className="text-sm font-black text-slate-900">
-                  Mostrando repuestos y accesorios para: <span className="text-[#FF5500]">{selectedBike.brand} {selectedBike.model}</span>
+                <h4 className="text-xs font-bold text-slate-900">
+                  Repuestos compatibles para: <span className="text-[#FF5500]">{selectedBike.brand} {selectedBike.model}</span>
                 </h4>
-                <p className="text-xs text-slate-500 mt-0.5 font-medium">
-                  Paso de Cadena: <strong>{selectedBike.chainPitch}</strong> | Aceite recomendado: <strong>{selectedBike.oilSpec}</strong>
+                <p className="text-[11px] text-slate-500 mt-0.5">
+                  Paso de Cadena: {selectedBike.chainPitch} ? Aceite recomendado: {selectedBike.oilSpec}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsGarageOpen(true)}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-xs font-bold rounded-full text-slate-800 shadow-sm"
+                className="px-3 py-1.5 bg-white hover:bg-slate-100 text-xs font-semibold rounded border border-slate-200 text-slate-800"
               >
                 Cambiar Moto
               </button>
               <button
                 onClick={() => setSelectedBike(null)}
-                className="px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-bold rounded-full border border-red-200 shadow-sm"
+                className="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-semibold rounded border border-red-200"
               >
                 Quitar Filtro
               </button>
@@ -271,27 +264,27 @@ export default function App() {
           </div>
         )}
 
-        {/* Category Navigation Bar */}
+        {/* Category Navigation */}
         <CategoryNav
           activeCategory={activeCategory}
           onSelectCategory={(catId) => setActiveCategory(catId)}
         />
 
-        {/* Filters and Sorting Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-4 glass-aero rounded-3xl shadow-sm">
-          <div className="flex items-center gap-2.5 text-xs">
-            <span className="font-black text-slate-900 flex items-center gap-1.5">
-              <Filter size={15} className="text-[#FF5500]" />
+        {/* Filters & Sorting Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-3.5 bg-white border border-slate-200 rounded-xl shadow-sm">
+          <div className="flex items-center gap-2 text-xs">
+            <span className="font-bold text-slate-900 flex items-center gap-1.5">
+              <Filter size={14} className="text-[#FF5500]" />
               Cat?logo ({totalItemsCount} productos)
             </span>
 
             {/* In stock toggle */}
             <button
               onClick={() => setInStockOnly(!inStockOnly)}
-              className={`px-3.5 py-1.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer ${
+              className={`px-3 py-1 rounded-md text-[11px] font-bold border transition-colors cursor-pointer ${
                 inStockOnly
-                  ? "bg-emerald-100 border-emerald-300 text-emerald-800 shadow-sm"
-                  : "bg-white/80 border-slate-200 text-slate-600 hover:text-slate-950"
+                  ? "bg-emerald-50 border-emerald-300 text-emerald-800"
+                  : "bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900"
               }`}
             >
               ? En Stock
@@ -300,25 +293,25 @@ export default function App() {
             {/* On sale toggle */}
             <button
               onClick={() => setOnSaleOnly(!onSaleOnly)}
-              className={`px-3.5 py-1.5 rounded-full text-[11px] font-bold border transition-all cursor-pointer ${
+              className={`px-3 py-1 rounded-md text-[11px] font-bold border transition-colors cursor-pointer ${
                 onSaleOnly
-                  ? "bg-orange-100 border-orange-300 text-[#FF5500] shadow-sm"
-                  : "bg-white/80 border-slate-200 text-slate-600 hover:text-slate-950"
+                  ? "bg-orange-50 border-orange-300 text-[#FF5500]"
+                  : "bg-slate-50 border-slate-200 text-slate-600 hover:text-slate-900"
               }`}
             >
-              ?? Ofertas
+              ?? En Oferta
             </button>
           </div>
 
           {/* Sort Selector */}
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-slate-500 font-semibold flex items-center gap-1"><ArrowUpDown size={13} /> Ordenar:</span>
+            <span className="text-slate-500 flex items-center gap-1"><ArrowUpDown size={12} /> Ordenar:</span>
             <select
               value={sortOption}
               onChange={(e) => setSortOption(e.target.value)}
-              className="bg-white text-slate-800 border border-slate-200 rounded-full px-3 py-1.5 text-xs font-semibold focus:outline-none focus:border-[#FF5500] shadow-sm cursor-pointer"
+              className="bg-slate-50 text-slate-800 border border-slate-300 rounded px-2.5 py-1 text-xs font-medium focus:outline-none focus:border-[#FF5500]"
             >
-              <option value="popular">M?s Populares & Destacados</option>
+              <option value="popular">Destacados</option>
               <option value="price_asc">Menor Precio</option>
               <option value="price_desc">Mayor Precio</option>
               <option value="name">Nombre A-Z</option>
@@ -328,10 +321,10 @@ export default function App() {
 
         {/* Product Grid */}
         {paginatedProducts.length === 0 ? (
-          <div className="py-20 text-center space-y-3 glass-aero rounded-3xl p-8 shadow-sm">
-            <span className="text-4xl">??</span>
-            <h3 className="text-base font-bold text-slate-900">No encontramos productos con esos filtros</h3>
-            <p className="text-xs text-slate-500">Intenta buscar con otros t?rminos o cambia la categor?a seleccionada.</p>
+          <div className="py-16 text-center space-y-2 bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+            <span className="text-3xl">??</span>
+            <h3 className="text-sm font-bold text-slate-900">No encontramos productos con esos filtros</h3>
+            <p className="text-xs text-slate-500">Prueba con otros t?rminos de b?squeda o restablece los filtros.</p>
             <button
               onClick={() => {
                 setActiveCategory("all");
@@ -340,13 +333,13 @@ export default function App() {
                 setInStockOnly(false);
                 setOnSaleOnly(false);
               }}
-              className="mt-2 liquid-btn text-white px-5 py-2.5 rounded-full text-xs font-bold shadow-md cursor-pointer"
+              className="mt-2 bg-[#FF5500] hover:bg-[#e64d00] text-white px-4 py-2 rounded-lg text-xs font-bold"
             >
               Restablecer Filtros
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {paginatedProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -360,40 +353,40 @@ export default function App() {
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div className="mt-12 flex items-center justify-center gap-3">
+          <div className="mt-10 flex items-center justify-center gap-2">
             <button
               onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-700 disabled:opacity-40 hover:bg-slate-50 shadow-sm transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-4 py-2 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700 disabled:opacity-40 hover:bg-slate-50 shadow-sm"
             >
-              <ChevronLeft size={16} /> Anterior
+              <ChevronLeft size={15} /> Anterior
             </button>
 
-            <span className="text-xs font-bold text-slate-500">
+            <span className="text-xs font-medium text-slate-500 px-2">
               P?gina <strong className="text-slate-900">{currentPage}</strong> de <strong className="text-slate-900">{totalPages}</strong>
             </span>
 
             <button
               onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-white border border-slate-200 text-xs font-bold text-slate-700 disabled:opacity-40 hover:bg-slate-50 shadow-sm transition-colors cursor-pointer"
+              className="flex items-center gap-1 px-4 py-2 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700 disabled:opacity-40 hover:bg-slate-50 shadow-sm"
             >
-              Siguiente <ChevronRight size={16} />
+              Siguiente <ChevronRight size={15} />
             </button>
           </div>
         )}
 
-        {/* Physical Store & Workshop Section */}
+        {/* Physical Store Section */}
         <StoreLocation />
       </main>
 
-      {/* Modals & Slide-Overs */}
+      {/* Modals */}
       <GarageSelector
         isOpen={isGarageOpen}
         onClose={() => setIsGarageOpen(false)}
         onSelectBike={(bike) => {
           setSelectedBike(bike);
-          showToast(`Garage: ${bike.brand} ${bike.model} seleccionado`);
+          showToast(`Moto seleccionada: ${bike.brand} ${bike.model}`);
         }}
         selectedBike={selectedBike}
       />

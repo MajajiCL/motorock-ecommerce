@@ -45,32 +45,30 @@ const BRANDS = [
 
 export default function BrandsCarousel() {
   return (
-    <section className="my-10">
-      <div className="text-center mb-5">
-        <span className="text-[11px] font-black text-[#FF5500] uppercase tracking-widest bg-orange-50 px-3.5 py-1 rounded-full border border-orange-200 shadow-sm inline-block">
-          MARCAS OFICIALES & DISTRIBUIDOR AUTORIZADO
-        </span>
-        <h3 className="text-lg sm:text-xl font-display font-black text-slate-900 mt-2">
-          Las Mejores Marcas del Mundo en MotoRock Chile
+    <section className="my-8 bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
+      <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700">
+          Marcas Oficiales & Distribuidor Autorizado
         </h3>
+        <span className="text-[11px] text-slate-400 font-medium">
+          Garant?a y respaldo oficial
+        </span>
       </div>
 
-      <div className="glass-aero rounded-3xl p-6 shadow-sm overflow-hidden">
-        <div className="flex items-center gap-6 overflow-x-auto pb-2 scrollbar-none justify-start sm:justify-center flex-nowrap">
-          {BRANDS.map((brand, idx) => (
-            <div
-              key={idx}
-              className="flex-shrink-0 flex items-center justify-center p-3 bg-white hover:bg-orange-50/50 rounded-2xl border border-slate-200/80 shadow-sm transition-all duration-300 hover:scale-105 group h-16 w-28 cursor-pointer"
-              title={brand.name}
-            >
-              <img
-                src={brand.img}
-                alt={brand.name}
-                className="max-h-9 max-w-[85%] object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300 opacity-80 group-hover:opacity-100"
-              />
-            </div>
-          ))}
-        </div>
+      <div className="flex items-center gap-6 overflow-x-auto pb-1 scrollbar-none justify-start sm:justify-center">
+        {BRANDS.map((brand, idx) => (
+          <div
+            key={idx}
+            className="flex-shrink-0 flex items-center justify-center p-2 hover:bg-slate-50 rounded-lg transition-all h-12 w-24 cursor-pointer"
+            title={brand.name}
+          >
+            <img
+              src={brand.img}
+              alt={brand.name}
+              className="max-h-7 max-w-[85%] object-contain filter grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100"
+            />
+          </div>
+        ))}
       </div>
     </section>
   );

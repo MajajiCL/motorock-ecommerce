@@ -1,7 +1,7 @@
-import logoMotoRock from '../assets/logo-motorock-600.png';
 import React, { useState, useEffect, useRef } from "react";
-import { ShoppingCart, Search, Wrench, MapPin, Phone, ChevronDown, X, Shield, Sparkles, SlidersHorizontal, Flame } from "lucide-react";
+import { ShoppingCart, Search, MapPin, Phone, X, ChevronRight, Bike } from "lucide-react";
 import { ALL_PRODUCTS } from "../data/catalogData";
+import logoMotoRock from "../assets/logo-motorock-600.png";
 
 export default function Navbar({
   cartCount,
@@ -45,68 +45,59 @@ export default function Navbar({
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 glass-nav-aero">
-      {/* Top Banner Ticker */}
-      <div className="bg-gradient-to-r from-orange-500/10 via-amber-500/10 to-orange-500/10 border-b border-orange-500/15 py-1.5 px-4 text-[11px] font-medium text-slate-700">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+      {/* Top Notification Bar */}
+      <div className="bg-slate-900 text-slate-200 text-[11px] py-1.5 px-4 font-medium">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 bg-[#FF5500] text-white px-2.5 py-0.5 rounded-full font-black text-[10px] uppercase tracking-wider shadow-sm shadow-[#FF5500]/30">
-              <Flame size={12} className="animate-bounce" /> OFERTAS CYBER 2026
+            <span className="bg-[#FF5500] text-white text-[10px] font-bold px-2 py-0.5 rounded">
+              CHILE
             </span>
-            <span className="hidden sm:inline text-slate-300">|</span>
-            <span className="hidden sm:inline text-slate-800">?? <strong>Env?os a todo Chile</strong> ? Gratis en compras sobre $50.000</span>
+            <span>Env?os a todo Chile v?a Starken y Chilexpress ? <strong>Gratis sobre $50.000</strong></span>
           </div>
 
-          <div className="flex items-center gap-4 text-slate-600">
-            <span className="flex items-center gap-1 hover:text-slate-900 font-semibold transition-colors">
-              <MapPin size={13} className="text-[#FF5500]" /> Talca: Av. 2 Sur 771 y 777
+          <div className="flex items-center gap-4 text-slate-300">
+            <span className="flex items-center gap-1">
+              <MapPin size={12} className="text-[#FF5500]" /> Talca: Av. 2 Sur 771 y 777
             </span>
-            <span className="hidden md:inline text-slate-300">?</span>
+            <span className="hidden md:inline text-slate-600">?</span>
             <a
               href="https://wa.me/56956105413"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-bold transition-colors"
+              className="flex items-center gap-1 text-emerald-400 hover:underline font-semibold"
             >
-              <Phone size={13} /> WhatsApp: +56 9 5610 5413
+              <Phone size={12} /> WhatsApp: +56 9 5610 5413
             </a>
           </div>
         </div>
       </div>
 
-      {/* Main Bar */}
+      {/* Main Header Bar */}
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
         {/* Brand Official Logo */}
-        <a href="#" className="flex items-center gap-2 group flex-shrink-0">
+        <a href="#" className="flex items-center gap-2 flex-shrink-0">
           <img
             src={logoMotoRock}
             alt="MotoRock Chile"
-            className="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
-            onError={(e) => {
-              // Fallback to text if image fails
-              e.target.style.display = "none";
-              if (e.target.nextSibling) e.target.nextSibling.style.display = "flex";
-            }}
+            className="h-10 sm:h-12 w-auto object-contain"
           />
-          <div className="hidden items-center gap-1.5 font-display font-black text-2xl tracking-tight text-slate-900">
-            <span>MOTO<span className="text-[#FF5500]">ROCK</span></span>
-          </div>
         </a>
 
-        {/* Search Bar with Liquid Glass styling */}
+        {/* Search Bar */}
         <div className="flex-1 max-w-xl relative hidden md:block" ref={searchRef}>
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={17} />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
             <input
               type="text"
-              placeholder="Buscar cascos LS2, cadenas DID, aceites Motul, repuestos..."
+              placeholder="Buscar cascos, aceites Motul, cadenas DID, repuestos..."
               value={searchQuery}
               onChange={(e) => {
                 onSearchChange(e.target.value);
                 setShowSearch(true);
               }}
               onFocus={() => setShowSearch(true)}
-              className="w-full bg-white/80 border border-slate-200/80 hover:border-slate-300 focus:border-[#FF5500] text-sm text-slate-900 pl-11 pr-24 py-2.5 rounded-full focus:outline-none focus:ring-4 focus:ring-[#FF5500]/10 transition-all placeholder:text-slate-400 shadow-sm shadow-slate-200/50"
+              className="w-full bg-slate-50 border border-slate-300 hover:border-slate-400 focus:border-[#FF5500] text-sm text-slate-900 pl-10 pr-20 py-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#FF5500] transition-colors placeholder:text-slate-400"
             />
             {searchQuery ? (
               <button
@@ -114,25 +105,23 @@ export default function Navbar({
                   onSearchChange("");
                   setSuggestions([]);
                 }}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
               >
                 <X size={15} />
               </button>
             ) : (
-              <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1 pointer-events-none">
-                <span className="bg-slate-100 text-slate-500 border border-slate-200 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                  726 items
-                </span>
-              </div>
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-semibold text-slate-400">
+                726 productos
+              </span>
             )}
           </div>
 
           {/* Autocomplete Dropdown */}
           {showSearch && suggestions.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-2xl border border-slate-200 rounded-2xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-100 animate-in fade-in-50 duration-150">
+            <div className="absolute top-full left-0 right-0 mt-1.5 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden z-50 divide-y divide-slate-100">
               <div className="p-2.5 text-[10px] font-bold text-slate-500 uppercase tracking-wider bg-slate-50 flex items-center justify-between">
-                <span>Sugerencias en Vivo</span>
-                <span className="text-[#FF5500] font-bold">{suggestions.length} productos</span>
+                <span>Resultados de b?squeda</span>
+                <span className="text-[#FF5500]">{suggestions.length} encontrados</span>
               </div>
               {suggestions.map((item) => (
                 <div
@@ -141,27 +130,23 @@ export default function Navbar({
                     onSelectProduct(item);
                     setShowSearch(false);
                   }}
-                  className="p-3 hover:bg-orange-50/50 flex items-center gap-3 cursor-pointer transition-colors"
+                  className="p-3 hover:bg-slate-50 flex items-center gap-3 cursor-pointer transition-colors"
                 >
                   <img
                     src={item.primaryImage}
                     alt={item.name}
-                    className="w-12 h-12 object-contain rounded-xl bg-white border border-slate-100 p-1 flex-shrink-0 shadow-sm"
+                    className="w-11 h-11 object-contain rounded-lg bg-slate-50 border border-slate-200 p-1 flex-shrink-0"
                   />
                   <div className="flex-1 min-w-0">
                     <h4 className="text-xs font-bold text-slate-900 truncate hover:text-[#FF5500]">{item.name}</h4>
                     <p className="text-[11px] text-slate-500 truncate">{item.categories?.[0]?.name || "Repuestos"}</p>
                   </div>
                   <div className="text-right">
-                    <span className="text-xs font-black text-[#FF5500] block">{item.priceFormatted}</span>
+                    <span className="text-xs font-bold text-[#FF5500] block">{item.priceFormatted}</span>
                     {item.inStock ? (
-                      <span className="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded-full border border-emerald-200">
-                        En Stock
-                      </span>
+                      <span className="text-[9px] font-semibold text-emerald-700">En Stock</span>
                     ) : (
-                      <span className="text-[9px] font-bold text-red-600 bg-red-50 px-1.5 py-0.2 rounded-full border border-red-200">
-                        Agotado
-                      </span>
+                      <span className="text-[9px] font-semibold text-red-600">Agotado</span>
                     )}
                   </div>
                 </div>
@@ -172,20 +157,20 @@ export default function Navbar({
 
         {/* Right Actions */}
         <div className="flex items-center gap-3">
-          {/* Virtual Garage Cockpit Button */}
+          {/* Virtual Garage Vehicle Selector */}
           <button
             onClick={onOpenGarage}
-            className={`flex items-center gap-2.5 px-4 py-2 rounded-full text-xs font-bold border transition-all duration-300 ${
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold border transition-all ${
               selectedBike
-                ? "bg-orange-50 border-[#FF5500] text-[#FF5500] shadow-sm shadow-[#FF5500]/20"
-                : "bg-white/80 border-slate-200 text-slate-700 hover:border-slate-400 hover:bg-white shadow-sm"
+                ? "bg-orange-50 border-[#FF5500] text-[#FF5500]"
+                : "bg-slate-50 border-slate-200 text-slate-700 hover:border-slate-400 hover:bg-slate-100"
             }`}
           >
             <span className="text-base">???</span>
             <div className="text-left hidden lg:block">
-              <span className="block text-[9px] text-slate-400 uppercase font-medium leading-none">Mi Garage</span>
-              <span className="block font-black text-xs truncate max-w-[130px] mt-0.5 text-slate-900">
-                {selectedBike ? `${selectedBike.brand} ${selectedBike.model}` : "Elegir Moto"}
+              <span className="block text-[9px] text-slate-400 uppercase leading-none">Mi Moto</span>
+              <span className="block font-bold text-xs truncate max-w-[120px] text-slate-900 mt-0.5">
+                {selectedBike ? `${selectedBike.brand} ${selectedBike.model}` : "Seleccionar"}
               </span>
             </div>
             {selectedBike && (
@@ -194,7 +179,7 @@ export default function Navbar({
                   e.stopPropagation();
                   onClearGarage();
                 }}
-                className="ml-1 text-slate-400 hover:text-slate-800 p-0.5 hover:bg-slate-200 rounded-full"
+                className="ml-1 text-slate-400 hover:text-slate-700 p-0.5 rounded"
                 title="Quitar filtro"
               >
                 <X size={12} />
@@ -205,12 +190,12 @@ export default function Navbar({
           {/* Cart Button */}
           <button
             onClick={onOpenCart}
-            className="liquid-btn text-white px-5 py-2.5 rounded-full font-black text-xs flex items-center gap-2 shadow-lg shadow-[#FF5500]/30 transform active:scale-95 cursor-pointer"
+            className="flex items-center gap-2 bg-[#FF5500] hover:bg-[#e64d00] text-white px-4 py-2 rounded-lg font-bold text-xs shadow-sm transition-all cursor-pointer"
           >
-            <ShoppingCart size={17} />
-            <span className="hidden sm:inline font-bold">Carrito</span>
+            <ShoppingCart size={16} />
+            <span className="hidden sm:inline">Carrito</span>
             {cartCount > 0 && (
-              <span className="bg-white text-[#FF5500] text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md">
+              <span className="bg-white text-[#FF5500] text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
                 {cartCount}
               </span>
             )}
@@ -218,16 +203,16 @@ export default function Navbar({
         </div>
       </div>
 
-      {/* Mobile Search Bar */}
+      {/* Mobile Search Input */}
       <div className="p-3 pt-0 md:hidden">
         <div className="relative">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
           <input
             type="text"
             placeholder="Buscar repuestos, cascos, aceites..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full bg-white border border-slate-200 text-xs text-slate-900 pl-10 pr-8 py-2 rounded-full focus:outline-none focus:border-[#FF5500]"
+            className="w-full bg-slate-50 border border-slate-200 text-xs text-slate-900 pl-9 pr-8 py-2 rounded-lg focus:outline-none focus:border-[#FF5500]"
           />
           {searchQuery && (
             <button onClick={() => onSearchChange("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400">

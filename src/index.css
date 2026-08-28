@@ -6,66 +6,60 @@
   body {
     background-color: #f8fafc;
     color: #0f172a;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-/* Liquid Glass Aero Panels */
-.glass-aero {
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 1px 1px rgba(226, 232, 240, 0.6), inset 0 1px 2px rgba(255, 255, 255, 1);
+/* Clean, crisp product & panel styling */
+.moto-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  transition: all 0.25s ease-in-out;
 }
-
-.glass-aero-hover {
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.glass-aero-hover:hover {
-  background: rgba(255, 255, 255, 0.92);
-  border-color: rgba(255, 85, 0, 0.35);
-  box-shadow: 0 25px 50px -12px rgba(255, 85, 0, 0.12), 0 0 20px rgba(255, 85, 0, 0.08), inset 0 1px 2px rgba(255, 255, 255, 1);
-  transform: translateY(-3px);
-}
-
-.glass-nav-aero {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(28px) saturate(200%);
-  -webkit-backdrop-filter: blur(28px) saturate(200%);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: 0 4px 25px -4px rgba(0, 0, 0, 0.03);
-}
-
-/* Liquid Gloss Reflection */
-.liquid-gloss {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.3) 100%);
-}
-
-.liquid-btn {
-  background: linear-gradient(135deg, #FF6600 0%, #FF5500 60%, #E64400 100%);
-  box-shadow: 0 10px 25px -5px rgba(255, 85, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.5);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.liquid-btn:hover {
-  background: linear-gradient(135deg, #FF7711 0%, #FF6600 60%, #EE5000 100%);
-  box-shadow: 0 15px 30px -5px rgba(255, 85, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.7);
+.moto-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
   transform: translateY(-2px);
 }
 
-/* Custom Scrollbar for Light Aero */
+.moto-btn-primary {
+  background-color: #FF5500;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease-in-out;
+}
+.moto-btn-primary:hover {
+  background-color: #e64d00;
+  box-shadow: 0 4px 12px rgba(255, 85, 0, 0.25);
+}
+
+.moto-btn-secondary {
+  background-color: #f1f5f9;
+  color: #334155;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease-in-out;
+}
+.moto-btn-secondary:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
-  border-radius: 9999px;
-  border: 2px solid #f1f5f9;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF5500;
+  background: #94a3b8;
 }
