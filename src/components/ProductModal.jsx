@@ -1,0 +1,252 @@
+import React, { useState, useEffect } from "react";
+import { X, ShoppingCart, Check, ShieldCheck, Truck, RefreshCw, MessageCircle, Star, ArrowRight } from "lucide-react";
+
+export default function ProductModal({ product, isOpen, onClose, onAddToCart, onBuyNow }) {
+  const [selectedImg, setSelectedImg] = useState(0);
+  const [selectedVariation, setSelectedVariation] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    if (product) {
+      setSelectedImg(0);
+      setQuantity(1);
+      if (product.variations && product.variations.length > 0) {
+        setSelectedVariation(product.variations[0]);
+      } else {
+        setSelectedVariation(null);
+      }
+    }
+  }, [product]);
+
+  if (!isOpen || !product) return null;
+
+  const images = product.images || [];
+  const currentImgUrl = images[selectedImg]?.localUrl || images[selectedImg]?.src || product.primaryImage || "https://placehold.co/600x600/181c28/fff?text=MotoRock";
+
+  // WhatsApp Message Generator
+  const waPhone = "56956105413";
+  const waText = encodeURIComponent(
+    `¡Hola MotoRock! Me interesa este producto de su tienda online:\n\n*${product.name}*\nPrecio: ${product.priceFormatted}\n${
+      selectedVariation ? `Talla/Opción: ${selectedVariation.attributes?.map((a) => a.value).join(", ")}\n` : ""
+    }URL: ${product.permalink}\n\n¿Tienen disponibilidad para retiro en Talca o envío a mi comuna?`
+  );
+  const waLink = `https://wa.me/${waPhone}?text=${waText}`;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="bg-[#12151f] border border-[#272e42] rounded-3xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] relative">
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 z-20 text-gray-400 hover:text-white bg-[#1c2233] hover:bg-[#28314a] p-2 rounded-full transition-all"
+        >
+          <X size={20} />
+        </button>
+
+        <div className="overflow-y-auto flex-1 p-6 md:p-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Gallery Column */}
+            <div className="space-y-4">
+              <div className="aspect-square bg-gradient-to-b from-[#181c28] to-[#0f121a] rounded-2xl border border-[#252c3d] p-6 flex items-center justify-center relative overflow-hidden">
+                <img
+                  src={currentImgUrl}
+                  alt={product.name}
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    if (images[selectedImg]?.originalUrl && e.target.src !== images[selectedImg].originalUrl) {
+                      e.target.src = images[selectedImg].originalUrl;
+                    }
+                  }}
+                />
+                {product.onSale && (
+                  <span className="absolute top-3 left-3 bg-[#FF5500] text-white text-xs font-black px-2.5 py-1 rounded-full uppercase">
+                    Oferta Especial
+                  </span>
+                )}
+              </div>
+
+              {/* Thumbnails */}
+              {images.length > 1 && (
+                <div className="flex items-center gap-2.5 overflow-x-auto pb-2 scrollbar-none">
+                  {images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedImg(idx)}
+                      className={`w-16 h-16 rounded-xl border p-1 bg-[#161a25] transition-all flex-shrink-0 ${
+                        selectedImg === idx ? "border-[#FF5500] ring-2 ring-[#FF5500]/30" : "border-[#252c3d] hover:border-gray-500"
+                      }`}
+                    >
+                      <img
+                        src={img.localUrl || img.src}
+                        alt=""
+                        className="w-full h-full object-contain"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Product Info & Actions Column */}
+            <div className="flex flex-col justify-between space-y-6">
+              <div>
+                <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                  <span className="uppercase font-semibold text-[#FF5500]">
+                    {product.categories?.[0]?.name || "Repuestos"}
+                  </span>
+                  <span>•</span>
+                  <span>SKU: {product.sku}</span>
+                </div>
+
+                <h2 className="text-xl md:text-2xl font-display font-black text-white leading-snug">
+                  {product.name}
+                </h2>
+
+                {/* Price Display */}
+                <div className="mt-3 flex items-baseline gap-3">
+                  <span className="text-2xl md:text-3xl font-black text-white">
+                    {product.priceFormatted}
+                  </span>
+                  {product.onSale && (
+                    <span className="text-sm text-gray-500 line-through">
+                      {product.regularPriceFormatted}
+                    </span>
+                  )}
+                </div>
+
+                {/* Stock Status */}
+                <div className="mt-3 flex items-center gap-2">
+                  {product.inStock ? (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full">
+                      <Check size={14} /> En Stock para Despacho o Retiro en Talca
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold text-red-400 bg-red-500/10 border border-red-500/30 px-3 py-1 rounded-full">
+                      Agotado Temporalmente
+                    </span>
+                  )}
+                </div>
+
+                {/* Variations / Sizes Selector */}
+                {product.variations && product.variations.length > 0 && (
+                  <div className="mt-6 p-4 bg-[#171b26] border border-[#262e42] rounded-2xl">
+                    <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2.5">
+                      Selecciona Talla / Variante:
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {product.variations.map((v) => {
+                        const attrText = v.attributes?.map((a) => a.value || a.name).join(" - ") || `Opción #${v.id}`;
+                        const isSelected = selectedVariation?.id === v.id;
+                        return (
+                          <button
+                            key={v.id}
+                            onClick={() => setSelectedVariation(v)}
+                            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
+                              isSelected
+                                ? "bg-[#FF5500] border-[#FF5500] text-white shadow-md shadow-[#FF5500]/25"
+                                : "bg-[#1c2233] border-[#2f3850] text-gray-300 hover:text-white hover:border-gray-500"
+                            }`}
+                          >
+                            {attrText}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Quantity Controls */}
+                <div className="mt-6 flex items-center gap-4">
+                  <span className="text-xs font-bold text-gray-400 uppercase">Cantidad:</span>
+                  <div className="flex items-center bg-[#171b26] border border-[#283045] rounded-xl p-1">
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="w-8 h-8 rounded-lg bg-[#202638] text-white flex items-center justify-center font-bold hover:bg-[#2b334a]"
+                    >
+                      -
+                    </button>
+                    <span className="w-10 text-center text-sm font-black text-white">{quantity}</span>
+                    <button
+                      onClick={() => setQuantity(quantity + 1)}
+                      className="w-8 h-8 rounded-lg bg-[#202638] text-white flex items-center justify-center font-bold hover:bg-[#2b334a]"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-3 pt-4 border-t border-[#222839]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <button
+                    onClick={() => {
+                      onAddToCart(product, quantity, selectedVariation);
+                      onClose();
+                    }}
+                    disabled={!product.inStock}
+                    className="flex items-center justify-center gap-2 bg-[#1c2233] hover:bg-[#273048] text-white border border-[#2f3850] py-3.5 px-4 rounded-xl font-bold text-sm transition-all"
+                  >
+                    <ShoppingCart size={18} />
+                    <span>Agregar al Carrito</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      onAddToCart(product, quantity, selectedVariation);
+                      onBuyNow(product, quantity, selectedVariation);
+                    }}
+                    disabled={!product.inStock}
+                    className="flex items-center justify-center gap-2 bg-[#FF5500] hover:bg-[#E04800] text-white py-3.5 px-4 rounded-xl font-black text-sm shadow-lg shadow-[#FF5500]/30 transition-all transform active:scale-95"
+                  >
+                    <span>Comprar Ahora (Webpay)</span>
+                    <ArrowRight size={18} />
+                  </button>
+                </div>
+
+                {/* WhatsApp Instant Consultation Button */}
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-2 bg-[#1b2b22] hover:bg-[#22392c] text-emerald-400 border border-emerald-500/30 py-3 px-4 rounded-xl font-semibold text-xs transition-all w-full"
+                >
+                  <MessageCircle size={16} />
+                  <span>Consultar con un Asesor MotoRock por WhatsApp</span>
+                </a>
+
+                {/* Trust Badges */}
+                <div className="grid grid-cols-3 gap-2 pt-2 text-[11px] text-gray-400 text-center">
+                  <div className="flex flex-col items-center gap-1">
+                    <Truck size={14} className="text-[#FF5500]" />
+                    <span>Envíos Todo Chile</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1">
+                    <ShieldCheck size={14} className="text-emerald-400" />
+                    <span>Garantía Oficial</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1">
+                    <RefreshCw size={14} className="text-amber-400" />
+                    <span>Cambios Fáciles</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Description & Technical Specs */}
+          {product.description && (
+            <div className="mt-8 pt-8 border-t border-[#222839]">
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider mb-3">
+                Descripción & Características Técnicas
+              </h3>
+              <div className="text-gray-300 text-xs sm:text-sm leading-relaxed bg-[#141722] p-5 rounded-2xl border border-[#22283a] whitespace-pre-line">
+                {product.description}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
