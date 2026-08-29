@@ -7,17 +7,17 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
   const installmentVal = Math.round(product.price / 6);
 
   return (
-    <div className="bg-white rounded-[24px] border border-[#e4e4e7] overflow-hidden flex flex-col justify-between hover:shadow-clean hover:border-red-200 transition-all duration-200 group">
+    <div className="glass-panel glass-panel-hover rounded-[24px] overflow-hidden flex flex-col justify-between group">
       {/* Contenedor Imagen */}
       <div
         onClick={() => onOpenDetail(product)}
-        className="relative aspect-square bg-[#f8f9fa] overflow-hidden cursor-pointer flex items-center justify-center p-6 border-b border-[#e4e4e7]"
+        className="relative aspect-square bg-white/50 overflow-hidden cursor-pointer flex items-center justify-center p-6 border-b border-white/60"
       >
         <img
           src={product.primaryImage}
           alt={product.name}
           loading="lazy"
-          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
           onError={(e) => {
             e.target.src = "https://placehold.co/400x400/ffffff/333?text=MotoRock";
           }}
@@ -26,12 +26,12 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1 z-10">
           {product.onSale && (
-            <span className="bg-[#e60000] text-white font-bold text-[9px] px-2.5 py-0.5 rounded-full shadow-sm">
+            <span className="bg-[#e60000] text-white font-extrabold text-[9px] px-2.5 py-0.5 rounded-full shadow-sm">
               OFERTA
             </span>
           )}
           {hasOptions && (
-            <span className="bg-white text-[#121214] border border-[#e4e4e7] text-[9px] font-bold px-2 py-0.5 rounded-full">
+            <span className="glass-pill text-[#121214] text-[9px] font-bold px-2 py-0.5 rounded-full">
               Tallas
             </span>
           )}
@@ -40,11 +40,11 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
         {/* Estado Stock */}
         <div className="absolute top-3 right-3 z-10">
           {product.inStock ? (
-            <span className="bg-white border border-emerald-100 text-[#00bb76] text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+            <span className="glass-pill text-[#00bb76] text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
               ✓ En Stock
             </span>
           ) : (
-            <span className="bg-zinc-100 border border-zinc-200 text-zinc-400 text-[10px] font-medium px-2 py-0.5 rounded-full">
+            <span className="glass-pill text-zinc-400 text-[10px] font-medium px-2 py-0.5 rounded-full">
               Agotado
             </span>
           )}
@@ -52,7 +52,7 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
       </div>
 
       {/* Contenido */}
-      <div className="p-5 flex-1 flex flex-col justify-between bg-white">
+      <div className="p-5 flex-1 flex flex-col justify-between">
         <div>
           {/* Categoría */}
           <div className="flex items-center justify-between gap-2 mb-1.5">
@@ -76,7 +76,7 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
         </div>
 
         {/* Precios & Acciones */}
-        <div className="mt-4 pt-3 border-t border-zinc-100 space-y-3">
+        <div className="mt-4 pt-3 border-t border-white/60 space-y-3">
           <div>
             <div className="flex items-baseline gap-2">
               <span className="text-base sm:text-lg font-extrabold text-[#e60000]">
@@ -96,7 +96,7 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => onOpenDetail(product)}
-              className="flex-1 py-2 px-3 rounded-full bg-[#f8f9fa] hover:bg-zinc-200 text-[#121214] font-bold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer border border-[#e4e4e7]"
+              className="flex-1 py-2 px-3 rounded-full glass-pill hover:bg-white text-[#121214] font-bold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <Eye size={13} />
               <span>Ver Detalle</span>

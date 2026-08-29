@@ -8,7 +8,7 @@ export default function BentoCategories({ onSelectCategory }) {
     <section className="my-14">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
         <div>
-          <span className="text-[11px] font-bold text-[#e60000] uppercase tracking-wider bg-red-50 px-3.5 py-1 rounded-full border border-red-100">
+          <span className="text-[11px] font-bold text-[#e60000] uppercase tracking-wider glass-pill-red px-3.5 py-1 rounded-full">
             LÍNEAS DE COMPETICIÓN & CALLE
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#121214] mt-1 tracking-tight">
@@ -24,7 +24,7 @@ export default function BentoCategories({ onSelectCategory }) {
         {/* Card 1: Cascos Premium HJC (2 Cols) */}
         <CardSpotlight
           onClick={() => onSelectCategory("128")}
-          className="md:col-span-2 lg:col-span-2 p-6 flex flex-col justify-between cursor-pointer relative overflow-hidden group min-h-[240px] bg-white rounded-[28px] border border-[#e4e4e7] shadow-sm"
+          className="md:col-span-2 lg:col-span-2 p-6 flex flex-col justify-between cursor-pointer relative overflow-hidden group min-h-[240px] glass-panel glass-panel-hover rounded-[28px]"
         >
           <BorderBeam size={180} duration={8} colorFrom="#e60000" colorTo="#121214" />
           <div className="relative z-10 max-w-sm space-y-2">
@@ -60,7 +60,7 @@ export default function BentoCategories({ onSelectCategory }) {
         {/* Card 2: Transmisión D.I.D */}
         <CardSpotlight
           onClick={() => onSelectCategory("47")}
-          className="p-6 flex flex-col justify-between cursor-pointer relative overflow-hidden group min-h-[240px] bg-white rounded-[28px] border border-[#e4e4e7] shadow-sm"
+          className="p-6 flex flex-col justify-between cursor-pointer relative overflow-hidden group min-h-[240px] glass-panel glass-panel-hover rounded-[28px]"
         >
           <div className="relative z-10 space-y-2">
             <div className="flex items-center gap-2">
@@ -94,7 +94,7 @@ export default function BentoCategories({ onSelectCategory }) {
         {/* Card 3: Aceites Motul */}
         <CardSpotlight
           onClick={() => onSelectCategory("36")}
-          className="p-6 flex flex-col justify-between cursor-pointer relative overflow-hidden group min-h-[240px] bg-white rounded-[28px] border border-[#e4e4e7] shadow-sm"
+          className="p-6 flex flex-col justify-between cursor-pointer relative overflow-hidden group min-h-[240px] glass-panel glass-panel-hover rounded-[28px]"
         >
           <div className="relative z-10 space-y-2">
             <div className="flex items-center gap-2">
@@ -125,8 +125,8 @@ export default function BentoCategories({ onSelectCategory }) {
           />
         </CardSpotlight>
 
-        {/* Card 4: Taller Talca (2 cols) */}
-        <div className="md:col-span-2 lg:col-span-2 p-6 bg-[#121214] text-white rounded-[28px] flex flex-col justify-between shadow-sm relative overflow-hidden min-h-[240px]">
+        {/* Card 4: Taller Talca (Frosted Dark Glass) */}
+        <div className="md:col-span-2 lg:col-span-2 p-6 glass-panel-dark text-white rounded-[28px] flex flex-col justify-between relative overflow-hidden min-h-[240px]">
           <div className="relative z-10 max-w-sm space-y-2">
             <div className="flex items-center gap-2">
               <span className="p-2 rounded-xl bg-white/10 text-[#00bb76]">
@@ -156,10 +156,10 @@ export default function BentoCategories({ onSelectCategory }) {
           </div>
         </div>
 
-        {/* Card 5: Chaquetas LS2 e Indumentaria (2 cols) */}
+        {/* Card 5: Chaquetas LS2 e Indumentaria */}
         <CardSpotlight
           onClick={() => onSelectCategory("116")}
-          className="md:col-span-1 lg:col-span-2 p-6 flex flex-col justify-between cursor-pointer relative overflow-hidden group min-h-[240px] bg-white rounded-[28px] border border-[#e4e4e7] shadow-sm"
+          className="md:col-span-1 lg:col-span-2 p-6 flex flex-col justify-between cursor-pointer relative overflow-hidden group min-h-[240px] glass-panel glass-panel-hover rounded-[28px]"
         >
           <div className="relative z-10 space-y-2">
             <div className="flex items-center gap-2">

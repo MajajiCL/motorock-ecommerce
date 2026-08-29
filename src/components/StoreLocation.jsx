@@ -6,7 +6,7 @@ export default function StoreLocation() {
     <section className="my-14">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
         <div>
-          <span className="text-[11px] font-bold text-[#e60000] uppercase tracking-wider bg-red-50 px-3.5 py-1 rounded-full border border-red-100">
+          <span className="text-[11px] font-bold text-[#e60000] uppercase tracking-wider glass-pill-red px-3.5 py-1 rounded-full">
             SHOWROOM & TALLER EN TALCA
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#121214] mt-1 tracking-tight">
@@ -19,11 +19,11 @@ export default function StoreLocation() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Local 771: Indumentaria */}
-        <div className="bg-white p-6 rounded-[28px] border border-[#e4e4e7] shadow-sm space-y-4 flex flex-col justify-between">
+        {/* Local 771 */}
+        <div className="glass-panel p-6 rounded-[28px] space-y-4 flex flex-col justify-between">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-[#e60000] uppercase tracking-wider bg-red-50 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-[#e60000] uppercase tracking-wider bg-red-50/80 px-3 py-1 rounded-full border border-red-100">
                 Local 771 • Cascos & Ropa
               </span>
               <span className="text-xs font-bold text-[#00bb76]">Abierto Hoy</span>
@@ -53,18 +53,18 @@ export default function StoreLocation() {
             href="https://wa.me/56956105413?text=Hola%20MotoRock,%20tengo%20una%20consulta%20sobre%20indumentaria"
             target="_blank"
             rel="noreferrer"
-            className="w-full py-2.5 rounded-full bg-[#121214] hover:bg-[#e60000] text-white font-bold text-xs text-center transition-colors flex items-center justify-center gap-1.5"
+            className="w-full py-2.5 rounded-full bg-[#121214] hover:bg-[#e60000] text-white font-bold text-xs text-center transition-colors flex items-center justify-center gap-1.5 shadow-sm"
           >
             <span>Consultar Disponibilidad</span>
             <ArrowRight size={13} />
           </a>
         </div>
 
-        {/* Local 777: Taller */}
-        <div className="bg-white p-6 rounded-[28px] border border-[#e4e4e7] shadow-sm space-y-4 flex flex-col justify-between">
+        {/* Local 777 */}
+        <div className="glass-panel p-6 rounded-[28px] space-y-4 flex flex-col justify-between">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-[#e60000] uppercase tracking-wider bg-red-50 px-3 py-1 rounded-full">
+              <span className="text-xs font-bold text-[#e60000] uppercase tracking-wider bg-red-50/80 px-3 py-1 rounded-full border border-red-100">
                 Local 777 • Taller Mecánico
               </span>
               <span className="text-xs font-bold text-[#00bb76]">Servicio Express</span>

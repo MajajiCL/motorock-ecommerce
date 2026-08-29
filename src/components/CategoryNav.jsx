@@ -14,7 +14,7 @@ export default function CategoryNav({ activeCategory, onSelectCategory }) {
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                 isActive
                   ? "bg-[#e60000] text-white shadow-racing"
-                  : "bg-white border border-[#e4e4e7] text-[#121214] hover:border-zinc-300 hover:bg-[#f8f9fa]"
+                  : "glass-pill text-[#121214] hover:bg-white/90"
               }`}
             >
               <span>{cat.icon}</span>

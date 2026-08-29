@@ -52,8 +52,8 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
   return (
     <ImageStreamHero images={STREAM_PRODUCTS} cards={8} speed={22} axis={52}>
       <div className="pt-8 pb-16 flex flex-col items-center text-center">
-        {/* 1. Trust Pill Badge with AnimatedShimmer */}
-        <div className="inline-flex items-center gap-2 bg-white/95 px-4 py-1.5 rounded-full border border-red-200 shadow-sm mb-6 animate-in fade-in duration-300 backdrop-blur-md">
+        {/* 1. Trust Glass Pill Badge */}
+        <div className="inline-flex items-center gap-2 glass-pill px-4 py-1.5 rounded-full mb-6 animate-in fade-in duration-300">
           <Sparkles size={13} className="text-[#e60000]" />
           <AnimatedShinyText className="text-xs text-[#121214]">
             ⚡ MotoRock App 2026 • Despacho Express en 24h & Retiro en 2h en Talca
@@ -61,22 +61,22 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
         </div>
 
         {/* 2. Display Headline */}
-        <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-extrabold text-[#121214] leading-[0.95] tracking-tight max-w-3xl mx-auto">
+        <h1 className="text-3xl sm:text-5xl lg:text-[54px] font-extrabold text-[#121214] leading-[0.95] tracking-tight max-w-3xl mx-auto drop-shadow-sm">
           Todo para tu moto en tu bolsillo.
           <br />
           <span className="text-[#e60000]">Repuestos exactos y despacho inmediato.</span>
         </h1>
 
-        {/* 3. Subtext in Dark Slate */}
+        {/* 3. Subtext */}
         <p className="text-base sm:text-lg text-zinc-600 max-w-xl mx-auto mt-6 leading-relaxed font-normal">
           Selecciona tu modelo de moto, compra en 1-click y sigue el delivery en tiempo real por Starken o retira en 2 horas en nuestro local de Talca.
         </p>
 
-        {/* 4. Action Buttons Pills */}
+        {/* 4. Action Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-3.5 mt-8">
           <button
             onClick={onOpenAppModal}
-            className="flex items-center gap-2.5 bg-[#121214] hover:bg-black text-white px-6 py-3 rounded-full text-xs font-bold shadow-sm transition-all cursor-pointer"
+            className="flex items-center gap-2.5 bg-[#121214] hover:bg-black text-white px-6 py-3 rounded-full text-xs font-bold shadow-md hover:shadow-lg transition-all cursor-pointer"
           >
             <span className="text-base"></span>
             <div className="text-left">
@@ -87,7 +87,7 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
 
           <button
             onClick={onOpenAppModal}
-            className="flex items-center gap-2.5 bg-[#121214] hover:bg-black text-white px-6 py-3 rounded-full text-xs font-bold shadow-sm transition-all cursor-pointer"
+            className="flex items-center gap-2.5 bg-[#121214] hover:bg-black text-white px-6 py-3 rounded-full text-xs font-bold shadow-md hover:shadow-lg transition-all cursor-pointer"
           >
             <span className="text-base">🤖</span>
             <div className="text-left">
@@ -105,17 +105,17 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
           </button>
         </div>
 
-        {/* 5. Centerpiece: iPhone 16 Pro Mockup with Floating Badges */}
+        {/* 5. Centerpiece: iPhone 16 Pro Mockup with Floating Glass Cards */}
         <div className="mt-14 w-full max-w-5xl relative flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-8 px-4">
-          {/* Left Floating Card: Real Casco HJC Dakar */}
+          {/* Left Floating Card */}
           <div
             onClick={() => onSelectCategory("128")}
-            className="w-full sm:w-auto lg:max-w-[230px] bg-white/95 backdrop-blur-md p-4 rounded-[24px] shadow-clean border border-[#e4e4e7] flex items-center gap-3.5 cursor-pointer hover:scale-105 transition-all duration-200 text-left order-2 lg:order-1"
+            className="w-full sm:w-auto lg:max-w-[230px] glass-panel glass-panel-hover p-4 rounded-[24px] flex items-center gap-3.5 cursor-pointer text-left order-2 lg:order-1"
           >
             <img
               src="https://motorock.cl/wp-content/uploads/2026/08/028f734bfb6a4b59a4a803ad9cc54fa8_800.jpg"
               alt="Casco HJC Dakar"
-              className="w-14 h-14 object-contain rounded-2xl bg-[#f8f9fa] p-1.5 flex-shrink-0"
+              className="w-14 h-14 object-contain rounded-2xl bg-white/80 p-1.5 flex-shrink-0"
             />
             <div className="min-w-0">
               <span className="text-[9px] font-bold text-[#00bb76] uppercase tracking-wider flex items-center gap-1">
@@ -134,15 +134,15 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
             />
           </div>
 
-          {/* Right Floating Card: Real Aceite Motul 7100 */}
+          {/* Right Floating Card */}
           <div
             onClick={() => onSelectCategory("36")}
-            className="w-full sm:w-auto lg:max-w-[230px] bg-white/95 backdrop-blur-md p-4 rounded-[24px] shadow-clean border border-[#e4e4e7] flex items-center gap-3.5 cursor-pointer hover:scale-105 transition-all duration-200 text-left order-3"
+            className="w-full sm:w-auto lg:max-w-[230px] glass-panel glass-panel-hover p-4 rounded-[24px] flex items-center gap-3.5 cursor-pointer text-left order-3"
           >
             <img
               src="https://motorock.cl/wp-content/uploads/2026/06/MOTUL-7100-10W-40.png"
               alt="Motul 7100"
-              className="w-14 h-14 object-contain rounded-2xl bg-[#f8f9fa] p-1.5 flex-shrink-0"
+              className="w-14 h-14 object-contain rounded-2xl bg-white/80 p-1.5 flex-shrink-0"
             />
             <div className="min-w-0">
               <span className="text-[9px] font-bold text-[#00bb76] uppercase tracking-wider block">
@@ -154,9 +154,9 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
           </div>
         </div>
 
-        {/* 6. Three Pillars Strip */}
+        {/* 6. Three Glass Pillars Strip */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto w-full mt-14 text-left">
-          <div className="bg-white/95 backdrop-blur-md p-5 rounded-[24px] shadow-clean border border-[#e4e4e7] space-y-1">
+          <div className="glass-panel p-5 rounded-[24px] space-y-1">
             <span className="text-[11px] font-bold text-[#00bb76] uppercase tracking-wider flex items-center gap-1">
               <CheckCircle2 size={13} />
               <NumberTicker value={24} suffix=" a 48 Horas" />
@@ -165,7 +165,7 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
             <p className="text-xs text-zinc-500">Envíos asegurados por Starken y Chilexpress directo a tu puerta.</p>
           </div>
 
-          <div className="bg-white/95 backdrop-blur-md p-5 rounded-[24px] shadow-clean border border-[#e4e4e7] space-y-1">
+          <div className="glass-panel p-5 rounded-[24px] space-y-1">
             <span className="text-[11px] font-bold text-[#e60000] uppercase tracking-wider flex items-center gap-1">
               <CheckCircle2 size={13} className="text-[#e60000]" />
               <NumberTicker value={726} prefix="+" suffix=" Repuestos" />
@@ -174,7 +174,7 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
             <p className="text-xs text-zinc-500">Filtra por modelo y recibe la cadena, piñón y aceite correcto.</p>
           </div>
 
-          <div className="bg-white/95 backdrop-blur-md p-5 rounded-[24px] shadow-clean border border-[#e4e4e7] space-y-1">
+          <div className="glass-panel p-5 rounded-[24px] space-y-1">
             <span className="text-[11px] font-bold text-[#121214] uppercase tracking-wider flex items-center gap-1">
               <Clock size={13} className="text-[#e60000]" />
               <NumberTicker value={2} prefix="Listo en " suffix=" Horas" />

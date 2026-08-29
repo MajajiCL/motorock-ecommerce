@@ -1,14 +1,13 @@
 import React from "react";
 import { Truck, ShieldCheck, Wrench, Smartphone, ArrowRight, Zap, CheckCircle2 } from "lucide-react";
-import { CardSpotlight } from "./ui/CardSpotlight";
 import NumberTicker from "./ui/NumberTicker";
 
 export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) {
   return (
     <section className="my-14">
-      <div className="bg-[#121214] text-white rounded-[32px] p-8 sm:p-12 relative overflow-hidden shadow-racing">
+      <div className="glass-panel-dark text-white rounded-[32px] p-8 sm:p-12 relative overflow-hidden">
         <div className="relative z-10 max-w-2xl space-y-4">
-          <div className="inline-flex items-center gap-2 bg-[#e60000] text-white px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 bg-[#e60000] text-white px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm">
             <Zap size={13} />
             <span>App Móvil MotoRock 2026</span>
           </div>
@@ -23,19 +22,19 @@ export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) 
 
           {/* Metric Badges */}
           <div className="grid grid-cols-3 gap-3 pt-2">
-            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-center">
+            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/15 text-center">
               <span className="text-lg sm:text-2xl font-extrabold text-[#e60000] block">
                 <NumberTicker value={726} prefix="+" />
               </span>
               <span className="text-[10px] text-zinc-300 uppercase font-semibold">Repuestos Reales</span>
             </div>
-            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-center">
+            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/15 text-center">
               <span className="text-lg sm:text-2xl font-extrabold text-[#00bb76] block">
                 <NumberTicker value={100} suffix="%" />
               </span>
               <span className="text-[10px] text-zinc-300 uppercase font-semibold">Garantía Calce</span>
             </div>
-            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-center">
+            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/15 text-center">
               <span className="text-lg sm:text-2xl font-extrabold text-white block">
                 <NumberTicker value={2} suffix="h" />
               </span>
@@ -61,8 +60,8 @@ export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) 
           </div>
         </div>
 
-        {/* Decorative Background Glow */}
-        <div className="absolute right-0 bottom-0 top-0 w-1/2 bg-gradient-to-l from-[#e60000]/20 to-transparent pointer-events-none" />
+        {/* Decorative Background Liquid Glow */}
+        <div className="absolute right-0 bottom-0 top-0 w-1/2 bg-gradient-to-l from-red-600/20 to-transparent pointer-events-none" />
       </div>
     </section>
   );
