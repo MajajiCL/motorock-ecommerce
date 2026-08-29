@@ -1,118 +1,68 @@
 import React from "react";
-import { Truck, ShieldCheck, Wrench, Smartphone, ArrowRight, CheckCircle2, Clock } from "lucide-react";
+import { Truck, ShieldCheck, Wrench, Smartphone, ArrowRight, Zap, CheckCircle2 } from "lucide-react";
+import { CardSpotlight } from "./ui/CardSpotlight";
+import NumberTicker from "./ui/NumberTicker";
 
 export default function AppFeatureSection({ onOpenAppModal, onSelectCategory }) {
   return (
-    <section className="my-16 bg-white rounded-[40px] p-8 sm:p-14 shadow-lovi border border-[#e5e5eb]">
-      <div className="max-w-3xl mx-auto text-center space-y-3 mb-12">
-        <span className="inline-block bg-[#f6f6fa] text-[#151581] font-semibold text-xs px-4 py-1.5 rounded-full border border-[#e5e5eb] uppercase tracking-wider">
-          Ecosistema MotoRock App
-        </span>
-        <h2 className="text-2xl sm:text-4xl font-normal text-[#151581] tracking-tight leading-tight">
-          La máxima efectividad de servicio para ti y tu motocicleta
-        </h2>
-        <p className="text-sm sm:text-base text-[#a1a1cd] max-w-xl mx-auto">
-          Diseñado para eliminar dudas de compatibilidad, acelerar los tiempos de despacho y darte control total desde tu teléfono.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Pilar 1 */}
-        <div className="bg-[#f6f6fa] rounded-[28px] p-7 flex flex-col justify-between border border-[#e5e5eb] hover:bg-white hover:shadow-sm transition-all group">
-          <div className="space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-white text-[#151581] flex items-center justify-center text-xl shadow-sm border border-[#e5e5eb]">
-              🏍️
-            </div>
-            <h3 className="text-lg font-semibold text-[#151581] group-hover:text-[#5465ff] transition-colors">
-              Garage de Compatibilidad Exacta
-            </h3>
-            <p className="text-xs text-[#292824]/80 leading-relaxed">
-              Ingresa la marca y cilindrada de tu moto. La app filtra automáticamente el paso de cadena correcto (428/520), bujías, pastillas y viscosidad recomendada.
-            </p>
+    <section className="my-14">
+      <div className="bg-[#121214] text-white rounded-[32px] p-8 sm:p-12 relative overflow-hidden shadow-racing">
+        <div className="relative z-10 max-w-2xl space-y-4">
+          <div className="inline-flex items-center gap-2 bg-[#e60000] text-white px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+            <Zap size={13} />
+            <span>App Móvil MotoRock 2026</span>
           </div>
 
-          <div className="pt-6 border-t border-slate-200/60 flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-[#00bb76] flex items-center gap-1">
-              <CheckCircle2 size={13} /> 100% Sin Errores
-            </span>
-            <span className="text-xs font-semibold text-[#151581] flex items-center gap-1 group-hover:translate-x-1 transition-transform cursor-pointer">
-              Configurar <ArrowRight size={13} />
-            </span>
-          </div>
-        </div>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+            Diagnóstico, Repuestos Exactos y Despacho en Tiempo Real
+          </h2>
 
-        {/* Pilar 2 */}
-        <div className="bg-[#f6f6fa] rounded-[28px] p-7 flex flex-col justify-between border border-[#e5e5eb] hover:bg-white hover:shadow-sm transition-all group">
-          <div className="space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-white text-[#00bb76] flex items-center justify-center text-xl shadow-sm border border-[#e5e5eb]">
-              <Truck size={24} />
-            </div>
-            <h3 className="text-lg font-semibold text-[#151581] group-hover:text-[#5465ff] transition-colors">
-              Despacho Express & Tracking GPS
-            </h3>
-            <p className="text-xs text-[#292824]/80 leading-relaxed">
-              Envíos diarios por Starken y Chilexpress a todo Chile. Monitorea el estado de tu encomienda en tiempo real con notificaciones push directo a tu móvil.
-            </p>
-          </div>
-
-          <div className="pt-6 border-t border-slate-200/60 flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-[#00bb76] flex items-center gap-1">
-              <CheckCircle2 size={13} /> 24-48h a Regiones
-            </span>
-            <span className="text-xs font-semibold text-[#151581] flex items-center gap-1 group-hover:translate-x-1 transition-transform cursor-pointer">
-              Ver Tiempos <ArrowRight size={13} />
-            </span>
-          </div>
-        </div>
-
-        {/* Pilar 3 */}
-        <div className="bg-[#f6f6fa] rounded-[28px] p-7 flex flex-col justify-between border border-[#e5e5eb] hover:bg-white hover:shadow-sm transition-all group">
-          <div className="space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-white text-[#5465ff] flex items-center justify-center text-xl shadow-sm border border-[#e5e5eb]">
-              <Wrench size={24} />
-            </div>
-            <h3 className="text-lg font-semibold text-[#151581] group-hover:text-[#5465ff] transition-colors">
-              Retiro en 2h & Taller en Talca
-            </h3>
-            <p className="text-xs text-[#292824]/80 leading-relaxed">
-              Compra en la app y retira listo en nuestro local de Av. 2 Sur 771-777. Agenda mantención o instalación de repuestos con mecánicos especializados.
-            </p>
-          </div>
-
-          <div className="pt-6 border-t border-slate-200/60 flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-[#5465ff] flex items-center gap-1">
-              <Clock size={13} /> Listo en 2 Horas
-            </span>
-            <span className="text-xs font-semibold text-[#151581] flex items-center gap-1 group-hover:translate-x-1 transition-transform cursor-pointer">
-              Ver Local <ArrowRight size={13} />
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Banner Descarga */}
-      <div className="mt-12 p-8 bg-[#151581] text-white rounded-[32px] flex flex-col lg:flex-row items-center justify-between gap-6 shadow-sm">
-        <div className="space-y-2 text-center lg:text-left">
-          <span className="bg-[#00bb76] text-white text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
-            Disponible para iOS y Android
-          </span>
-          <h3 className="text-xl sm:text-2xl font-normal tracking-tight">
-            Descarga la App MotoRock y obtén despacho prioritario
-          </h3>
-          <p className="text-xs text-slate-300 max-w-lg">
-            Guarda tu moto en el garage virtual, recibe cupones de descuento exclusivos y gestiona tus pedidos desde un solo lugar.
+          <p className="text-sm text-zinc-300 leading-relaxed font-normal">
+            La primera app móvil en Chile diseñada para motociclistas. Guarda tu moto en el Garage Virtual, recibe alertas de mantención, consulta por audio a nuestro Asistente Mecánico y sigue el camión de Starken en vivo hasta tu casa.
           </p>
+
+          {/* Metric Badges */}
+          <div className="grid grid-cols-3 gap-3 pt-2">
+            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-center">
+              <span className="text-lg sm:text-2xl font-extrabold text-[#e60000] block">
+                <NumberTicker value={726} prefix="+" />
+              </span>
+              <span className="text-[10px] text-zinc-300 uppercase font-semibold">Repuestos Reales</span>
+            </div>
+            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-center">
+              <span className="text-lg sm:text-2xl font-extrabold text-[#00bb76] block">
+                <NumberTicker value={100} suffix="%" />
+              </span>
+              <span className="text-[10px] text-zinc-300 uppercase font-semibold">Garantía Calce</span>
+            </div>
+            <div className="bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/10 text-center">
+              <span className="text-lg sm:text-2xl font-extrabold text-white block">
+                <NumberTicker value={2} suffix="h" />
+              </span>
+              <span className="text-[10px] text-zinc-300 uppercase font-semibold">Retiro en Talca</span>
+            </div>
+          </div>
+
+          <div className="pt-4 flex flex-wrap items-center gap-3">
+            <button
+              onClick={onOpenAppModal}
+              className="bg-[#e60000] hover:bg-[#cc0000] text-white px-6 py-3 rounded-full font-bold text-xs shadow-racing flex items-center gap-2 transition-all cursor-pointer"
+            >
+              <Smartphone size={15} />
+              <span>Instalar App Gratis</span>
+            </button>
+            <button
+              onClick={() => onSelectCategory("47")}
+              className="bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-full font-bold text-xs border border-white/20 flex items-center gap-1.5 transition-all cursor-pointer"
+            >
+              <span>Explorar Repuestos</span>
+              <ArrowRight size={13} />
+            </button>
+          </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 flex-shrink-0">
-          <button
-            onClick={onOpenAppModal}
-            className="bg-white hover:bg-slate-100 text-[#151581] px-6 py-3 rounded-full text-xs font-bold shadow-sm transition-all cursor-pointer flex items-center gap-2"
-          >
-            <Smartphone size={15} className="text-[#00bb76]" />
-            <span>Descargar Gratis</span>
-          </button>
-        </div>
+        {/* Decorative Background Glow */}
+        <div className="absolute right-0 bottom-0 top-0 w-1/2 bg-gradient-to-l from-[#e60000]/20 to-transparent pointer-events-none" />
       </div>
     </section>
   );

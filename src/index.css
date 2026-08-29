@@ -4,50 +4,98 @@
 
 @layer base {
   :root {
-    --color-porcelain: #f6f6fa;
-    --color-paper-white: #ffffff;
-    --color-bone: #f6f5f4;
-    --color-indigo-ink: #151581;
-    --color-electric-violet: #5465ff;
-    --color-lavender-mist: #a1a1cd;
-    --color-lilac-accent: #9f73e6;
-    --color-petal-blush: #de62de;
+    --color-racing-red: #e60000;
+    --color-racing-red-hover: #cc0000;
+    --color-racing-black: #121214;
+    --color-racing-dark: #18181b;
+    --color-racing-white: #ffffff;
+    --color-racing-canvas: #f8f9fa;
     --color-verified-green: #00bb76;
-    --color-graphite: #292824;
-    --color-fog: #e5e5eb;
+    --color-slate-sub: #71717a;
+    --color-border-subtle: #e4e4e7;
   }
 
   body {
-    background-color: #f6f6fa;
-    color: #151581;
+    background-color: #f8f9fa;
+    color: #121214;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 }
 
-.bg-porcelain {
-  background-color: #f6f6fa;
+.bg-canvas {
+  background-color: #f8f9fa;
 }
 
-.text-indigo-ink {
-  color: #151581;
+.text-racing-red {
+  color: #e60000;
 }
 
-.text-lavender-mist {
-  color: #a1a1cd;
+.text-racing-black {
+  color: #121214;
 }
 
-.text-verified-green {
-  color: #00bb76;
+.bg-racing-red {
+  background-color: #e60000;
 }
 
-.shadow-lovi {
-  box-shadow: rgba(36, 36, 41, 0.07) 0px 8px 34px 0px, rgba(37, 36, 41, 0.09) 0px 1px 2px 0px;
+.bg-racing-black {
+  background-color: #121214;
+}
+
+.border-racing-red {
+  border-color: #e60000;
+}
+
+.shadow-racing {
+  box-shadow: 0 10px 30px -5px rgba(230, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-clean {
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 8px 30px 0px, rgba(0, 0, 0, 0.04) 0px 1px 2px 0px;
+}
+
+.gradient-racing-red {
+  background: linear-gradient(135deg, #e60000 0%, #b91c1c 100%);
 }
 
 .gradient-brand {
-  background: linear-gradient(270deg, rgba(102, 127, 255, 0.85) 19.6%, rgba(206, 162, 255, 0.85) 50%, rgba(255, 133, 177, 0.85) 86%);
+  background: linear-gradient(270deg, #e60000 0%, #121214 100%);
+}
+
+/* Racing Checkered Pattern */
+.racing-grid-pattern {
+  background-image: 
+    linear-gradient(45deg, rgba(18, 18, 20, 0.035) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(18, 18, 20, 0.035) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(18, 18, 20, 0.035) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(18, 18, 20, 0.035) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+}
+
+/* Infinite Marquee Animations for Background Brands */
+@keyframes marquee-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 45s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 45s linear infinite;
+}
+
+.animate-marquee-left-fast {
+  animation: marquee-left 35s linear infinite;
 }
 
 @keyframes shimmer {
@@ -60,5 +108,5 @@
 }
 
 .animate-shimmer {
-  animation: shimmer 4s infinite linear;
+  animation: shimmer 3s infinite linear;
 }
