@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Navbar from "./components/Navbar";
 import HeroBanner from "./components/HeroBanner";
 import BrandsCarousel from "./components/BrandsCarousel";
+import DiffusedBrandsBackground from "./components/DiffusedBrandsBackground";
 import AppFeatureSection from "./components/AppFeatureSection";
 import BentoCategories from "./components/BentoCategories";
 import GarageSelector from "./components/GarageSelector";
@@ -187,7 +188,10 @@ export default function App() {
   const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#f6f6fa] text-[#151581] flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f6f6fa] text-[#151581] flex flex-col justify-between relative overflow-x-hidden">
+      {/* 1. Diffused Brands Watermark Background across the entire site */}
+      <DiffusedBrandsBackground />
+
       {/* Toast Notification */}
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 bg-[#151581] text-white px-5 py-3 rounded-full shadow-lovi font-semibold text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200">
@@ -210,8 +214,8 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
-        {/* 1. Hero Showcase with iPhone Mockup and Floating Real Cutouts */}
+      <main className="max-w-7xl mx-auto px-4 py-6 flex-1 w-full relative z-10">
+        {/* 1. 3D Perspective Image Stream Corridor Hero Banner */}
         <HeroBanner
           onSelectCategory={(catId) => setActiveCategory(catId)}
           onOpenGarage={() => setIsGarageOpen(true)}
@@ -234,7 +238,7 @@ export default function App() {
 
         {/* Selected Bike Notification Banner */}
         {selectedBike && (
-          <div className="mb-6 p-5 bg-indigo-50/70 border border-indigo-200 rounded-[24px] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
+          <div className="mb-6 p-5 bg-indigo-50/80 backdrop-blur-md border border-indigo-200 rounded-[24px] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
             <div className="flex items-center gap-3">
               <span className="text-2xl">🏍️</span>
               <div>
@@ -270,7 +274,7 @@ export default function App() {
         />
 
         {/* Filters & Sorting Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-4 bg-white border border-[#e5e5eb] rounded-[24px] shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-4 bg-white/90 backdrop-blur-md border border-[#e5e5eb] rounded-[24px] shadow-sm">
           <div className="flex items-center gap-2 text-xs">
             <span className="font-bold text-[#151581] flex items-center gap-1.5">
               <Filter size={14} className="text-[#5465ff]" />
@@ -317,7 +321,7 @@ export default function App() {
 
         {/* Product Grid */}
         {paginatedProducts.length === 0 ? (
-          <div className="py-16 text-center space-y-2 bg-white border border-[#e5e5eb] rounded-[32px] p-8 shadow-sm">
+          <div className="py-16 text-center space-y-2 bg-white/90 backdrop-blur-md border border-[#e5e5eb] rounded-[32px] p-8 shadow-sm">
             <span className="text-3xl">🔍</span>
             <h3 className="text-sm font-bold text-[#151581]">No encontramos repuestos con esos filtros</h3>
             <p className="text-xs text-[#a1a1cd]">Prueba con otros términos de búsqueda o restablece los filtros.</p>
@@ -353,7 +357,7 @@ export default function App() {
             <button
               onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
-              className="flex items-center gap-1 px-4 py-2 rounded-full bg-white border border-[#e5e5eb] text-xs font-semibold text-[#151581] disabled:opacity-40 hover:bg-[#f6f6fa] shadow-sm cursor-pointer"
+              className="flex items-center gap-1 px-4 py-2 rounded-full bg-white/90 border border-[#e5e5eb] text-xs font-semibold text-[#151581] disabled:opacity-40 hover:bg-[#f6f6fa] shadow-sm cursor-pointer"
             >
               <ChevronLeft size={14} /> Anterior
             </button>
@@ -365,7 +369,7 @@ export default function App() {
             <button
               onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-1 px-4 py-2 rounded-full bg-white border border-[#e5e5eb] text-xs font-semibold text-[#151581] disabled:opacity-40 hover:bg-[#f6f6fa] shadow-sm cursor-pointer"
+              className="flex items-center gap-1 px-4 py-2 rounded-full bg-white/90 border border-[#e5e5eb] text-xs font-semibold text-[#151581] disabled:opacity-40 hover:bg-[#f6f6fa] shadow-sm cursor-pointer"
             >
               Siguiente <ChevronRight size={14} />
             </button>
