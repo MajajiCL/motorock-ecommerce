@@ -52,19 +52,21 @@ export default function DiffusedBrandsBackground() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none"
     >
-      {/* 1. Ultra-Soft Ambient Glows */}
-      <div className="absolute -top-[15%] left-[20%] w-[650px] h-[650px] rounded-full bg-gradient-to-br from-red-500/[0.07] via-rose-500/[0.03] to-transparent blur-[140px]" />
-      <div className="absolute top-[35%] -right-[5%] w-[600px] h-[600px] rounded-full bg-gradient-to-tl from-slate-400/[0.08] via-red-500/[0.03] to-transparent blur-[150px]" />
-      <div className="absolute bottom-[5%] left-[5%] w-[700px] h-[700px] rounded-full bg-gradient-to-tr from-red-600/[0.05] via-amber-500/[0.02] to-transparent blur-[160px]" />
+      {/* 1. Precision Technical Dot Grid to eliminate feeling empty */}
+      <div className="absolute inset-0 bg-tech-mesh opacity-50" />
 
-      {/* 2. Floating Liquid Glass Brand Ribbons */}
-      <div className="absolute inset-0 opacity-[0.18] flex flex-col justify-around py-16 space-y-16 -rotate-1 scale-105">
-        {/* Track 1: Left */}
+      {/* 2. Rich Multi-tone Atmospheric Glows */}
+      <div className="absolute -top-[10%] left-[15%] w-[700px] h-[700px] rounded-full bg-gradient-to-br from-red-600/[0.09] via-rose-500/[0.04] to-transparent blur-[140px]" />
+      <div className="absolute top-[30%] -right-[8%] w-[650px] h-[650px] rounded-full bg-gradient-to-tl from-indigo-600/[0.06] via-red-500/[0.04] to-transparent blur-[150px]" />
+      <div className="absolute bottom-[2%] left-[8%] w-[750px] h-[750px] rounded-full bg-gradient-to-tr from-red-600/[0.07] via-slate-600/[0.03] to-transparent blur-[160px]" />
+
+      {/* 3. Floating Frosted Brand Badges */}
+      <div className="absolute inset-0 opacity-[0.20] flex flex-col justify-around py-16 space-y-16 -rotate-1 scale-105">
         <div className="flex w-max animate-marquee-left space-x-8">
           {[...ROW_1, ...ROW_1, ...ROW_1].map((brand, idx) => (
             <div
               key={`r1-${idx}`}
-              className="flex items-center justify-center h-14 w-36 px-4 py-2 bg-white/70 rounded-2xl border border-white/80 shadow-[0_4px_20px_rgba(15,23,42,0.02)] backdrop-blur-md flex-shrink-0"
+              className="flex items-center justify-center h-14 w-36 px-4 py-2 bg-white/80 rounded-2xl border border-white/90 shadow-[0_4px_20px_rgba(15,23,42,0.03)] backdrop-blur-md flex-shrink-0"
             >
               <img
                 src={brand.img}
@@ -77,12 +79,11 @@ export default function DiffusedBrandsBackground() {
           ))}
         </div>
 
-        {/* Track 2: Right */}
         <div className="flex w-max animate-marquee-right space-x-8">
           {[...ROW_2, ...ROW_2, ...ROW_2].map((brand, idx) => (
             <div
               key={`r2-${idx}`}
-              className="flex items-center justify-center h-14 w-36 px-4 py-2 bg-white/70 rounded-2xl border border-white/80 shadow-[0_4px_20px_rgba(15,23,42,0.02)] backdrop-blur-md flex-shrink-0"
+              className="flex items-center justify-center h-14 w-36 px-4 py-2 bg-white/80 rounded-2xl border border-white/90 shadow-[0_4px_20px_rgba(15,23,42,0.03)] backdrop-blur-md flex-shrink-0"
             >
               <img
                 src={brand.img}
