@@ -2,21 +2,21 @@ import React, { useId, useMemo } from "react";
 import { cn } from "../lib/utils";
 
 const PATH = {
-  perspective: 32,
-  cardWidth: 15,
-  cardHeight: 20,
-  cardRadius: 1.1,
+  perspective: 30,
+  cardWidth: 14,
+  cardHeight: 18,
+  cardRadius: 1.2,
   birthHeight: 2.8,
-  exitHeight: 42,
-  railBirth: -10,
-  railExit: 48,
-  fan: 3.2,
-  turnBirth: 6,
-  turnExit: 24,
+  exitHeight: 38,
+  railBirth: -8,
+  railExit: 44,
+  fan: 3.0,
+  turnBirth: 5,
+  turnExit: 22,
   stops: 24,
 };
 
-/** Sample the path once so the CSS keyframes trace the real curve in 3D perspective */
+/** Sample the path once so CSS keyframes trace the real curve with ultra-smooth opacity fading */
 function keyframes(dir, name, p) {
   const steps = [];
   for (let s = 0; s <= p.stops; s++) {
@@ -29,13 +29,18 @@ function keyframes(dir, name, p) {
       p.railExit - (p.railExit - p.railBirth) * Math.pow(1 - u, p.fan);
     const turn = p.turnBirth + (p.turnExit - p.turnBirth) * u;
     
-    // Dynamic opacity fade in/out so cards don't pop abruptly
-    const opacity = u < 0.12 ? (u / 0.12).toFixed(2) : u > 0.88 ? ((1 - u) / 0.12).toFixed(2) : 1;
+    // Smooth quadratic opacity curve so cards naturally dissolve without any hard edges
+    let opacity = 1;
+    if (u < 0.15) {
+      opacity = Math.max(0, u / 0.15);
+    } else if (u > 0.72) {
+      opacity = Math.max(0, (1 - u) / 0.28);
+    }
     
     steps.push(
       `${(u * 100).toFixed(2)}%{transform:translate3d(${(dir * rail).toFixed(
         2
-      )}cqw,0,${z.toFixed(2)}cqw) rotateY(${(-dir * turn).toFixed(2)}deg); opacity:${opacity};}`
+      )}cqw,0,${z.toFixed(2)}cqw) rotateY(${(-dir * turn).toFixed(2)}deg); opacity:${opacity.toFixed(3)};}`
     );
   }
   return `@keyframes ${name}{${steps.join("")}}`;
@@ -44,7 +49,7 @@ function keyframes(dir, name, p) {
 export default function ImageStreamHero({
   images,
   cards = 8,
-  speed = 18,
+  speed = 20,
   axis = 50,
   path,
   children,
@@ -74,13 +79,15 @@ export default function ImageStreamHero({
     >
       <style>{css}</style>
 
-      {/* 3D Perspective Viewport */}
+      {/* 3D Perspective Viewport with Edge Fade Masks to prevent any sharp cutoff */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 overflow-hidden"
         style={{
           perspective: `${p.perspective}cqw`,
           perspectiveOrigin: `50% ${axis}%`,
+          maskImage: "radial-gradient(ellipse 75% 70% at 50% 50%, black 45%, transparent 95%)",
+          WebkitMaskImage: "radial-gradient(ellipse 75% 70% at 50% 50%, black 45%, transparent 95%)",
         }}
       >
         <div
@@ -95,7 +102,7 @@ export default function ImageStreamHero({
                   key={`${name}-${i}`}
                   className={cn(
                     card,
-                    "absolute overflow-hidden bg-white/95 p-2 shadow-[0_12px_36px_rgba(21,21,129,0.09)] border border-[#e5e5eb] backdrop-blur-md rounded-[1.2cqw] transition-transform"
+                    "absolute overflow-hidden bg-white/80 p-2 shadow-[0_12px_32px_rgba(15,23,42,0.06)] border border-white/90 backdrop-blur-xl rounded-[1.3cqw] transition-transform"
                   )}
                   style={{
                     left: "50%",
@@ -111,7 +118,7 @@ export default function ImageStreamHero({
                   }}
                 >
                   {img ? (
-                    <div className="w-full h-full flex flex-col items-center justify-between bg-[#f6f6fa]/90 rounded-[calc(1.1cqw-2px)] p-1.5 overflow-hidden">
+                    <div className="w-full h-full flex flex-col items-center justify-between bg-white/60 rounded-[calc(1.2cqw-2px)] p-1.5 overflow-hidden">
                       <img
                         src={img.src}
                         alt={img.title || "MotoRock Repuesto"}
@@ -122,11 +129,11 @@ export default function ImageStreamHero({
                       />
                       {img.title && (
                         <div className="w-full text-center px-1 pb-0.5">
-                          <p className="text-[1.05cqw] font-bold text-[#151581] truncate leading-tight">
+                          <p className="text-[1cqw] font-bold text-[#0f172a] truncate leading-tight font-heading">
                             {img.title}
                           </p>
                           {img.price && (
-                            <p className="text-[0.95cqw] font-bold text-[#00bb76] leading-none mt-0.5">
+                            <p className="text-[0.9cqw] font-extrabold text-[#e60000] leading-none mt-0.5">
                               {img.price}
                             </p>
                           )}
@@ -140,12 +147,12 @@ export default function ImageStreamHero({
           )}
         </div>
 
-        {/* Ambient Top & Bottom Vignettes for Seamless Blending */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#f6f6fa] via-[#f6f6fa]/60 to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f6f6fa] via-[#f6f6fa]/80 to-transparent z-10" />
+        {/* Seamless Soft Ambient Vignettes */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#fafafc] via-[#fafafc]/60 to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#fafafc] via-[#fafafc]/80 to-transparent z-10" />
       </div>
 
-      {/* Foreground Interactive Content */}
+      {/* Foreground Content */}
       <div className="relative z-20">{children}</div>
     </div>
   );
