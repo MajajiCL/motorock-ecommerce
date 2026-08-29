@@ -1,11 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { Truck, Shield, Mic, CheckCircle2, ChevronRight, Sparkles, Navigation, Bell } from "lucide-react";
+import AnimatedList from "./ui/AnimatedList";
+import NumberTicker from "./ui/NumberTicker";
+
+const LIVE_EVENTS = [
+  {
+    id: "e1",
+    icon: "📦",
+    title: "Orden #STK-882194 despachada",
+    time: "Hace 1 min",
+    desc: "En ruta con Starken Express a Talca",
+    badge: "En Camino"
+  },
+  {
+    id: "e2",
+    icon: "🪖",
+    title: "Nuevo Casco HJC Dakar en stock",
+    time: "Hace 3 min",
+    desc: "Tallas M y L listas para retiro en Talca",
+    badge: "Stock Listo"
+  },
+  {
+    id: "e3",
+    icon: "⭐",
+    title: "Reseña 5★ de Claudio V.",
+    time: "Hace 5 min",
+    desc: "Retiro de kit D.I.D en 2h en local 2 Sur",
+    badge: "Verificado"
+  }
+];
 
 export default function IPhoneMockup({ onSelectCategory, onOpenGarage }) {
   const [activeTab, setActiveTab] = useState("delivery"); // 'delivery' | 'garage' | 'deals'
   const [waveHeight, setWaveHeight] = useState([10, 16, 8, 20, 12]);
 
-  // Audio wave animation for the AI Mechanic Voice Bar
+  // Audio wave animation for AI Mechanic Voice Bar
   useEffect(() => {
     const interval = setInterval(() => {
       setWaveHeight([
@@ -33,9 +62,9 @@ export default function IPhoneMockup({ onSelectCategory, onOpenGarage }) {
 
       {/* Titanium Natural Metallic Outer Chassis (iPhone 16 Pro) */}
       <div className="w-[310px] sm:w-[335px] rounded-[52px] p-[9px] bg-gradient-to-b from-[#e2e8f0] via-[#cbd5e1] to-[#94a3b8] shadow-[0_25px_60px_-15px_rgba(21,21,129,0.18),0_0_0_1px_rgba(255,255,255,0.8)_inset,0_12px_32px_rgba(0,0,0,0.1)] relative z-10">
-        {/* Inner Ceramic Shield Bezel (Black Ring) */}
+        {/* Inner Ceramic Shield Bezel */}
         <div className="rounded-[44px] p-[6px] bg-[#000000] shadow-[0_0_0_1px_rgba(0,0,0,0.95)] relative overflow-hidden">
-          {/* Subtle Screen Glass Glare Reflection Layer */}
+          {/* Subtle Screen Glass Glare Reflection */}
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-white/[0.12] pointer-events-none z-30 rounded-[40px]" />
 
           {/* Super Retina XDR OLED Display Screen */}
@@ -50,7 +79,7 @@ export default function IPhoneMockup({ onSelectCategory, onOpenGarage }) {
                   <span className="w-2 h-2 rounded-full bg-[#00bb76] animate-pulse" />
                   <span className="text-[9px] font-bold text-white tracking-tight">MotoRock</span>
                 </div>
-                {/* Camera Lens with True Optical Ring */}
+                {/* Camera Lens */}
                 <div className="w-2.5 h-2.5 rounded-full bg-[#1e293b] ring-1 ring-white/20 flex items-center justify-center">
                   <div className="w-1 h-1 rounded-full bg-blue-400" />
                 </div>
@@ -112,7 +141,7 @@ export default function IPhoneMockup({ onSelectCategory, onOpenGarage }) {
                 </button>
               </div>
 
-              {/* Tab Content Cards */}
+              {/* Tab Content Panels */}
               <div className="space-y-2.5 flex-1">
                 {/* 1. Live Starken Delivery Tracker */}
                 {activeTab === "delivery" && (

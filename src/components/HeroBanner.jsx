@@ -2,6 +2,8 @@ import React from "react";
 import { Truck, ShieldCheck, Clock, ArrowRight, Smartphone, Sparkles, Shield, CheckCircle2 } from "lucide-react";
 import IPhoneMockup from "./IPhoneMockup";
 import ImageStreamHero from "./ImageStreamHero";
+import AnimatedShinyText from "./ui/AnimatedShinyText";
+import NumberTicker from "./ui/NumberTicker";
 
 // Verified 200 OK Real Product Assets for the 3D Corridor Stream
 const STREAM_PRODUCTS = [
@@ -51,12 +53,12 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
   return (
     <ImageStreamHero images={STREAM_PRODUCTS} cards={8} speed={22} axis={52}>
       <div className="pt-8 pb-16 flex flex-col items-center text-center">
-        {/* 1. Trust Pill Badge */}
+        {/* 1. Trust Pill Badge with Magic UI AnimatedShinyText */}
         <div className="inline-flex items-center gap-2 bg-white/95 px-4 py-1.5 rounded-full border border-[#e5e5eb] shadow-sm mb-6 animate-in fade-in duration-300 backdrop-blur-md">
           <Sparkles size={13} className="text-[#5465ff]" />
-          <span className="text-xs font-normal text-[#151581]">
+          <AnimatedShinyText className="text-xs">
             MotoRock App 2026 • Despacho Express en 24h & Retiro en 2h en Talca
-          </span>
+          </AnimatedShinyText>
         </div>
 
         {/* 2. Display Headline */}
@@ -159,11 +161,12 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
           </div>
         </div>
 
-        {/* 6. Three Pillars Strip in Paper White with 24px Radius */}
+        {/* 6. Three Pillars Strip with Magic UI NumberTicker Metrics */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto w-full mt-14 text-left">
           <div className="bg-white/95 backdrop-blur-md p-5 rounded-[24px] shadow-lovi border border-[#e5e5eb] space-y-1">
             <span className="text-[11px] font-bold text-[#00bb76] uppercase tracking-wider flex items-center gap-1">
-              <CheckCircle2 size={13} /> 24 a 48 Horas
+              <CheckCircle2 size={13} />
+              <NumberTicker value={24} suffix=" a 48 Horas" />
             </span>
             <h4 className="text-sm font-semibold text-[#151581]">Despacho Express a Todo Chile</h4>
             <p className="text-xs text-[#a1a1cd]">Envíos asegurados por Starken y Chilexpress directo a tu puerta.</p>
@@ -171,7 +174,8 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
 
           <div className="bg-white/95 backdrop-blur-md p-5 rounded-[24px] shadow-lovi border border-[#e5e5eb] space-y-1">
             <span className="text-[11px] font-bold text-[#151581] uppercase tracking-wider flex items-center gap-1">
-              <CheckCircle2 size={13} className="text-[#5465ff]" /> Cero Errores
+              <CheckCircle2 size={13} className="text-[#5465ff]" />
+              <NumberTicker value={726} prefix="+" suffix=" Repuestos" />
             </span>
             <h4 className="text-sm font-semibold text-[#151581]">Garage y Compatibilidad Exacta</h4>
             <p className="text-xs text-[#a1a1cd]">Filtra por modelo y recibe la cadena, piñón y aceite correcto.</p>
@@ -179,7 +183,8 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
 
           <div className="bg-white/95 backdrop-blur-md p-5 rounded-[24px] shadow-lovi border border-[#e5e5eb] space-y-1">
             <span className="text-[11px] font-bold text-[#5465ff] uppercase tracking-wider flex items-center gap-1">
-              <Clock size={13} /> Listo en 2 Horas
+              <Clock size={13} />
+              <NumberTicker value={2} prefix="Listo en " suffix=" Horas" />
             </span>
             <h4 className="text-sm font-semibold text-[#151581]">Retiro en Tienda Talca</h4>
             <p className="text-xs text-[#a1a1cd]">Compra en la app y retira listo en Av. 2 Sur 771 y 777.</p>

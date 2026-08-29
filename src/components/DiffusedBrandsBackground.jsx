@@ -19,36 +19,66 @@ import senaImg from "../assets/brands/sena.png";
 import ixonImg from "../assets/brands/ixon.png";
 import flyImg from "../assets/brands/fly.png";
 import nolanImg from "../assets/brands/nolan.png";
+import InteractiveGridPattern from "./ui/InteractiveGridPattern";
 
 const ALL_DIFFUSED_BRANDS = [
-  motulImg, ls2Img, alpinestarsImg, agvImg, pirelliImg, bellImg,
-  cardoImg, shaftImg, ghbImg, dunlopImg, protaperImg, liquiMolyImg,
-  iponeImg, repsolImg, castrolImg, boschImg, senaImg, ixonImg, flyImg, nolanImg
+  { name: "Motul", img: motulImg },
+  { name: "LS2 Helmets", img: ls2Img },
+  { name: "Alpinestars", img: alpinestarsImg },
+  { name: "AGV", img: agvImg },
+  { name: "Pirelli", img: pirelliImg },
+  { name: "Bell", img: bellImg },
+  { name: "Cardo", img: cardoImg },
+  { name: "Shaft", img: shaftImg },
+  { name: "GHB", img: ghbImg },
+  { name: "Dunlop", img: dunlopImg },
+  { name: "ProTaper", img: protaperImg },
+  { name: "Liqui Moly", img: liquiMolyImg },
+  { name: "Ipone", img: iponeImg },
+  { name: "Repsol", img: repsolImg },
+  { name: "Castrol", img: castrolImg },
+  { name: "Bosch", img: boschImg },
+  { name: "Sena", img: senaImg },
+  { name: "Ixon", img: ixonImg },
+  { name: "Fly Racing", img: flyImg },
+  { name: "Nolan", img: nolanImg }
 ];
 
 export default function DiffusedBrandsBackground() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none opacity-[0.045] blur-[0.6px] mix-blend-multiply"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none"
     >
-      <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-x-12 gap-y-16 p-8 -rotate-6 scale-110">
-        {Array.from({ length: 4 }).flatMap((_, loopIdx) =>
-          ALL_DIFFUSED_BRANDS.map((imgSrc, idx) => (
-            <div
-              key={`${loopIdx}-${idx}`}
-              className="flex items-center justify-center h-16 w-full grayscale"
-            >
-              <img
-                src={imgSrc}
-                alt=""
-                className="max-h-10 max-w-[80%] object-contain"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          ))
-        )}
+      {/* Background Interactive Mesh Grid */}
+      <InteractiveGridPattern width={48} height={48} className="opacity-25" />
+
+      {/* Clearly Visible Diagonal Watermark Grid of Authorized Brands */}
+      <div className="absolute inset-0 opacity-[0.16] -rotate-3 scale-105 flex flex-col justify-around py-6">
+        {Array.from({ length: 5 }).map((_, rowIdx) => (
+          <div
+            key={rowIdx}
+            className="flex items-center justify-around gap-8 whitespace-nowrap overflow-hidden px-4"
+            style={{
+              transform: `translateX(${(rowIdx % 2 === 0 ? 1 : -1) * 20}px)`,
+            }}
+          >
+            {ALL_DIFFUSED_BRANDS.slice(rowIdx * 4, rowIdx * 4 + 7).concat(ALL_DIFFUSED_BRANDS.slice(0, 3)).map((brand, idx) => (
+              <div
+                key={`${rowIdx}-${idx}`}
+                className="flex items-center justify-center h-14 w-32 px-3 py-1.5 bg-white/40 rounded-2xl border border-slate-300/30 backdrop-blur-[1px] shadow-sm flex-shrink-0"
+              >
+                <img
+                  src={brand.img}
+                  alt=""
+                  className="max-h-7 max-w-[85%] object-contain filter grayscale contrast-125 brightness-90"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );
