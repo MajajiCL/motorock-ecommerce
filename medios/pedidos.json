@@ -44,7 +44,19 @@
     "ancho": 1216,
     "alto": 832,
     "destino": "public/img/hero-fondo-fuego.jpg",
+    "estado": "listo",
+    "nota": "Fondo de fuego para el hero: el casco real va encima. Sin el, el casco negro se pierde contra el fondo oscuro.",
+    "segundos": 2094,
+    "generado": "2026-08-30 16:06",
+    "medida": "1216x832"
+  },
+  {
+    "id": "hero-casco-limpio",
+    "que": "matte black and red motorcycle racing helmet, dark tinted visor, PLAIN SURFACE with no decals no badges no emblems no writing, resting on dark volcanic rock with glowing orange embers and flames behind, strong warm rim light on the helmet edge, dramatic studio product photography, 8k, no text, no logo, no lettering, no brand marks",
+    "ancho": 1216,
+    "alto": 832,
+    "destino": "public/img/hero-casco-limpio.jpg",
     "estado": "pendiente",
-    "nota": "Fondo de fuego para el hero: el casco real va encima. Sin el, el casco negro se pierde contra el fondo oscuro."
+    "nota": "Reemplazo del hero: la version anterior salio con una insignia inventada que imita a LS2"
   }
 ]

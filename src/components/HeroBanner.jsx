@@ -77,51 +77,82 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
             {/* Dynamic Ember Glow */}
             <div className="absolute inset-0 bg-gradient-to-t from-red-600/40 via-orange-500/20 to-transparent rounded-full filter blur-3xl pointer-events-none" />
 
-            {/* Resplandor detrás del casco. Va DEBAJO de la imagen y no como
-                sombra del <img>: el casco es negro sobre fondo casi negro y
-                sin una luz que lo separe se pierde la mitad de la silueta. */}
-            {/* Los gradientes van en `style` y no en clases de Tailwind.
-                Un `bg-[radial-gradient(...)]` con varias paradas y comas
-                deja de generarse en cuanto el className se parte en varias
-                líneas: la clase existe en el JSX pero el CSS nunca sale, y
-                el div queda a 0x0 sin fondo. Pasó exactamente eso aquí. */}
+            {/* Brasas reales detrás del casco.
+                Un resplandor difuso no bastaba: el casco es negro y sobre
+                fondo negro perdía media silueta, se veía partido en trozos
+                rojos flotando. Contra el naranja de las brasas la forma
+                completa se recorta y se lee entera.
+
+                La máscara radial es imprescindible: sin ella se ve el
+                rectángulo del JPEG pegado sobre el fondo de la sección.
+                Aquí se difumina hacia los bordes y funde con el negro.
+
+                Los gradientes van en `style` y no en clases de Tailwind:
+                un `bg-[radial-gradient(...)]` con comas deja de generarse
+                en cuanto el className se parte en varias líneas, y el div
+                queda a 0x0 sin fondo. Ya pasó una vez en este archivo. */}
             <div
-              className="absolute z-0 rounded-full pointer-events-none"
+              className="absolute z-0 pointer-events-none"
               style={{
-                width: "92%", aspectRatio: "1 / 1", filter: "blur(70px)",
-                background:
-                  "radial-gradient(circle, rgba(255,90,10,0.62) 0%, rgba(230,20,0,0.34) 38%, rgba(120,10,0,0.12) 62%, transparent 78%)",
+                width: "125%", aspectRatio: "1216 / 832",
+                backgroundImage: "url(./img/hero-fondo-fuego.webp)",
+                backgroundSize: "cover",
+                backgroundPosition: "center 58%",
+                // Desenfocado y a media opacidad: en la primera prueba iba
+                // nítido y las rocas competían con el casco —dos planos al
+                // mismo nivel de detalle y no se distinguía cuál era el
+                // producto—. Difuminado se comporta como lo que es: la luz
+                // y el ambiente que hay detrás.
+                filter: "blur(14px) saturate(1.15)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 58% 54% at 50% 55%, #000 30%, transparent 74%)",
+                maskImage:
+                  "radial-gradient(ellipse 58% 54% at 50% 55%, #000 30%, transparent 74%)",
+                opacity: 0.62,
               }}
             />
-            {/* Segundo foco, más bajo y ancho: la brasa que queda bajo el
-                casco y le da suelo. Sin él la pieza flota. */}
+            {/* Un punto de luz cálida justo detrás del casco, encima de las
+                brasas: es lo que empuja la silueta hacia adelante. */}
             <div
               className="absolute z-0 rounded-full pointer-events-none"
               style={{
-                width: "58%", height: "22%", bottom: "16%", filter: "blur(45px)",
+                width: "70%", aspectRatio: "1 / 1", filter: "blur(60px)",
                 background:
-                  "radial-gradient(ellipse, rgba(255,120,20,0.50) 0%, transparent 70%)",
+                  "radial-gradient(circle, rgba(255,110,20,0.40) 0%, rgba(220,40,0,0.18) 45%, transparent 72%)",
               }}
             />
 
             <div className="relative z-10 group cursor-pointer" onClick={() => onSelectCategory("128")}>
-              {/* Foto oficial del HJC RPHA que la tienda vende, recortada del
-                  fondo blanco de catálogo. Antes se cargaba el JPG tal cual
-                  desde el WordPress y se veía un rectángulo blanco pegado
-                  sobre el fondo negro.
-                  WebP con alfa: 73 KB frente a 514 del PNG, y el <picture>
-                  deja el PNG para quien no soporte WebP. */}
-              <picture>
-                <source srcSet="./img/hjc-rpha-hero.webp" type="image/webp" />
-                <img
-                  src="./img/hjc-rpha-hero.png"
-                  alt="Casco HJC RPHA 60 Dakar, homologado, disponible en MotoRock Talca"
-                  width="794"
-                  height="716"
-                  fetchPriority="high"
-                  className="w-full max-w-[420px] sm:max-w-[480px] h-auto object-contain filter drop-shadow-[0_18px_38px_rgba(230,0,0,0.55)] group-hover:scale-105 transition-transform duration-500"
-                />
-              </picture>
+              {/* POR QUÉ AQUÍ NO VA UNA FOTO DE CATÁLOGO.
+                  Se probó con la foto oficial del HJC RPHA y con los tres
+                  cascos del catálogo que mejor puntuaban: recortados del
+                  fondo blanco y puestos sobre el fondo oscuro, todos se ven
+                  partidos. La razón es de la fuente, no del recorte: un
+                  casco negro fotografiado sobre blanco sólo tiene contorno
+                  por contraste con ese blanco, y al quitarlo la silueta
+                  desaparece. Se midió sobre 22 fotos de casco y ninguna
+                  sobrevive.
+
+                  Esta imagen es de ambiente y va rotulada como tal en el
+                  alt: no afirma ser un producto del catálogo ni lleva marca
+                  legible. El producto real se compra en la parrilla, donde
+                  cada ficha sí lleva su foto oficial, su SKU y su precio. */}
+              <img
+                src="./img/hero-helmet-flame.jpg"
+                alt="Casco de moto sobre brasas — imagen de ambiente"
+                width="1088"
+                height="768"
+                fetchPriority="high"
+                className="w-full max-w-[470px] sm:max-w-[560px] h-auto object-contain group-hover:scale-105 transition-transform duration-500"
+                style={{
+                  // La imagen trae su propio fondo negro; la máscara lo
+                  // funde con el de la sección para que no se vea la caja.
+                  WebkitMaskImage:
+                    "radial-gradient(ellipse 74% 72% at 50% 50%, #000 58%, transparent 88%)",
+                  maskImage:
+                    "radial-gradient(ellipse 74% 72% at 50% 50%, #000 58%, transparent 88%)",
+                }}
+              />
             </div>
           </div>
         </div>
