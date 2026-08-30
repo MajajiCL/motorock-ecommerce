@@ -37,5 +37,14 @@
     "nota": "Imagen para la tarjeta de accesorios / maleta",
     "generado": "2026-08-30 06:36",
     "segundos": 1171
+  },
+  {
+    "id": "hero-fondo-fuego",
+    "que": "dark volcanic rock ground with burning orange embers and rising flames, deep black background, dramatic fire glow from below, smoke, cinematic product photography backdrop, empty scene with no objects, no text, no logo",
+    "ancho": 1216,
+    "alto": 832,
+    "destino": "public/img/hero-fondo-fuego.jpg",
+    "estado": "pendiente",
+    "nota": "Fondo de fuego para el hero: el casco real va encima. Sin el, el casco negro se pierde contra el fondo oscuro."
   }
 ]

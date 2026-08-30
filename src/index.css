@@ -49,3 +49,23 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #e60000;
 }
+
+/* Cinta de marcas.
+   La animación desplaza la mitad exacta del ancho: como la lista va
+   duplicada, al llegar al 50% el contenido coincide con el punto de
+   partida y el salto no se ve.
+   Se detiene al pasar el cursor —si alguien quiere mirar un logotipo, que
+   pueda— y respeta prefers-reduced-motion: quien pidió menos movimiento
+   ve la fila quieta, no una fila rota. */
+@keyframes desfile {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquesina {
+  animation: desfile 38s linear infinite;
+  will-change: transform;
+}
+.marquesina:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .marquesina { animation: none; flex-wrap: wrap; justify-content: center; }
+}

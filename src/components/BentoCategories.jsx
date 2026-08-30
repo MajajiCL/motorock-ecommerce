@@ -1,42 +1,47 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 
+/*
+  CUATRO tarjetas, no cinco, y con estos destinos.
+
+  El menú declara diez categorías pero sólo cuatro tienen productos:
+  cascos (203), cadenas y transmisiones (322), aceites (72) y chaquetas y
+  guantes (6). Frenos, neumáticos, baterías y filtros están a cero. Una
+  tarjeta que lleva a una parrilla vacía es peor que no tenerla.
+
+  Antes había además dos errores: CADENAS y REPUESTOS apuntaban al MISMO
+  id 47 —dos tarjetas al mismo sitio— y la foto de CADENAS era un casco
+  azul.
+
+  Todas las imágenes están recortadas del fondo blanco de catálogo con
+  scripts/tratar_producto.py y llevan luz de contra donde el objeto es
+  oscuro. Antes se cargaban los JPG tal cual del WordPress y sobre el
+  fondo negro se veían como recortes con marco blanco.
+*/
 const CATEGORIES_GRID = [
   {
     id: "128",
     name: "CASCOS",
-    subtitle: "Encuentra tu estilo",
-    image: "https://motorock.cl/wp-content/uploads/2026/08/028f734bfb6a4b59a4a803ad9cc54fa8_800.jpg",
+    subtitle: "Homologados ECE 22.06",
+    image: "./img/hjc-rpha-hero.webp",
+  },
+  {
+    id: "47",
+    name: "TRANSMISIÓN",
+    subtitle: "Cadenas, coronas y piñones",
+    image: "./img/category-sprocket.webp",
   },
   {
     id: "36",
     name: "ACEITES",
-    subtitle: "Máximo rendimiento",
-    image: "https://motorock.cl/wp-content/uploads/2026/06/MOTUL-7100-10W-40.png",
-  },
-  {
-    id: "47",
-    name: "CADENAS",
-    subtitle: "Alta resistencia",
-    image: "https://motorock.cl/wp-content/uploads/2026/08/1-24-300x300.webp",
-  },
-  {
-    id: "47",
-    name: "REPUESTOS",
-    subtitle: "Todo para tu moto",
-    // Antes repetía la MISMA foto que CADENAS. Dos tarjetas contiguas con
-    // idéntica imagen se leen como un error de montaje. Ahora lleva una
-    // corona genérica: la tarjeta representa la categoría entera, no un
-    // kit concreto con SKU y precio.
-    image: "./img/category-sprocket.webp",
+    subtitle: "Motul, Liqui Moly, Ipone",
+    image: "./img/cat-aceites.webp",
   },
   {
     id: "116",
-    name: "ACCESORIOS",
-    subtitle: "Viaja seguro",
-    // Llevaba la foto de un bolso Rhinowalk puntual. Mismo criterio: la
-    // tarjeta es la categoría, no ese producto.
-    image: "./img/category-topcase.webp",
+    name: "INDUMENTARIA",
+    subtitle: "Chaquetas y guantes",
+    image: "./img/cat-indumentaria.webp",
   },
 ];
 
@@ -58,7 +63,7 @@ export default function BentoCategories({ onSelectCategory }) {
       </div>
 
       {/* 5 Cards Horizontal Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {CATEGORIES_GRID.map((cat, idx) => (
           <div
             key={idx}
