@@ -137,11 +137,17 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
                   alt: no afirma ser un producto del catálogo ni lleva marca
                   legible. El producto real se compra en la parrilla, donde
                   cada ficha sí lleva su foto oficial, su SKU y su precio. */}
+              {/* Segunda versión. La primera salió con una insignia de
+                  letras deformadas que imitaba a LS2 —una marca que la
+                  tienda SÍ distribuye—, y un logotipo falso de una marca
+                  real es peor que ninguno. Se intentó borrarla con
+                  inpainting dos veces y quedó peor que el original, así que
+                  se regeneró pidiendo superficie lisa sin emblemas. */}
               <img
-                src="./img/hero-helmet-flame.jpg"
+                src="./img/hero-casco-limpio.jpg"
                 alt="Casco de moto sobre brasas — imagen de ambiente"
-                width="1088"
-                height="768"
+                width="1216"
+                height="832"
                 fetchPriority="high"
                 className="w-full max-w-[470px] sm:max-w-[560px] h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                 style={{

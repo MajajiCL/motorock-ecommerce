@@ -56,7 +56,10 @@
     "ancho": 1216,
     "alto": 832,
     "destino": "public/img/hero-casco-limpio.jpg",
-    "estado": "pendiente",
-    "nota": "Reemplazo del hero: la version anterior salio con una insignia inventada que imita a LS2"
+    "estado": "listo",
+    "nota": "Reemplazo del hero: la version anterior salio con una insignia inventada que imita a LS2",
+    "segundos": 701,
+    "generado": "2026-08-30 16:24",
+    "medida": "1216x832"
   }
 ]
