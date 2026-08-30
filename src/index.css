@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Montserrat:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,9 +6,9 @@
 
 @layer base {
   :root {
-    --font-heading: 'Outfit', sans-serif;
-    --font-sans: 'Plus Jakarta Sans', sans-serif;
     --font-display: 'Montserrat', sans-serif;
+    --font-heading: 'Oswald', 'Outfit', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
   }
 
   body {
@@ -21,8 +21,8 @@
   }
 
   h1, h2, h3, h4, .font-heading {
-    font-family: 'Outfit', -apple-system, sans-serif;
-    letter-spacing: -0.03em;
+    font-family: 'Oswald', 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
   }
 
   .font-display {
@@ -30,31 +30,14 @@
   }
 }
 
-/* Dark Biker Surface Cards */
-.dark-card {
-  background-color: #121318;
-  border: 1px solid #202129;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.dark-card:hover {
-  border-color: rgba(230, 0, 0, 0.5);
-  box-shadow: 0 12px 35px rgba(230, 0, 0, 0.15);
-}
-
-/* Flame Ember Glow Effect */
-.flame-glow {
-  background: radial-gradient(circle at center, rgba(230, 0, 0, 0.25) 0%, rgba(255, 68, 0, 0.1) 40%, transparent 70%);
-}
-
 .shadow-racing-red {
-  box-shadow: 0 8px 25px -4px rgba(230, 0, 0, 0.5);
+  box-shadow: 0 4px 20px -2px rgba(230, 0, 0, 0.6);
 }
 
-/* Custom Scrollbar for Dark Theme */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #0a0a0c;

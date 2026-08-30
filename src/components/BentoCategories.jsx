@@ -36,7 +36,7 @@ const CATEGORIES_GRID = [
 
 export default function BentoCategories({ onSelectCategory }) {
   return (
-    <section className="my-10 sm:my-14 max-w-7xl mx-auto px-4">
+    <section className="my-10 sm:my-14 max-w-7xl mx-auto px-4 sm:px-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight uppercase font-heading">
@@ -51,25 +51,25 @@ export default function BentoCategories({ onSelectCategory }) {
         </button>
       </div>
 
-      {/* 5 Cards Grid */}
+      {/* 5 Cards Horizontal Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
         {CATEGORIES_GRID.map((cat, idx) => (
           <div
             key={idx}
             onClick={() => onSelectCategory(cat.id)}
-            className="bg-[#121318] border border-[#202128] hover:border-red-600/60 rounded-xl p-4 flex flex-col justify-between group cursor-pointer transition-all duration-300 min-h-[190px] relative overflow-hidden"
+            className="bg-[#121318] border border-[#1e2028] hover:border-red-600/60 rounded-xl p-4 flex flex-col justify-between group cursor-pointer transition-all duration-300 min-h-[195px] relative overflow-hidden shadow-lg"
           >
-            {/* Top texts */}
+            {/* Top Info */}
             <div>
-              <h3 className="text-sm font-black text-white group-hover:text-[#e60000] transition-colors font-heading tracking-wide uppercase">
+              <h3 className="text-sm font-black text-white group-hover:text-[#e60000] transition-colors font-heading tracking-wider uppercase">
                 {cat.name}
               </h3>
               <p className="text-[11px] text-zinc-400 mt-0.5">{cat.subtitle}</p>
             </div>
 
-            {/* Bottom: Arrow left & image centered/right */}
-            <div className="flex items-end justify-between mt-3">
-              <span className="text-zinc-500 group-hover:text-[#e60000] transition-colors pb-1">
+            {/* Bottom: Left Arrow & Right Product Image */}
+            <div className="flex items-end justify-between mt-4">
+              <span className="text-zinc-600 group-hover:text-[#e60000] transition-colors pb-1">
                 <ArrowRight size={16} />
               </span>
               <img

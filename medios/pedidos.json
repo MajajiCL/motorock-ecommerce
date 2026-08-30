@@ -1,11 +1,29 @@
 [
   {
     "id": "hero-helmet-flame",
-    "que": "premium matte black motorcycle racing helmet with red aerodynamic decals on dark volcanic rock surrounded by intense glowing fire sparks smoke and deep orange flame aura, hyperrealistic, octane render, dramatic lighting, dark background, no text, no logo",
+    "que": "premium matte black motorcycle racing helmet with bold red and white aerodynamic stripes, dark tinted visor, resting on rough dark volcanic rock texture with realistic glowing fire embers, dramatic flame smoke and fiery red backlight, highly detailed, 8k octane render, dark moody atmosphere, studio photography, no text, no logo",
     "ancho": 1216,
     "alto": 832,
     "destino": "public/img/hero-helmet-flame.jpg",
     "estado": "pendiente",
-    "nota": "imagen derecha del hero banner con fuego y chispas"
+    "nota": "Imagen hero principal del banner derecho con casco y fondo de fuego"
+  },
+  {
+    "id": "category-sprocket",
+    "que": "metallic steel motorcycle rear sprocket and front chain gear set on dark volcanic surface with subtle rim light, product photography, studio lighting, highly detailed, no text, no logo",
+    "ancho": 1024,
+    "alto": 1024,
+    "destino": "public/img/category-sprocket.png",
+    "estado": "pendiente",
+    "nota": "Imagen para la tarjeta de repuestos / transmisión"
+  },
+  {
+    "id": "category-topcase",
+    "que": "aerodynamic black matte motorcycle rear tail box top case with bright red reflector and mounting lock, isolated on pure dark background, product photography, studio lighting, no text, no logo",
+    "ancho": 1024,
+    "alto": 1024,
+    "destino": "public/img/category-topcase.png",
+    "estado": "pendiente",
+    "nota": "Imagen para la tarjeta de accesorios / maleta"
   }
 ]

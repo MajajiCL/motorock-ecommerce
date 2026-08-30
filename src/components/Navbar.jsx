@@ -59,9 +59,9 @@ export default function Navbar({
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 bg-[#0d0e12] border-b border-[#1e1f26] shadow-xl w-full">
+    <header className="sticky top-0 z-40 bg-[#09090b] border-b border-[#181920] shadow-2xl w-full">
       {/* 1. Top Notice Bar */}
-      <div className="bg-[#08080a] text-zinc-400 text-[11px] py-1.5 px-4 border-b border-[#1a1b22]">
+      <div className="bg-[#050507] text-zinc-400 text-[11px] py-1.5 px-4 sm:px-6 border-b border-[#141418]">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           {/* Left notice items */}
           <div className="flex items-center gap-4 sm:gap-6 truncate text-xs">
@@ -95,13 +95,13 @@ export default function Navbar({
       </div>
 
       {/* 2. Main Header */}
-      <div className="max-w-7xl mx-auto px-4 py-3 sm:py-3.5 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
         {/* Brand Flame Logo */}
         <a href="#" className="flex items-center gap-2 flex-shrink-0">
           <img
             src={logoMotoRock}
             alt="MotoRock Chile"
-            className="h-10 sm:h-12 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(230,0,0,0.4)]"
+            className="h-10 sm:h-12 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(230,0,0,0.5)]"
           />
         </a>
 
@@ -117,7 +117,7 @@ export default function Navbar({
                 setShowSearch(true);
               }}
               onFocus={() => setShowSearch(true)}
-              className="w-full bg-[#16171d] border border-[#262730] focus:border-[#e60000] text-xs text-white pl-4 pr-10 py-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-red-600 transition-all placeholder:text-zinc-500"
+              className="w-full bg-[#14151a] border border-[#23242c] focus:border-[#e60000] text-xs text-white pl-4 pr-10 py-2.5 rounded-lg focus:outline-none focus:ring-1 focus:ring-red-600 transition-all placeholder:text-zinc-500"
             />
             <Search className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-400" size={16} />
           </div>
@@ -162,11 +162,11 @@ export default function Navbar({
         </div>
 
         {/* Header Action Buttons */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2 sm:gap-2.5">
           {/* Descargar App Button */}
           <button
             onClick={onOpenAppModal}
-            className="flex items-center gap-2 border border-red-600/70 hover:border-red-500 text-[#ff3333] hover:bg-red-600/10 px-3.5 py-2 rounded-lg font-bold text-xs transition-all cursor-pointer"
+            className="flex items-center gap-2 border border-red-600/70 hover:border-red-500 text-[#ff3333] hover:bg-red-600/10 px-3.5 py-2 rounded-lg font-bold text-xs transition-all cursor-pointer font-heading"
           >
             <Smartphone size={15} />
             <span className="hidden sm:inline">Descargar App</span>
@@ -175,10 +175,10 @@ export default function Navbar({
           {/* Virtual Garage Button */}
           <button
             onClick={onOpenGarage}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer font-heading ${
               selectedBike
                 ? "bg-[#e60000] text-white shadow-racing-red"
-                : "bg-[#16171d] border border-white/10 hover:border-white/20 text-white"
+                : "bg-[#14151a] border border-[#23242c] hover:border-white/20 text-white"
             }`}
           >
             <span className="text-sm">🏍️</span>
@@ -202,7 +202,7 @@ export default function Navbar({
           {/* Cart Button */}
           <button
             onClick={onOpenCart}
-            className="flex items-center gap-2 bg-[#16171d] border border-white/10 hover:border-white/20 text-white px-3.5 py-2 rounded-lg font-bold text-xs transition-all cursor-pointer"
+            className="flex items-center gap-2 bg-[#14151a] border border-[#23242c] hover:border-white/20 text-white px-3.5 py-2 rounded-lg font-bold text-xs transition-all cursor-pointer font-heading"
           >
             <ShoppingCart size={15} />
             <span className="hidden sm:inline">Carrito</span>
@@ -214,29 +214,29 @@ export default function Navbar({
       </div>
 
       {/* 3. Sub-Navbar de Categorías */}
-      <div className="bg-[#101116] border-t border-[#1a1b22] px-4 hidden md:block">
+      <div className="bg-[#0d0e12] border-t border-[#181920] px-4 sm:px-6 hidden md:block">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center">
-            {/* Categorías Button (Red Block) */}
+            {/* Categorías Button (Solid Red Block) */}
             <button
               onClick={() => onSelectCategory("all")}
               className="bg-[#e60000] hover:bg-[#cc0000] text-white font-black text-xs px-6 py-2.5 uppercase tracking-wider flex items-center gap-2 transition-colors cursor-pointer font-heading"
             >
               <Menu size={15} />
-              <span>Categorías</span>
+              <span>CATEGORÍAS</span>
             </button>
 
-            {/* Horizontal Links */}
+            {/* Horizontal Navigation Links */}
             <nav className="flex items-center space-x-1 pl-4">
               {CATEGORIES_NAV.map((cat) => {
-                const isActive = String(activeCategory) === String(cat.id);
+                const isActive = String(activeCategory) === String(cat.id) || (activeCategory === "all" && cat.id === "128");
                 return (
                   <button
                     key={cat.name}
                     onClick={() => onSelectCategory(cat.id)}
-                    className={`px-4 py-2.5 text-xs font-extrabold tracking-wide uppercase transition-colors font-heading ${
+                    className={`px-4 py-2.5 text-xs font-black tracking-wider uppercase transition-colors font-heading ${
                       isActive
-                        ? "text-[#00d2ff] border-b-2 border-[#00d2ff]"
+                        ? "text-[#00c2cb] border-b-2 border-[#00c2cb]"
                         : "text-zinc-300 hover:text-white hover:bg-white/5"
                     }`}
                   >
@@ -247,19 +247,19 @@ export default function Navbar({
             </nav>
           </div>
 
-          {/* Ofertas Link (Right) */}
+          {/* Ofertas Link (Right in Red) */}
           <button
             onClick={() => onSelectCategory("ofertas")}
-            className="flex items-center gap-1.5 text-[#ff3333] hover:text-white font-extrabold text-xs uppercase tracking-wider transition-colors font-heading py-2.5 pr-2"
+            className="flex items-center gap-1.5 text-[#ff2200] hover:text-white font-black text-xs uppercase tracking-wider transition-colors font-heading py-2.5 pr-2"
           >
             <Flame size={15} className="text-[#e60000]" />
-            <span>Ofertas</span>
+            <span>OFERTAS</span>
           </button>
         </div>
       </div>
 
       {/* Mobile Search Bar */}
-      <div className="px-3 pb-2.5 md:hidden bg-[#0d0e12]">
+      <div className="px-3 pb-2.5 md:hidden bg-[#09090b]">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" size={14} />
           <input
@@ -268,7 +268,7 @@ export default function Navbar({
             placeholder="Buscar repuestos, cascos, aceites..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full bg-[#16171d] border border-[#262730] text-xs text-white pl-8 pr-8 py-2 rounded-lg focus:outline-none focus:border-[#e60000]"
+            className="w-full bg-[#14151a] border border-[#23242c] text-xs text-white pl-8 pr-8 py-2 rounded-lg focus:outline-none focus:border-[#e60000]"
           />
           {searchQuery && (
             <button onClick={() => onSearchChange("")} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400">
