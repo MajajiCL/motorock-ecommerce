@@ -28,7 +28,14 @@ export default function ProductCard({ product, onOpenDetail, onAddToCart }) {
         </div>
 
         {/* Product Image */}
-        <div className="w-full h-36 sm:h-44 bg-[#0a0a0c] rounded-lg p-2 flex items-center justify-center overflow-hidden mb-3 border border-[#1a1b22]">
+        {/* La caja de la foto va CLARA, no negra.
+            Las 726 fotos vienen del catálogo WooCommerce recortadas sobre
+            blanco, y sobre un fondo negro cada una se ve como un cuadrado
+            blanco pegado. No se pueden reprocesar una a una —están en el
+            servidor del cliente y son 726—, así que se normaliza aquí: con
+            la caja clara el fondo de la foto se funde y el producto queda
+            limpio, que es lo que hace cualquier tienda con tema oscuro. */}
+        <div className="w-full h-36 sm:h-44 bg-[#f4f4f5] rounded-lg p-2 flex items-center justify-center overflow-hidden mb-3 border border-[#1a1b22]">
           <img
             src={product.primaryImage}
             alt={product.name}

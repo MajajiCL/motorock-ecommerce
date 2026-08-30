@@ -24,13 +24,19 @@ const CATEGORIES_GRID = [
     id: "47",
     name: "REPUESTOS",
     subtitle: "Todo para tu moto",
-    image: "https://motorock.cl/wp-content/uploads/2026/08/1-24-300x300.webp",
+    // Antes repetía la MISMA foto que CADENAS. Dos tarjetas contiguas con
+    // idéntica imagen se leen como un error de montaje. Ahora lleva una
+    // corona genérica: la tarjeta representa la categoría entera, no un
+    // kit concreto con SKU y precio.
+    image: "./img/category-sprocket.webp",
   },
   {
     id: "116",
     name: "ACCESORIOS",
     subtitle: "Viaja seguro",
-    image: "https://motorock.cl/wp-content/uploads/2026/08/X_imgi-2-rhinowalk-motorcycle-bag-45l-waterproof-pvc-tail-saddle-bag-durable-dry-luggage-outdoor-bag-motorbike-rear4921.jpg",
+    // Llevaba la foto de un bolso Rhinowalk puntual. Mismo criterio: la
+    // tarjeta es la categoría, no ese producto.
+    image: "./img/category-topcase.webp",
   },
 ];
 

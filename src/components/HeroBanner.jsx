@@ -77,12 +77,51 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
             {/* Dynamic Ember Glow */}
             <div className="absolute inset-0 bg-gradient-to-t from-red-600/40 via-orange-500/20 to-transparent rounded-full filter blur-3xl pointer-events-none" />
 
+            {/* Resplandor detrás del casco. Va DEBAJO de la imagen y no como
+                sombra del <img>: el casco es negro sobre fondo casi negro y
+                sin una luz que lo separe se pierde la mitad de la silueta. */}
+            {/* Los gradientes van en `style` y no en clases de Tailwind.
+                Un `bg-[radial-gradient(...)]` con varias paradas y comas
+                deja de generarse en cuanto el className se parte en varias
+                líneas: la clase existe en el JSX pero el CSS nunca sale, y
+                el div queda a 0x0 sin fondo. Pasó exactamente eso aquí. */}
+            <div
+              className="absolute z-0 rounded-full pointer-events-none"
+              style={{
+                width: "92%", aspectRatio: "1 / 1", filter: "blur(70px)",
+                background:
+                  "radial-gradient(circle, rgba(255,90,10,0.62) 0%, rgba(230,20,0,0.34) 38%, rgba(120,10,0,0.12) 62%, transparent 78%)",
+              }}
+            />
+            {/* Segundo foco, más bajo y ancho: la brasa que queda bajo el
+                casco y le da suelo. Sin él la pieza flota. */}
+            <div
+              className="absolute z-0 rounded-full pointer-events-none"
+              style={{
+                width: "58%", height: "22%", bottom: "16%", filter: "blur(45px)",
+                background:
+                  "radial-gradient(ellipse, rgba(255,120,20,0.50) 0%, transparent 70%)",
+              }}
+            />
+
             <div className="relative z-10 group cursor-pointer" onClick={() => onSelectCategory("128")}>
-              <img
-                src="https://motorock.cl/wp-content/uploads/2026/08/028f734bfb6a4b59a4a803ad9cc54fa8_800.jpg"
-                alt="Casco HJC RPHA 60 Dakar"
-                className="w-full max-w-[420px] sm:max-w-[480px] h-auto object-contain filter drop-shadow-[0_25px_50px_rgba(230,0,0,0.6)] group-hover:scale-105 transition-transform duration-500"
-              />
+              {/* Foto oficial del HJC RPHA que la tienda vende, recortada del
+                  fondo blanco de catálogo. Antes se cargaba el JPG tal cual
+                  desde el WordPress y se veía un rectángulo blanco pegado
+                  sobre el fondo negro.
+                  WebP con alfa: 73 KB frente a 514 del PNG, y el <picture>
+                  deja el PNG para quien no soporte WebP. */}
+              <picture>
+                <source srcSet="./img/hjc-rpha-hero.webp" type="image/webp" />
+                <img
+                  src="./img/hjc-rpha-hero.png"
+                  alt="Casco HJC RPHA 60 Dakar, homologado, disponible en MotoRock Talca"
+                  width="794"
+                  height="716"
+                  fetchPriority="high"
+                  className="w-full max-w-[420px] sm:max-w-[480px] h-auto object-contain filter drop-shadow-[0_18px_38px_rgba(230,0,0,0.55)] group-hover:scale-105 transition-transform duration-500"
+                />
+              </picture>
             </div>
           </div>
         </div>

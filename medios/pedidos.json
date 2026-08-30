@@ -5,8 +5,13 @@
     "ancho": 1216,
     "alto": 832,
     "destino": "public/img/hero-helmet-flame.jpg",
-    "estado": "pendiente",
-    "nota": "Imagen hero principal del banner derecho con casco y fondo de fuego"
+    "estado": "listo",
+    "nota": "Imagen hero principal del banner derecho con casco y fondo de fuego",
+    "error": "[[\"execution_error\", {\"prompt_id\": \"30e5e109-7390-4099-a458-9375fc6bcfb1\", \"node_id\": \"5\", \"node_type\": \"KSampler\", \"executed\": [\"2\", \"1\", \"4\", \"3\"], \"exception_message\": \"CUDA out of memory. Tried to allocate 78.00 MiB. GPU 0 has a total capacity of 4.00 GiB of which 44.06 MiB is free. Of the alloc",
+    "segundos": 1387,
+    "generado": "2026-08-30 07:19",
+    "medida": "1088x768",
+    "nota_claude": "generada a 1088x768 en vez de 1216x832: no cabía en 4 GB de VRAM"
   },
   {
     "id": "category-sprocket",
@@ -14,8 +19,13 @@
     "ancho": 1024,
     "alto": 1024,
     "destino": "public/img/category-sprocket.png",
-    "estado": "pendiente",
-    "nota": "Imagen para la tarjeta de repuestos / transmisión"
+    "estado": "listo",
+    "nota": "Imagen para la tarjeta de repuestos / transmisión",
+    "error": "[[\"execution_error\", {\"prompt_id\": \"0a39f25c-10e2-448b-a46f-7e5796b2adeb\", \"node_id\": \"5\", \"node_type\": \"KSampler\", \"executed\": [\"2\", \"4\"], \"exception_message\": \"CUDA out of memory. Tried to allocate 80.00 MiB. GPU 0 has a total capacity of 4.00 GiB of which 3.66 MiB is free. Of the allocated memory",
+    "segundos": 1327,
+    "generado": "2026-08-30 07:44",
+    "medida": "896x896",
+    "nota_claude": "generada a 896x896 en vez de 1024x1024: no cabía en 4 GB de VRAM"
   },
   {
     "id": "category-topcase",
@@ -23,7 +33,9 @@
     "ancho": 1024,
     "alto": 1024,
     "destino": "public/img/category-topcase.png",
-    "estado": "pendiente",
-    "nota": "Imagen para la tarjeta de accesorios / maleta"
+    "estado": "listo",
+    "nota": "Imagen para la tarjeta de accesorios / maleta",
+    "generado": "2026-08-30 06:36",
+    "segundos": 1171
   }
 ]
