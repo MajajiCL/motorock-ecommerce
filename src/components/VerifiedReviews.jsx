@@ -1,82 +1,87 @@
 import React from "react";
-import { CheckCircle2 } from "lucide-react";
+import { Star, CheckCircle2, ThumbsUp } from "lucide-react";
 
 const REVIEWS = [
   {
-    name: "Claudio V.",
-    location: "Talca, Región del Maule",
+    name: "Rodrigo Morales",
+    city: "Talca, Maule",
     bike: "Yamaha MT-03",
     rating: 5,
-    title: "Retiro en tienda en 2 horas impecable",
-    body: "Compré el kit de transmisión D.I.D desde la app y en menos de 2 horas ya estaba listo para retirar en el local de 2 Sur. Excelente atención de los mecánicos.",
-    date: "Hace 2 días"
+    date: "Hace 2 días",
+    comment: "Compré el kit de transmisión DID y aceite Motul 7100. Retiré en 1 hora y media en el local de 2 Sur. Excelente atención de los mecánicos.",
+    verified: true,
   },
   {
-    name: "Matías P.",
-    location: "Santiago, RM",
-    bike: "Honda CB 190R",
+    name: "Matías Silva",
+    city: "Curicó, Maule",
+    bike: "Honda CB500X",
     rating: 5,
-    title: "Despacho Starken rapidísimo a Santiago",
-    body: "Pedí casco HJC y aceite Motul 7100 el martes y me llegó el miércoles a primera hora con el seguimiento en la app. Calce perfecto y todo original con boleta.",
-    date: "Hace 4 días"
+    date: "Hace 4 días",
+    comment: "Despacho por Starken llegó al día siguiente a Curicó. El casco HJC impecable con su certificación ECE 22.06. 100% recomendados.",
+    verified: true,
   },
   {
-    name: "Gonzalo R.",
-    location: "Concepción, Biobío",
-    bike: "Kawasaki Ninja 400",
+    name: "Felipe Araya",
+    city: "Santiago, RM",
+    bike: "KTM Duke 390",
     rating: 5,
-    title: "El filtro por moto me evitó comprar la cadena incorrecta",
-    body: "Puse mi modelo en el Garage y me mostró exactamente el paso 520 con los eslabones correctos. La mejor tienda de motos de Chile sin duda.",
-    date: "Hace 1 semana"
+    date: "Hace 1 semana",
+    comment: "La mejor tienda de motos. El garage de compatibilidad me ahorró comprar la cadena equivocada. Llegó todo bien embalado.",
+    verified: true,
   }
 ];
 
 export default function VerifiedReviews() {
   return (
-    <section className="my-16">
-      <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-        <span className="text-[11px] font-bold text-[#151581] uppercase tracking-wider bg-[#f6f6fa] px-3 py-1 rounded-full border border-[#e5e5eb]">
-          Opiniones Verificadas
-        </span>
-        <h2 className="text-2xl sm:text-3xl font-normal text-[#151581] tracking-tight">
-          La confianza de miles de motociclistas en Chile
-        </h2>
-        <p className="text-xs text-[#a1a1cd]">
-          Calificación promedio de 4.9/5 basada en compras con entrega confirmada.
-        </p>
+    <section className="my-12 sm:my-16 max-w-7xl mx-auto px-4">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
+        <div>
+          <span className="text-[10px] font-black text-[#e60000] uppercase tracking-widest bg-red-600/10 border border-red-600/20 px-3 py-0.5 rounded">
+            EXPERIENCIAS REALES
+          </span>
+          <h2 className="text-xl sm:text-2xl font-black text-white mt-1 tracking-tight uppercase font-heading">
+            Opiniones de la Comunidad Biker
+          </h2>
+        </div>
+        <div className="flex items-center gap-1.5 text-xs text-zinc-400">
+          <div className="flex text-amber-400">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} size={14} fill="currentColor" />
+            ))}
+          </div>
+          <span className="font-bold text-white">4.9 / 5.0</span>
+          <span>(Más de 850 clientes)</span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {REVIEWS.map((rev, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-[24px] p-6 shadow-lovi border border-[#e5e5eb] flex flex-col justify-between space-y-4"
+            className="bg-[#121318] border border-[#202128] rounded-xl p-5 flex flex-col justify-between space-y-4"
           >
-            <div className="space-y-3">
+            <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <div className="flex text-[#00bb76] text-sm tracking-tight">
-                  {"★".repeat(rev.rating)}
+                <div className="flex text-amber-400">
+                  {[...Array(rev.rating)].map((_, i) => (
+                    <Star key={i} size={13} fill="currentColor" />
+                  ))}
                 </div>
-                <span className="text-xs font-semibold text-[#00bb76] flex items-center gap-1">
-                  <CheckCircle2 size={12} /> Verificado
-                </span>
+                <span className="text-[10px] text-zinc-500">{rev.date}</span>
               </div>
-
-              <h4 className="text-sm font-semibold text-[#151581] leading-snug">
-                {rev.title}
-              </h4>
-
-              <p className="text-xs text-[#292824]/80 leading-relaxed font-normal">
-                "{rev.body}"
+              <p className="text-xs text-zinc-300 leading-relaxed italic">
+                "{rev.comment}"
               </p>
             </div>
 
-            <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px]">
+            <div className="pt-3 border-t border-[#1a1b22] flex items-center justify-between">
               <div>
-                <strong className="text-[#151581] block">{rev.name}</strong>
-                <span className="text-[#a1a1cd]">{rev.bike} • {rev.location}</span>
+                <h4 className="text-xs font-bold text-white font-heading">{rev.name}</h4>
+                <p className="text-[10px] text-zinc-500">{rev.city} • <strong className="text-zinc-400">{rev.bike}</strong></p>
               </div>
-              <span className="text-[#a1a1cd]">{rev.date}</span>
+              <span className="text-[9px] font-bold text-[#00bb76] flex items-center gap-1 bg-emerald-500/10 px-2 py-0.5 rounded">
+                <CheckCircle2 size={11} /> Verificado
+              </span>
             </div>
           </div>
         ))}

@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import HeroBanner from "./components/HeroBanner";
 import BrandsCarousel from "./components/BrandsCarousel";
 import DiffusedBrandsBackground from "./components/DiffusedBrandsBackground";
-import AppFeatureSection from "./components/AppFeatureSection";
 import BentoCategories from "./components/BentoCategories";
 import GarageSelector from "./components/GarageSelector";
 import CategoryNav from "./components/CategoryNav";
@@ -98,7 +97,9 @@ export default function App() {
       });
     }
 
-    if (activeCategory !== "all") {
+    if (activeCategory === "ofertas") {
+      result = result.filter((p) => p.onSale);
+    } else if (activeCategory !== "all") {
       result = result.filter((p) => {
         return (p.categories || []).some(
           (c) => String(c.id) === String(activeCategory) || c.slug === activeCategory || c.name.toLowerCase() === activeCategory.toLowerCase()
@@ -198,13 +199,13 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fc] text-[#0f172a] flex flex-col justify-between relative overflow-x-hidden w-full max-w-[100vw]">
-      {/* 1. Diffused Background Mesh */}
+    <div className="min-h-screen bg-[#0a0a0c] text-white flex flex-col justify-between relative overflow-x-hidden w-full max-w-[100vw]">
+      {/* Background Glows */}
       <DiffusedBrandsBackground />
 
       {/* Toast Notification */}
       {toast && (
-        <div className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-50 bg-[#0f172a] text-white px-4 sm:px-5 py-2.5 sm:py-3 rounded-full shadow-2xl font-bold text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200 border border-white/20">
+        <div className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-50 bg-[#16171d] text-white px-5 py-3 rounded-xl shadow-2xl font-bold text-xs flex items-center gap-2 animate-in slide-in-from-bottom duration-200 border border-red-600/40">
           <Check size={14} className="text-[#00bb76]" />
           <span className="font-heading">{toast}</span>
         </div>
@@ -221,11 +222,13 @@ export default function App() {
         onSearchChange={(q) => setSearchQuery(q)}
         onSelectProduct={(p) => setSelectedProduct(p)}
         onOpenAppModal={() => setIsAppModalOpen(true)}
+        activeCategory={activeCategory}
+        onSelectCategory={(catId) => setActiveCategory(catId)}
         searchInputRef={searchInputRef}
       />
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 flex-1 w-full relative z-10 pb-24 md:pb-10">
+      <main className="w-full relative z-10 pb-20">
         {/* 1. Hero Banner */}
         <HeroBanner
           onSelectCategory={(catId) => setActiveCategory(catId)}
@@ -236,162 +239,158 @@ export default function App() {
         {/* 2. Official Brands Ribbon */}
         <BrandsCarousel />
 
-        {/* 3. App Feature Section */}
-        <AppFeatureSection
-          onOpenAppModal={() => setIsAppModalOpen(true)}
-          onSelectCategory={(catId) => setActiveCategory(catId)}
-        />
-
-        {/* 4. Bento Categories Showcase */}
+        {/* 3. Bento Categories Showcase */}
         <BentoCategories
           onSelectCategory={(catId) => setActiveCategory(catId)}
         />
 
-        {/* Selected Bike Notification Banner */}
-        {selectedBike && (
-          <div className="mb-6 p-4 sm:p-5 bg-red-50/80 backdrop-blur-md border border-red-200 rounded-[20px] sm:rounded-[24px] flex flex-col sm:flex-row items-center justify-between gap-3 shadow-sm">
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <span className="text-2xl">🏍️</span>
-              <div className="min-w-0 flex-1">
-                <h4 className="text-xs font-black text-[#0f172a] font-heading truncate">
-                  Repuestos para: <span className="text-[#e60000]">{selectedBike.brand} {selectedBike.model}</span>
-                </h4>
-                <p className="text-[10px] sm:text-[11px] text-slate-500 mt-0.5 truncate">
-                  Paso: {selectedBike.chainPitch} • Aceite: {selectedBike.oilSpec}
-                </p>
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Selected Bike Notification Banner */}
+          {selectedBike && (
+            <div className="mb-6 p-4 sm:p-5 bg-red-600/10 border border-red-600/30 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-md">
+              <div className="flex items-center gap-3 w-full sm:w-auto">
+                <span className="text-2xl">🏍️</span>
+                <div className="min-w-0 flex-1">
+                  <h4 className="text-xs font-black text-white font-heading truncate uppercase">
+                    Repuestos para: <span className="text-[#e60000]">{selectedBike.brand} {selectedBike.model}</span>
+                  </h4>
+                  <p className="text-[10px] sm:text-[11px] text-zinc-400 mt-0.5 truncate">
+                    Paso: {selectedBike.chainPitch} • Aceite: {selectedBike.oilSpec}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                <button
+                  onClick={() => setIsGarageOpen(true)}
+                  className="flex-1 sm:flex-initial px-3 sm:px-4 py-1.5 bg-[#16171d] hover:bg-[#202129] text-xs font-bold rounded-lg border border-white/10 text-white"
+                >
+                  Cambiar
+                </button>
+                <button
+                  onClick={() => setSelectedBike(null)}
+                  className="flex-1 sm:flex-initial px-3 sm:px-4 py-1.5 bg-red-600/20 hover:bg-red-600/30 text-[#ff3333] text-xs font-bold rounded-lg border border-red-600/30"
+                >
+                  Quitar
+                </button>
               </div>
             </div>
-            <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+          )}
+
+          {/* Category Navigation Pills */}
+          <CategoryNav
+            activeCategory={activeCategory}
+            onSelectCategory={(catId) => setActiveCategory(catId)}
+          />
+
+          {/* Filters & Sorting Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-3 sm:p-4 bg-[#121318] border border-[#202128] rounded-xl" id="catalogo">
+            <div className="flex items-center gap-2 text-xs flex-wrap">
+              <span className="font-black text-white flex items-center gap-1.5 font-heading uppercase">
+                <Filter size={13} className="text-[#e60000]" />
+                Catálogo ({totalItemsCount})
+              </span>
+
               <button
-                onClick={() => setIsGarageOpen(true)}
-                className="flex-1 sm:flex-initial px-3 sm:px-4 py-1.5 bg-white hover:bg-slate-100 text-xs font-bold rounded-full border border-slate-200 text-[#0f172a]"
+                onClick={() => setInStockOnly(!inStockOnly)}
+                className={`px-3 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold border transition-colors cursor-pointer ${
+                  inStockOnly
+                    ? "bg-emerald-500/10 border-emerald-500/30 text-[#00bb76]"
+                    : "bg-[#16171d] text-zinc-400 border-[#262730] hover:text-white"
+                }`}
               >
-                Cambiar
+                ✓ En Stock
               </button>
+
               <button
-                onClick={() => setSelectedBike(null)}
-                className="flex-1 sm:flex-initial px-3 sm:px-4 py-1.5 bg-red-50 hover:bg-red-100 text-[#e60000] text-xs font-bold rounded-full border border-red-200"
+                onClick={() => setOnSaleOnly(!onSaleOnly)}
+                className={`px-3 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold border transition-colors cursor-pointer ${
+                  onSaleOnly
+                    ? "bg-red-600/20 border-red-600/40 text-[#ff3333]"
+                    : "bg-[#16171d] text-zinc-400 border-[#262730] hover:text-white"
+                }`}
               >
-                Quitar
+                🔥 Ofertas
               </button>
             </div>
-          </div>
-        )}
 
-        {/* Category Navigation Pills */}
-        <CategoryNav
-          activeCategory={activeCategory}
-          onSelectCategory={(catId) => setActiveCategory(catId)}
-        />
-
-        {/* Filters & Sorting Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 p-3 sm:p-4 glass-panel rounded-[20px] sm:rounded-[24px]">
-          <div className="flex items-center gap-2 text-xs flex-wrap">
-            <span className="font-black text-[#0f172a] flex items-center gap-1.5 font-heading">
-              <Filter size={13} className="text-[#e60000]" />
-              Catálogo ({totalItemsCount})
-            </span>
-
-            <button
-              onClick={() => setInStockOnly(!inStockOnly)}
-              className={`px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold border transition-colors cursor-pointer ${
-                inStockOnly
-                  ? "bg-emerald-50 border-emerald-200 text-[#00bb76]"
-                  : "glass-pill text-[#0f172a] hover:bg-white"
-              }`}
-            >
-              ✓ En Stock
-            </button>
-
-            <button
-              onClick={() => setOnSaleOnly(!onSaleOnly)}
-              className={`px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-bold border transition-colors cursor-pointer ${
-                onSaleOnly
-                  ? "bg-red-50 border-red-200 text-[#e60000]"
-                  : "glass-pill text-[#0f172a] hover:bg-white"
-              }`}
-            >
-              🔥 Ofertas
-            </button>
+            <div className="flex items-center gap-2 text-xs">
+              <span className="text-zinc-500 text-[11px] flex items-center gap-1"><ArrowUpDown size={11} /> Orden:</span>
+              <select
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+                className="bg-[#16171d] text-white border border-[#262730] rounded-lg px-2.5 py-1 text-[11px] font-bold focus:outline-none focus:border-[#e60000]"
+              >
+                <option value="popular">Destacados</option>
+                <option value="price_asc">Menor Precio</option>
+                <option value="price_desc">Mayor Precio</option>
+                <option value="name">Nombre A-Z</option>
+              </select>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-slate-400 text-[11px] flex items-center gap-1"><ArrowUpDown size={11} /> Orden:</span>
-            <select
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-              className="bg-white text-[#0f172a] border border-slate-200 rounded-full px-2.5 py-1 text-[11px] font-bold focus:outline-none focus:border-[#e60000]"
-            >
-              <option value="popular">Destacados</option>
-              <option value="price_asc">Menor Precio</option>
-              <option value="price_desc">Mayor Precio</option>
-              <option value="name">Nombre A-Z</option>
-            </select>
-          </div>
+          {/* Product Grid */}
+          {paginatedProducts.length === 0 ? (
+            <div className="py-12 sm:py-16 text-center space-y-2 bg-[#121318] border border-[#202128] rounded-2xl p-6 sm:p-8">
+              <span className="text-3xl">🔍</span>
+              <h3 className="text-sm font-black text-white font-heading">No encontramos repuestos con esos filtros</h3>
+              <p className="text-xs text-zinc-400">Prueba con otros términos de búsqueda o restablece los filtros.</p>
+              <button
+                onClick={() => {
+                  setActiveCategory("all");
+                  setSearchQuery("");
+                  setSelectedBike(null);
+                  setInStockOnly(false);
+                  setOnSaleOnly(false);
+                }}
+                className="mt-2 bg-[#e60000] hover:bg-[#cc0000] text-white px-5 py-2 rounded-lg text-xs font-black shadow-racing-red"
+              >
+                Restablecer Filtros
+              </button>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+              {paginatedProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onOpenDetail={(p) => setSelectedProduct(p)}
+                  onAddToCart={(p) => handleAddToCart(p, 1)}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="mt-8 sm:mt-10 flex items-center justify-center gap-2">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                className="flex items-center gap-1 px-3 sm:px-4 py-2 rounded-lg bg-[#121318] border border-[#202128] text-xs font-bold text-white disabled:opacity-30 hover:bg-[#16171d] cursor-pointer"
+              >
+                <ChevronLeft size={14} /> Anterior
+              </button>
+
+              <span className="text-xs font-medium text-zinc-400 px-2">
+                <strong className="text-white">{currentPage}</strong> / <strong className="text-white">{totalPages}</strong>
+              </span>
+
+              <button
+                onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages}
+                className="flex items-center gap-1 px-3 sm:px-4 py-2 rounded-lg bg-[#121318] border border-[#202128] text-xs font-bold text-white disabled:opacity-30 hover:bg-[#16171d] cursor-pointer"
+              >
+                Siguiente <ChevronRight size={14} />
+              </button>
+            </div>
+          )}
+
+          {/* 4. Verified Reviews Section */}
+          <VerifiedReviews />
+
+          {/* 5. Physical Showroom & Workshop Section in Talca */}
+          <StoreLocation />
         </div>
-
-        {/* Product Grid */}
-        {paginatedProducts.length === 0 ? (
-          <div className="py-12 sm:py-16 text-center space-y-2 glass-panel rounded-[28px] sm:rounded-[32px] p-6 sm:p-8">
-            <span className="text-3xl">🔍</span>
-            <h3 className="text-sm font-black text-[#0f172a] font-heading">No encontramos repuestos con esos filtros</h3>
-            <p className="text-xs text-slate-500">Prueba con otros términos de búsqueda o restablece los filtros.</p>
-            <button
-              onClick={() => {
-                setActiveCategory("all");
-                setSearchQuery("");
-                setSelectedBike(null);
-                setInStockOnly(false);
-                setOnSaleOnly(false);
-              }}
-              className="mt-2 bg-[#e60000] hover:bg-[#cc0000] text-white px-5 py-2 rounded-full text-xs font-black shadow-racing"
-            >
-              Restablecer Filtros
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-            {paginatedProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onOpenDetail={(p) => setSelectedProduct(p)}
-                onAddToCart={(p) => handleAddToCart(p, 1)}
-              />
-            ))}
-          </div>
-        )}
-
-        {/* Pagination Controls */}
-        {totalPages > 1 && (
-          <div className="mt-8 sm:mt-10 flex items-center justify-center gap-2">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-              disabled={currentPage === 1}
-              className="flex items-center gap-1 px-3 sm:px-4 py-2 rounded-full glass-pill text-xs font-bold text-[#0f172a] disabled:opacity-40 hover:bg-white shadow-sm cursor-pointer"
-            >
-              <ChevronLeft size={14} /> Anterior
-            </button>
-
-            <span className="text-xs font-medium text-slate-500 px-2">
-              <strong className="text-[#0f172a]">{currentPage}</strong> / <strong className="text-[#0f172a]">{totalPages}</strong>
-            </span>
-
-            <button
-              onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
-              disabled={currentPage === totalPages}
-              className="flex items-center gap-1 px-3 sm:px-4 py-2 rounded-full glass-pill text-xs font-bold text-[#0f172a] disabled:opacity-40 hover:bg-white shadow-sm cursor-pointer"
-            >
-              Siguiente <ChevronRight size={14} />
-            </button>
-          </div>
-        )}
-
-        {/* 5. Verified Reviews Section */}
-        <VerifiedReviews />
-
-        {/* 6. Physical Showroom & Workshop Section in Talca */}
-        <StoreLocation />
       </main>
 
       {/* Mobile Sticky Floating Navigation Bar */}

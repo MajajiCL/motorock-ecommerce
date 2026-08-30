@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "hero-helmet-flame",
+    "que": "premium matte black motorcycle racing helmet with red aerodynamic decals on dark volcanic rock surrounded by intense glowing fire sparks smoke and deep orange flame aura, hyperrealistic, octane render, dramatic lighting, dark background, no text, no logo",
+    "ancho": 1216,
+    "alto": 832,
+    "destino": "public/img/hero-helmet-flame.jpg",
+    "estado": "pendiente",
+    "nota": "imagen derecha del hero banner con fuego y chispas"
+  }
+]

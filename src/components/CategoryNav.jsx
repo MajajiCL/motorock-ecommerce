@@ -11,10 +11,10 @@ export default function CategoryNav({ activeCategory, onSelectCategory }) {
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer font-heading ${
                 isActive
-                  ? "bg-[#e60000] text-white shadow-racing"
-                  : "glass-pill text-[#121214] hover:bg-white/90"
+                  ? "bg-[#e60000] text-white shadow-racing-red"
+                  : "bg-[#121318] text-zinc-300 border border-[#202128] hover:border-red-600/50 hover:text-white"
               }`}
             >
               <span>{cat.icon}</span>
