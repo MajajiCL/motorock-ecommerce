@@ -2,9 +2,83 @@
 <html lang="es" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MotoRock Chile | Todo para tu moto en tu bolsillo</title>
+
+    <!-- 58 y 155 caracteres: por encima de ~60 y ~160 Google corta en mitad
+         de frase y lo que se pierde es siempre el final. "Talca" va en el
+         título porque es la búsqueda que trae clientes al local. -->
+    <title>Repuestos y Cascos de Moto en Talca | MotoRock Chile</title>
+    <meta name="description" content="Repuestos, cascos y aceites de moto en Talca. Más de 700 productos con despacho en 24h a todo Chile y retiro en 2 horas en Av. 2 Sur 771 y 777." />
+
+    <link rel="icon" href="./img/favicon-motorock.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./img/favicon-motorock.png" />
+
+    <!-- OJO, DECISIÓN PENDIENTE: el cliente ya tiene motorock.cl con este
+         MISMO catálogo. Si esta web se indexa a la vez, las dos compiten
+         por las mismas búsquedas y Google reparte la fuerza entre ambas.
+         Mientras esto sea una propuesta y no el sitio definitivo, el
+         canonical apunta al sitio oficial del cliente para no restarle
+         posiciones. Cuando reemplace a motorock.cl, cambiar esta línea a
+         la URL propia. -->
+    <link rel="canonical" href="https://motorock.cl/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <meta name="geo.region" content="CL-ML" />
+    <meta name="geo.placename" content="Talca, Región del Maule" />
+    <meta name="geo.position" content="-35.4264;-71.6554" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content="MotoRock Chile" />
+    <meta property="og:title" content="Repuestos y Cascos de Moto en Talca | MotoRock Chile" />
+    <meta property="og:description" content="Más de 700 repuestos y accesorios de moto. Despacho en 24h a todo Chile y retiro en 2 horas en Talca." />
+    <meta property="og:image" content="https://majajicl.github.io/motorock-ecommerce/img/hjc-rpha-hero.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Repuestos y Cascos de Moto en Talca | MotoRock Chile" />
+    <meta name="twitter:description" content="Más de 700 repuestos de moto. Despacho 24h y retiro en 2h en Talca." />
+    <meta name="twitter:image" content="https://majajicl.github.io/motorock-ecommerce/img/hjc-rpha-hero.png" />
+
+    <!-- Dos locales, dos fichas. Son direcciones y teléfonos distintos y
+         atienden cosas distintas: si se declaran como uno solo, Google
+         Maps no puede distinguirlos. No se declara AggregateRating: las
+         reseñas de la página no están verificadas por una plataforma y
+         marcarlas como tal es motivo de penalización. -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@graph":[
+     {"@type":"Organization","@id":"https://motorock.cl/#empresa",
+      "name":"MotoRock Chile","legalName":"MotoRock Chile SpA",
+      "url":"https://motorock.cl/",
+      "sameAs":["https://www.instagram.com/motorock.cl"]},
+     {"@type":"MotorcycleDealer","@id":"https://motorock.cl/#local771",
+      "name":"MotoRock Talca — Cascos e Indumentaria",
+      "parentOrganization":{"@id":"https://motorock.cl/#empresa"},
+      "description":"Cascos homologados ECE 22.06, chaquetas con protecciones CE, guantes e indumentaria para motociclistas.",
+      "telephone":"+56956105413","priceRange":"$$",
+      "currenciesAccepted":"CLP","paymentAccepted":"Efectivo, Débito, Crédito, Transferencia",
+      "address":{"@type":"PostalAddress","streetAddress":"Av. 2 Sur 771","addressLocality":"Talca","addressRegion":"Región del Maule","addressCountry":"CL"},
+      "geo":{"@type":"GeoCoordinates","latitude":-35.4264,"longitude":-71.6554},
+      "openingHoursSpecification":[
+        {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"19:30"},
+        {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"10:30","closes":"15:00"}],
+      "areaServed":{"@type":"Country","name":"Chile"}},
+     {"@type":"AutoRepair","@id":"https://motorock.cl/#local777",
+      "name":"MotoRock Talca — Taller y Repuestos",
+      "parentOrganization":{"@id":"https://motorock.cl/#empresa"},
+      "description":"Taller mecánico especializado y repuestos: transmisión, frenos, aceites y bujías.",
+      "telephone":"+56976967438","priceRange":"$$",
+      "address":{"@type":"PostalAddress","streetAddress":"Av. 2 Sur 777","addressLocality":"Talca","addressRegion":"Región del Maule","addressCountry":"CL"},
+      "geo":{"@type":"GeoCoordinates","latitude":-35.4264,"longitude":-71.6554}},
+     {"@type":"FAQPage","@id":"https://motorock.cl/#faq","mainEntity":[
+      {"@type":"Question","name":"¿Hacen despacho a regiones?",
+       "acceptedAnswer":{"@type":"Answer","text":"Sí. Despachamos a todo Chile por Starken y Chilexpress, con entrega estimada de 24 a 48 horas desde Talca."}},
+      {"@type":"Question","name":"¿Puedo retirar mi compra en Talca?",
+       "acceptedAnswer":{"@type":"Answer","text":"Sí. El retiro está disponible en dos horas en Av. 2 Sur 771 para cascos e indumentaria, y en Av. 2 Sur 777 para repuestos y taller."}},
+      {"@type":"Question","name":"¿Cómo sé si el repuesto sirve para mi moto?",
+       "acceptedAnswer":{"@type":"Answer","text":"En la web puedes seleccionar tu modelo de moto y el catálogo se filtra a los repuestos compatibles. Si tienes dudas, escríbenos por WhatsApp con el modelo y año."}},
+      {"@type":"Question","name":"¿Los cascos están homologados?",
+       "acceptedAnswer":{"@type":"Answer","text":"Sí, trabajamos cascos con homologación ECE 22.06, que es la norma vigente."}}]}
+    ]}
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
