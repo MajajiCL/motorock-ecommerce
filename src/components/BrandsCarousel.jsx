@@ -58,18 +58,33 @@ export default function BrandsCarousel() {
           style={{ background: "linear-gradient(to left, #09090b, transparent)" }}
         />
 
-        <ul className="marquesina flex items-center gap-10 sm:gap-16 w-max">
+        {/* Cada logotipo dentro de su propia cápsula, como en la referencia:
+            así se lee como una placa de marca y no como una marca de agua
+            perdida sobre el fondo. Y a plena opacidad — en gris al 55% se
+            veían apagados y desaparecían contra el negro. */}
+        <ul className="marquesina flex items-center gap-4 sm:gap-6 w-max">
           {cinta.map((m, i) => (
             <li key={`${m.id}-${i}`} className="flex-shrink-0">
-              <img
-                src={`./brands/${m.id}.png`}
-                alt={i < MARCAS.length ? m.nombre : ""}
-                aria-hidden={i >= MARCAS.length}
-                loading="lazy"
-                width="827"
-                height="472"
-                className="h-8 sm:h-10 w-auto object-contain opacity-55 hover:opacity-100 transition-opacity duration-300"
-              />
+              <span
+                className="flex items-center justify-center h-14 sm:h-16 w-32 sm:w-40 px-4
+                           overflow-hidden rounded-lg border border-[#23242c] bg-[#101116]
+                           hover:border-[#e60000]/60 transition-colors duration-300"
+              >
+                {/* object-contain con ancho Y alto acotados. Sólo con
+                    max-h la imagen conserva su ancho natural de 827 px y
+                    se sale de la cápsula: los logotipos salieron del
+                    tamaño de media pantalla. */}
+                <img
+                  src={`./brands/${m.id}.png`}
+                  alt={i < MARCAS.length ? m.nombre : ""}
+                  aria-hidden={i >= MARCAS.length}
+                  loading="lazy"
+                  width="827"
+                  height="472"
+                  className="w-full h-full object-contain
+                             brightness-[1.9] contrast-[1.15]"
+                />
+              </span>
             </li>
           ))}
         </ul>

@@ -11,8 +11,13 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column (7 Cols): Impactful Headline & Actions */}
           <div className="lg:col-span-7 space-y-6 text-left">
-            <h1 className="text-4xl sm:text-6xl lg:text-[70px] font-black uppercase tracking-tight leading-[0.92] text-white font-display">
-              TODO PARA TU MOTO
+            {/* "TODO PARA TU MOTO" tiene que caber en UNA línea: a 70 px
+                medía 699 px en una columna de 699 y se partía en tres
+                renglones, dejando "MOTO" solo en el medio. Con 58 px entra
+                entero y el titular queda en dos líneas, como debe. El
+                `whitespace-nowrap` lo garantiza aunque cambie la columna. */}
+            <h1 className="text-4xl sm:text-5xl lg:text-[58px] font-black uppercase tracking-tight leading-[0.94] text-white font-display">
+              <span className="lg:whitespace-nowrap">TODO PARA TU MOTO</span>
               <br />
               <span className="text-[#e60000] drop-shadow-[0_0_25px_rgba(230,0,0,0.6)]">
                 EN TU BOLSILLO
