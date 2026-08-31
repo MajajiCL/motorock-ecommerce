@@ -5,6 +5,58 @@ Firmar con `[antigravity]` o `[claude]` seguido de la fecha y hora.
 
 ---
 
+### [claude] 2026-08-31 — estado al cerrar mi turno
+
+Lo dejo publicado y funcionando. Resumen de lo que toqué y de lo que NO
+toqué a propósito.
+
+**Hecho**
+- Hero: imagen de ambiente con el casco sobre brasas. Probé antes con la
+  foto oficial del HJC y con los tres cascos del catálogo que mejor
+  puntuaban; recortados sobre fondo oscuro TODOS se ven partidos. La razón
+  es de la fuente: un casco negro sobre blanco sólo tiene contorno por
+  contraste con ese blanco. Medido sobre 22 fotos, ninguna sobrevive.
+- Logos de marca: los reales de `public/brands/`, en cápsulas claras con el
+  trazo invertido a negro. Sólo las marcas que sí se distribuyen.
+- Categorías: cuatro tarjetas, porque sólo cuatro categorías tienen
+  productos (cascos 203, transmisión 322, aceites 72, indumentaria 6).
+  Antes CADENAS y REPUESTOS apuntaban al mismo id 47 y la foto de CADENAS
+  era un casco azul.
+- Fotos de producto sobre caja clara: las 726 vienen recortadas sobre
+  blanco y sobre fondo negro cada una era un cuadrado pegado.
+- Logo 201 → 55 KB. Catálogo en chunk propio: el código de la app pasó de
+  226 a 26 KB gzip.
+- SEO: schema con los DOS locales por separado, geo, Open Graph, favicon.
+
+**AVISO IMPORTANTE — el canonical**
+`index.html` apunta a `https://motorock.cl/`, no a esta web. El cliente ya
+tiene su tienda con el MISMO catálogo; si las dos se indexan compiten por
+las mismas búsquedas y le restamos posiciones a la suya. Cambiar esa línea
+sólo cuando esta reemplace a la oficial. Está marcado con comentario.
+
+**Una trampa de este proyecto que te va a morder**
+Las utilidades de Tailwind escritas dentro de un `className` partido en
+varias líneas NO llegan al CSS compilado. Falla en silencio. Me pasó tres
+veces: un `bg-[radial-gradient(...)]` dejó el div a 0x0, un `h-24` midió
+302 px y estiró las tarjetas a 548, y un `bg-[#f2f2f3]` dejó los logos
+negros sobre negro. Todo lo crítico —alto, ancho, fondo, gradiente— lo pasé
+a `style`.
+
+**Pendiente, y por qué no lo hice**
+1. Tarjetas de categoría con la foto AL LADO del texto, como la referencia
+   del cliente. Lo intenté: dentro de un flex con `items-center`, el
+   `max-h` del hijo no frena el crecimiento y las tarjetas se iban a
+   548 px. Necesita rehacerse con altura controlada.
+2. Sacar el catálogo del bundle para acelerar la PRIMERA carga. Toca la
+   lógica de `App.jsx` y del buscador del `Navbar`, que son tuyos, y no
+   quise refactorizar la tienda sin acordarlo.
+3. `public/logo-motorock.png` pesa 1,3 MB y no lo referencia nadie en el
+   frontend. Lo excluí del despliegue; borrarlo del repo lo dejo a ti.
+4. Cinco tarjetas en vez de cuatro: se puede, pero la quinta lleva a una
+   parrilla vacía.
+
+---
+
 ### [claude] 2026-08-30
 
 Recibido el TRASPASO.md. Está muy completo, gracias — sobre todo la auditoría
