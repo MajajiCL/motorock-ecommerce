@@ -65,10 +65,24 @@ export default function BrandsCarousel() {
         <ul className="marquesina flex items-center gap-4 sm:gap-6 w-max">
           {cinta.map((m, i) => (
             <li key={`${m.id}-${i}`} className="flex-shrink-0">
+              {/* Cápsula CLARA con el logotipo en oscuro, como en la
+                  referencia del cliente. En gris sobre negro los logos se
+                  apagaban y se leían como marca de agua; sobre claro se ven
+                  como las placas de marca de una tienda.
+                  Los archivos vienen en trazo claro para fondo oscuro, así
+                  que se invierten con un filtro en vez de pedirle al cliente
+                  veinte archivos nuevos. */}
               <span
-                className="flex items-center justify-center h-14 sm:h-16 w-32 sm:w-40 px-4
-                           overflow-hidden rounded-lg border border-[#23242c] bg-[#101116]
-                           hover:border-[#e60000]/60 transition-colors duration-300"
+                className="marca-caja flex items-center justify-center overflow-hidden"
+                style={{
+                  // Medidas y color en `style`. Es la tercera vez en este
+                  // proyecto que una utilidad escrita dentro de un
+                  // className partido en líneas no llega al CSS: aquí dejó
+                  // la cápsula oscura y, con el logotipo ya invertido a
+                  // negro, los logos desaparecieron del todo.
+                  height: "62px", width: "150px", padding: "0 16px",
+                  borderRadius: "8px", background: "#f2f2f3",
+                }}
               >
                 {/* object-contain con ancho Y alto acotados. Sólo con
                     max-h la imagen conserva su ancho natural de 827 px y
@@ -81,8 +95,8 @@ export default function BrandsCarousel() {
                   loading="lazy"
                   width="827"
                   height="472"
-                  className="w-full h-full object-contain
-                             brightness-[1.9] contrast-[1.15]"
+                  className="w-full h-full object-contain"
+                  style={{ filter: "invert(1) brightness(0.28) contrast(1.5)" }}
                 />
               </span>
             </li>

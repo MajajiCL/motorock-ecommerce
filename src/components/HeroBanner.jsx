@@ -154,7 +154,8 @@ export default function HeroBanner({ onSelectCategory, onOpenGarage, onOpenAppMo
                 width="1216"
                 height="832"
                 fetchPriority="high"
-                className="w-full max-w-[470px] sm:max-w-[560px] h-auto object-contain group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500
+                           lg:w-[132%] lg:max-w-none lg:-mr-[18%]"
                 style={{
                   // La imagen trae su propio fondo negro; la máscara lo
                   // funde con el de la sección para que no se vea la caja.
